@@ -1,0 +1,28 @@
+/*------------------
+      ERRORS
+------------------*/
+
+const errors = {
+  //-- Simple throw error
+  storeErr = (err) => {
+    console.error('STORE ERROR:', err);
+    return new Error(err);
+  },
+  //-- Send error to Slack in channel
+  async slackErr(app, channel, err) {
+    const msg = err.message || err;
+    console.error('ERROR:', msg);
+    try {
+      const sendErr = await app.client.chat.postMessage({
+        token: process.env.SLACK_BOT_TOKEN,
+        channel: channel,
+        text: ":x: I'm sorry, I couldn't do that because an error occurred: ```" + JSON.stringify(msg) + "```"
+      });
+    }
+    catch (err) {
+      console.error('ERROR SENDING SLACK DM ERROR TO USER:', err);
+    }
+  }
+};
+
+module.exports = errors;

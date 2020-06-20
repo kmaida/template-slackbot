@@ -2,15 +2,11 @@ const base = require('airtable').base(process.env.AIRTABLE_BASE_ID);
 const table = process.env.AIRTABLE_TABLE;
 const tableID = process.env.AIRTABLE_TABLE_ID;
 const viewID = process.env.AIRTABLE_TABLE_VIEW_ID;
+const errors = require('./../utils/errors');
 
 /*------------------
   AIRTABLE: TABLE
 ------------------*/
-
-const atErr = (err) => {
-  console.error('AIRTABLE ERROR:', err);
-  return new Error(err);
-};
 
 const at = {
   /*----
@@ -27,7 +23,7 @@ const at = {
       }
     ], (err, records) => {
       if (err) {
-        atErr(err);
+        errors.storeErr(err);
       }
       const savedRecord = records[0];
       const savedID = savedRecord.getId();

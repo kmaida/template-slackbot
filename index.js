@@ -39,7 +39,7 @@ mon.once('open', function () {
 // /*------------------
 //   APP HOME OPENED
 // ------------------*/
-// require('./events/app-home-opened')(app);
+require('./events/app-home-opened')(app);
 
 // /*------------------
 //     APP MENTION
