@@ -9,9 +9,12 @@ const errors = require('./../utils/errors');
 ------------------*/
 
 const at = {
-  /*----
-    Save a new record
-  ----*/
+  /*--
+  Save a new record
+  @Param: Slack app
+  @Param: data to save (object)
+  @Return: saved object
+  --*/
   async saveRecord(app, data) {
     base(table).create([
       {

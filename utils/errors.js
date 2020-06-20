@@ -3,12 +3,22 @@
 ------------------*/
 
 const errors = {
-  //-- Simple throw error
-  storeErr = (err) => {
-    console.error('STORE ERROR:', err);
-    return new Error(err);
+  /*--
+  Simple log and return error
+  @Param: error message (string)
+  @Return: Error
+  --*/
+  storeErr(err) {
+    const msg = err.msg || err;
+    console.error('STORE ERROR:', msg);
+    return new Error(msg);
   },
-  //-- Send error to Slack in channel
+  /*--
+  Send error to Slack in specified channel
+  @Param: Slack app
+  @Param: channel to send error in (string)
+  @Param: error message (string)
+  --*/
   async slackErr(app, channel, err) {
     const msg = err.message || err;
     console.error('ERROR:', msg);
