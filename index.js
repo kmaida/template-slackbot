@@ -36,20 +36,20 @@ mon.once('open', function () {
 // require('./ix/modal')(app);
 // require('./ix/modal-view-submit')(app);
 
-// /*------------------
-//   APP HOME OPENED
-// ------------------*/
+/*------------------
+  APP HOME OPENED
+------------------*/
 require('./events/app-home-opened')(app);
 
-// /*------------------
-//     APP MENTION
-// ------------------*/
-// require('./events/app-mention')(app);
+/*------------------
+    APP MENTION
+------------------*/
+require('./events/app-mention')(app);
 
-// /*------------------
-//        BOT DM
-// ------------------*/
-// require('./events/message-im')(app, at);
+/*------------------
+       BOT DM
+------------------*/
+require('./events/message-im')(app, at);
 
 /*------------------
      START APP
