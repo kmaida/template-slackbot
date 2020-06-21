@@ -28,6 +28,7 @@
     "airtable"
   ],
   "devDependencies": {
+    "@types/airtable": "^0.8.0",
     "@types/mongoose": "^5.7.27"
   }
 }

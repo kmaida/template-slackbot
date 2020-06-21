@@ -1,10 +1,11 @@
-const errors = require('./../utils/errors');
+import errors from './../utils/errors';
+import { ATData } from './../types/types';
 
 /*------------------
   DM CONFIRM SAVE
 ------------------*/
 
-const dmConfirmSave = async (app, atData) => {
+const dmConfirmSave = async (app, atData: ATData) => {
   const userID = atData.slackID;
   try {
     const sendMsg = await app.client.chat.postMessage({
