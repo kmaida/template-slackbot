@@ -18,8 +18,8 @@ const monDB = {
   },
   /*--
   Save sample to store
-  @Param: sample data (object)
-  @Return: saved data (promise)
+  @param: {object} sample data
+  @return: {promise} saved data
   --*/
   async saveSample(sampleData) {
     if (!sampleData) {

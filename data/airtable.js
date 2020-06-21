@@ -13,9 +13,9 @@ const channelPublishSave = require('../bot-publish/channel-publish-save');
 const at = {
   /*--
   Save a new Airtable data record
-  @Param: Slack app
-  @Param: data to save (object)
-  @Return: saved object
+  @param: {App} Slack app
+  @param: {object} data to save
+  @return: {object} saved object
   --*/
   async saveData(app, data) {
     base(table).create([

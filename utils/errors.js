@@ -5,8 +5,8 @@
 const errors = {
   /*--
   Simple log and return error
-  @Param: error message (string)
-  @Return: Error
+  @param: {string} error message
+  @return: {error}
   --*/
   storeErr(err) {
     const msg = err.msg || err;
@@ -15,9 +15,9 @@ const errors = {
   },
   /*--
   Send error to Slack in specified channel
-  @Param: Slack app
-  @Param: channel to send error in (string)
-  @Param: error message (string)
+  @param: {App} Slack app
+  @param: {string} channel to send error in
+  @param: {string} error message
   --*/
   async slackErr(app, channel, err) {
     const msg = err.message || err;
