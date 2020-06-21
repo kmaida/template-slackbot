@@ -4,6 +4,7 @@ const tableID = process.env.AIRTABLE_TABLE_ID;
 const viewID = process.env.AIRTABLE_TABLE_VIEW_ID;
 const errors = require('./../utils/errors');
 const dmConfirmSave = require('./../bot-publish/dm-confirm-save');
+const channelPublishSave = require('../bot-publish/channel-publish-save');
 
 /*------------------
   AIRTABLE: TABLE
@@ -41,9 +42,11 @@ const at = {
         link: `https://airtable.com/${tableID}/${viewID}/${savedID}`
       };
       console.log('AIRTABLE: Saved new record', savedObj);
-      // If you want to update home view: need to have passed user's app home view ID
       // Send Slack DM to submitter confirming successful save
       dmConfirmSave(app, savedObj);
+      // Send Slack channel message
+      channelPublishSave(app, savedObj);
+      // @NOTE: If you want to update home view: need to have passed user's app home view ID
       return savedObj;
     });
   }
