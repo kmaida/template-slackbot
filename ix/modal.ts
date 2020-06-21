@@ -1,4 +1,4 @@
-const errors = require('./../utils/errors');
+import errors from '../utils/errors';
 
 /*------------------
  MODAL DIALOG FORM
@@ -88,4 +88,4 @@ const modal = (app) => {
   app.shortcut('add_airtable_data', openDialog);
 };
 
-module.exports = modal;
+export default modal;

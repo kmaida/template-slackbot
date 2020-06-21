@@ -7,6 +7,12 @@ import at from './data/airtable';
 import mdb from './data/mongodb';
 import mongoose from 'mongoose';
 
+import modal from './ix/modal';
+import submitModal from './ix/modal-view-submit';
+import appHomeOpened from './events/app-home-opened';
+import appMention from './events/app-mention';
+import botDM from './events/message-im';
+
 /*------------------
   CREATE BOLT APP
 ------------------*/
@@ -34,23 +40,23 @@ mon.once('open', function () {
 /*------------------
   SET UP MODAL IX
 ------------------*/
-require('./ix/modal')(app);
-require('./ix/modal-view-submit')(app, at);
+modal(app);
+submitModal(app, at);
 
 /*------------------
   APP HOME OPENED
 ------------------*/
-require('./events/app-home-opened')(app);
+appHomeOpened(app);
 
 /*------------------
     APP MENTION
 ------------------*/
-require('./events/app-mention')(app);
+appMention(app);
 
 /*------------------
        BOT DM
 ------------------*/
-require('./events/message-im')(app, at);
+botDM(app);
 
 /*------------------
      START APP

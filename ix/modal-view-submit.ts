@@ -1,5 +1,5 @@
-const utils = require('./../utils/utils');
-const errors = require('./../utils/errors');
+import utils from './../utils/utils';
+import errors from './../utils/errors';
 
 /*------------------
   MODAL VIEW SUBMIT
@@ -21,7 +21,7 @@ const submitModal = (app, at) => {
     };
     // Validate form fields and handle errors
     // https://api.slack.com/surfaces/modals/using#displaying_errors#displaying_errors
-    let ackParams = { 
+    const ackParams: any = {
       response_action: 'errors',
       errors: {}
     };
@@ -43,4 +43,4 @@ const submitModal = (app, at) => {
   });
 };
 
-module.exports = submitModal;
+export default submitModal;

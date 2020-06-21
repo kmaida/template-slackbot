@@ -13,4 +13,4 @@ const ignoreMsg = async function ({ message, next }) {
   }
 }
 
-module.exports = ignoreMsg;
+export default ignoreMsg;

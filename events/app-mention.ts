@@ -1,5 +1,5 @@
-const errors = require('./../utils/errors');
-const ignoreMsg = require('./../middleware/ignore-message');
+import errors from './../utils/errors';
+import ignoreMsg from './../middleware/ignore-message';
 
 /*------------------
     APP MENTION
@@ -20,4 +20,4 @@ const appMention = (app) => {
   });
 };
 
-module.exports = appMention;
+export default appMention;

@@ -1,5 +1,5 @@
-const errors = require('./../utils/errors');
-const ignoreMsg = require('./../middleware/ignore-message');
+import errors from './../utils/errors';
+import ignoreMsg from './../middleware/ignore-message';
 
 /*------------------
        BOT DM
@@ -20,4 +20,4 @@ const botDM = (app) => {
   });
 };
 
-module.exports = botDM;
+export default botDM;

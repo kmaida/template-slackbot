@@ -1,4 +1,4 @@
-const errors = require('./../utils/errors');
+import errors from './../utils/errors';
 
 /*------------------
   APP HOME OPENED
@@ -40,4 +40,4 @@ const appHomeOpened = async (app) => {
   });
 }
 
-module.exports = appHomeOpened;
+export default appHomeOpened;

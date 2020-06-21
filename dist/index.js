@@ -37,6 +37,11 @@ const bolt_1 = require("@slack/bolt");
 // Airtable
 const airtable_1 = __importDefault(require("./data/airtable"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const modal_1 = __importDefault(require("./ix/modal"));
+const modal_view_submit_1 = __importDefault(require("./ix/modal-view-submit"));
+const app_home_opened_1 = __importDefault(require("./events/app-home-opened"));
+const app_mention_1 = __importDefault(require("./events/app-mention"));
+const message_im_1 = __importDefault(require("./events/message-im"));
 /*------------------
   CREATE BOLT APP
 ------------------*/
@@ -62,20 +67,20 @@ mon.once('open', function () {
 /*------------------
   SET UP MODAL IX
 ------------------*/
-require('./ix/modal')(app);
-require('./ix/modal-view-submit')(app, airtable_1.default);
+modal_1.default(app);
+modal_view_submit_1.default(app, airtable_1.default);
 /*------------------
   APP HOME OPENED
 ------------------*/
-require('./events/app-home-opened')(app);
+app_home_opened_1.default(app);
 /*------------------
     APP MENTION
 ------------------*/
-require('./events/app-mention')(app);
+app_mention_1.default(app);
 /*------------------
        BOT DM
 ------------------*/
-require('./events/message-im')(app, airtable_1.default);
+message_im_1.default(app);
 /*------------------
      START APP
 ------------------*/
