@@ -1,11 +1,12 @@
 const errors = require('./../utils/errors');
+const ignoreMsg = require('./../middleware/ignore-message');
 
 /*------------------
        BOT DM
 ------------------*/
 
 const botDM = (app) => {
-  app.event('message', async ({ event, context }) => {
+  app.event('message', ignoreMsg, async ({ event, context }) => {
     try {
       const sendMsg = await app.client.chat.postMessage({
         token: context.botToken,
