@@ -26,8 +26,8 @@ const at = {
     /**
      * Save a new Airtable data record
      * @param {App} App Slack app
-     * @param {ATData} data to save to Airtable
-     * @return {ATData} saved object
+     * @param {IATData} data to save to Airtable
+     * @return {IATData} saved object
      */
     saveData(app, data) {
         return __awaiter(this, void 0, void 0, function* () {

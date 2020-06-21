@@ -4,9 +4,8 @@ import { App } from '@slack/bolt';
 // Airtable
 import at from './data/airtable';
 // MongoDB
-import mdb from './data/mongodb';
 import mongoose from 'mongoose';
-
+// App functionality
 import modal from './ix/modal';
 import submitModal from './ix/modal-view-submit';
 import appHomeOpened from './events/app-home-opened';

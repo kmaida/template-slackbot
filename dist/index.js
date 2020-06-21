@@ -36,7 +36,9 @@ dotenv.config();
 const bolt_1 = require("@slack/bolt");
 // Airtable
 const airtable_1 = __importDefault(require("./data/airtable"));
+// MongoDB
 const mongoose_1 = __importDefault(require("mongoose"));
+// App functionality
 const modal_1 = __importDefault(require("./ix/modal"));
 const modal_view_submit_1 = __importDefault(require("./ix/modal-view-submit"));
 const app_home_opened_1 = __importDefault(require("./events/app-home-opened"));

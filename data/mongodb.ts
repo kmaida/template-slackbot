@@ -1,3 +1,4 @@
+import { IObjectAny } from './../types';
 import Sample from './SampleSchema';
 import errors from './../utils/errors';
 
@@ -6,26 +7,26 @@ import errors from './../utils/errors';
 ------------------*/
 
 const monDB = {
-  /*--
-  Get samples
-  --*/
+  /**
+   * Get samples
+   */
   async getSamples() {
-    return Sample.find({}, (err, samples) => {
+    return Sample.find({}, (err, samples: IObjectAny) => {
       if (err) return errors.storeErr(err);
       if (!samples) return errors.storeErr('MONGODB: No samples are saved');
       return samples;
     });
   },
-  /*--
-  Save sample to store
-  @param: {object} sample data
-  @return: {promise} saved data
-  --*/
-  async saveSample(sampleData) {
+  /**
+   * Save sample to store
+   * @param {IObjectAny} sampleData data to save to MongoDB
+   * @return {promise} successfully saved data
+   */
+  async saveSample(sampleData: IObjectAny) {
     if (!sampleData) {
       errors.storeErr('MONGODB: No data provided to save to MongoDB');
     }
-    return Sample.findOne({}, (err, sample) => {
+    return Sample.findOne({}, (err, sample: IObjectAny) => {
       if (err) return errors.storeErr(err);
       const newSample = new Sample(sampleData);
       newSample.save((err) => {

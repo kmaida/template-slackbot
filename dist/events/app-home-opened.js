@@ -17,9 +17,6 @@ const errors_1 = __importDefault(require("./../utils/errors"));
   APP HOME OPENED
 ------------------*/
 const appHomeOpened = (app) => __awaiter(void 0, void 0, void 0, function* () {
-    /*----
-      EVENT: app-home-opened
-    ----*/
     app.event('app_home_opened', ({ event, context }) => __awaiter(void 0, void 0, void 0, function* () {
         // Find the bot user ID to set in .env:
         // Uncomment the following line

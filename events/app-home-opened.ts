@@ -5,15 +5,12 @@ import errors from './../utils/errors';
 ------------------*/
 
 const appHomeOpened = async (app) => {
-  /*----
-    EVENT: app-home-opened
-  ----*/
   app.event('app_home_opened', async ({ event, context }) => {
     // Find the bot user ID to set in .env:
     // Uncomment the following line
     // Open the App Home, and check console logs
     // console.log('Bot User ID:', context.botUserId);
-    const userID = event.user;
+    const userID: string = event.user;
 
     // Publish this user's home view
     try {

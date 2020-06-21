@@ -1,7 +1,4 @@
 "use strict";
-/*------------------
-      ERRORS
-------------------*/
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -12,23 +9,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/*------------------
+      ERRORS
+------------------*/
 const errors = {
-    /*--
-    Simple log and return error
-    @param: {string} error message
-    @return: {error}
-    --*/
+    /**
+     * Simple log and return error
+     * @param {IObjectAny|string} err object or error message
+     * @return Error
+     */
     storeErr(err) {
         const msg = err.msg || err;
         console.error('STORE ERROR:', msg);
         return new Error(msg);
     },
-    /*--
-    Send error to Slack in specified channel
-    @param: {App} Slack app
-    @param: {string} channel to send error in
-    @param: {string} error message
-    --*/
+    /**
+     * Send error to Slack in specified channel
+     * @param app Slack app
+     * @param {string} channel to publish message in
+     * @param {string} err message
+     */
     slackErr(app, channel, err) {
         return __awaiter(this, void 0, void 0, function* () {
             const msg = err.message || err;

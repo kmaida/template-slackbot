@@ -1,11 +1,11 @@
 import errors from './../utils/errors';
-import { ObjectAny } from './../types/types';
+import { IATData } from './../types';
 
 /*------------------
 CHANNEL PUBLISH SAVE
 ------------------*/
 
-const channelPublishSave = async (app, atData: ObjectAny) => {
+const channelPublishSave = async (app, atData: IATData) => {
   const channel = process.env.SLACK_CHANNEL_ID;
   try {
     const sendMsg = await app.client.chat.postMessage({

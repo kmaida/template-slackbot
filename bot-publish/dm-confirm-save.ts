@@ -1,11 +1,11 @@
 import errors from './../utils/errors';
-import { ATData } from './../types/types';
+import { IATData } from './../types';
 
 /*------------------
   DM CONFIRM SAVE
 ------------------*/
 
-const dmConfirmSave = async (app, atData: ATData) => {
+const dmConfirmSave = async (app, atData: IATData) => {
   const userID = atData.slackID;
   try {
     const sendMsg = await app.client.chat.postMessage({

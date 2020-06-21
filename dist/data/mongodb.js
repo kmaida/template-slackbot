@@ -18,9 +18,9 @@ const errors_1 = __importDefault(require("./../utils/errors"));
     MONGODB API
 ------------------*/
 const monDB = {
-    /*--
-    Get samples
-    --*/
+    /**
+     * Get samples
+     */
     getSamples() {
         return __awaiter(this, void 0, void 0, function* () {
             return SampleSchema_1.default.find({}, (err, samples) => {
@@ -32,11 +32,11 @@ const monDB = {
             });
         });
     },
-    /*--
-    Save sample to store
-    @param: {object} sample data
-    @return: {promise} saved data
-    --*/
+    /**
+     * Save sample to store
+     * @param {IObjectAny} sampleData data to save to MongoDB
+     * @return {promise} successfully saved data
+     */
     saveSample(sampleData) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!sampleData) {

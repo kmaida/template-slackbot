@@ -1,3 +1,4 @@
+import { IObjectAny, IATData } from './../types';
 import utils from './../utils/utils';
 import errors from './../utils/errors';
 
@@ -8,12 +9,13 @@ import errors from './../utils/errors';
 const submitModal = (app, at) => {
   // Modal view submitted
   app.view('add_airtable_data', async ({ ack, body, view }) => {
-    const userID = body.user.id;
-    const metadata = view.private_metadata ? JSON.parse(view.private_metadata) : {};
-    const payload = view.state.values;
+    const userID: string = body.user.id;
+    const metadata: IObjectAny = view.private_metadata ? JSON.parse(view.private_metadata) : {};
+    console.log('Extra metadata received from modal form:', metadata);
+    const payload: IObjectAny = view.state.values;
     // Capture data from modal interactions
     // Modal blocks data format: payload.[block_id].[action_id].value
-    const data = {
+    const data: IATData = {
       name: payload.b_name.a_name.value,
       url: payload.b_url.a_url.value,
       notes: payload.b_notes.a_notes.value || '',
@@ -25,7 +27,7 @@ const submitModal = (app, at) => {
       response_action: 'errors',
       errors: {}
     };
-    if (!utils.validUrl(data.url.toString())) {
+    if (!utils.validUrl(data.url)) {
       ackParams.errors.b_url = 'Please provide a valid URL.';
     }
     if (utils.objNotEmpty(ackParams.errors)) {

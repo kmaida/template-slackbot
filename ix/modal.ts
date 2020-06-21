@@ -15,6 +15,7 @@ const modal = (app) => {
         view: {
           type: 'modal',
           callback_id: 'add_airtable_data',
+          private_metadata: JSON.stringify({ greeting: 'hi' }),  // Sample of some metadata passed from modal to view submission
           title: {
             type: 'plain_text',
             text: 'Add Airtable Data'

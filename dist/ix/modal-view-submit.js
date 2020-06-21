@@ -22,6 +22,7 @@ const submitModal = (app, at) => {
     app.view('add_airtable_data', ({ ack, body, view }) => __awaiter(void 0, void 0, void 0, function* () {
         const userID = body.user.id;
         const metadata = view.private_metadata ? JSON.parse(view.private_metadata) : {};
+        console.log('Extra metadata received from modal form:', metadata);
         const payload = view.state.values;
         // Capture data from modal interactions
         // Modal blocks data format: payload.[block_id].[action_id].value
@@ -37,7 +38,7 @@ const submitModal = (app, at) => {
             response_action: 'errors',
             errors: {}
         };
-        if (!utils_1.default.validUrl(data.url.toString())) {
+        if (!utils_1.default.validUrl(data.url)) {
             ackParams.errors.b_url = 'Please provide a valid URL.';
         }
         if (utils_1.default.objNotEmpty(ackParams.errors)) {
