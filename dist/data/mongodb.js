@@ -19,6 +19,9 @@ const errors_1 = __importDefault(require("./../utils/errors"));
 /*------------------
     MONGODB API
 ------------------*/
+/**
+ * MongoDB setup
+ */
 const mdbSetup = () => {
     // Address server discovery deprecation warning
     mongoose_1.default.set('useUnifiedTopology', true);
@@ -36,6 +39,7 @@ exports.mdbSetup = mdbSetup;
 const mdbApi = {
     /**
      * Get samples
+     * @return {IObjectAny[]} Array of sample data (promise)
      */
     getSamples() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -51,7 +55,7 @@ const mdbApi = {
     /**
      * Save sample to store
      * @param {IObjectAny} sampleData data to save to MongoDB
-     * @return {promise} successfully saved data
+     * @return {IObjectAny} successfully saved data (promise)
      */
     saveSample(sampleData) {
         return __awaiter(this, void 0, void 0, function* () {

@@ -12,7 +12,9 @@
     "dotenv": "^8.2.0",
     "mongoose": "^5.9.19",
     "tslint": "^6.1.2",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.5",
+    "@types/airtable": "^0.8.0",
+    "@types/mongoose": "^5.7.27"
   },
   "engines": {
     "node": "12.x"
@@ -25,10 +27,8 @@
   "keywords": [
     "slackapi",
     "slackapp",
-    "airtable"
-  ],
-  "devDependencies": {
-    "@types/airtable": "^0.8.0",
-    "@types/mongoose": "^5.7.27"
-  }
+    "airtable",
+    "mongodb",
+    "typescript"
+  ]
 }

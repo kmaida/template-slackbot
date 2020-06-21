@@ -53,8 +53,9 @@ const app = new bolt_1.App({
 });
 const port = process.env.PORT || 3000;
 /*------------------
-      MONGODB
+    ON APP INIT
 ------------------*/
+// Set up MongoDB store
 mongodb_1.mdbSetup();
 /*------------------
   SET UP MODAL IX
@@ -78,6 +79,6 @@ message_im_1.default(app);
 ------------------*/
 (() => __awaiter(void 0, void 0, void 0, function* () {
     yield app.start(port);
-    console.log(`⚡️ Slackbot is running on ${port}!`);
+    console.log(`⚡️ TemplateSlackbot is running on ${port}!`);
 }))();
 //# sourceMappingURL=index.js.map

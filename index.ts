@@ -22,8 +22,9 @@ const app = new App({
 const port = process.env.PORT || 3000;
 
 /*------------------
-      MONGODB
+    ON APP INIT
 ------------------*/
+// Set up MongoDB store
 mdbSetup();
 
 /*------------------
@@ -52,5 +53,5 @@ botDM(app);
 ------------------*/
 (async () => {
   await app.start(port);
-  console.log(`⚡️ Slackbot is running on ${port}!`);
+  console.log(`⚡️ TemplateSlackbot is running on ${port}!`);
 })();
