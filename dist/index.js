@@ -37,7 +37,7 @@ const bolt_1 = require("@slack/bolt");
 // Airtable
 const airtable_1 = __importDefault(require("./data/airtable"));
 // MongoDB
-const mongoose_1 = __importDefault(require("mongoose"));
+const mongodb_1 = require("./data/mongodb");
 // App functionality
 const modal_1 = __importDefault(require("./ix/modal"));
 const modal_view_submit_1 = __importDefault(require("./ix/modal-view-submit"));
@@ -55,17 +55,7 @@ const port = process.env.PORT || 3000;
 /*------------------
       MONGODB
 ------------------*/
-// Address server discovery deprecation warning
-mongoose_1.default.set('useUnifiedTopology', true);
-// Connect to MongoDB
-mongoose_1.default.connect(process.env.MONGO_URI, { useNewUrlParser: true });
-const mon = mongoose_1.default.connection;
-// Capture connection errors
-mon.on('error', console.error.bind(console, 'MongoDB Connection Error. Please make sure that', process.env.MONGO_URI, 'is running.'));
-// Open connection
-mon.once('open', function () {
-    console.info('Connected to MongoDB:', process.env.MONGO_URI);
-});
+mongodb_1.mdbSetup();
 /*------------------
   SET UP MODAL IX
 ------------------*/

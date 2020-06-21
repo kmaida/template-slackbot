@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { IObjectAny } from './../types';
 import Sample from './SampleSchema';
 import errors from './../utils/errors';
@@ -6,7 +7,21 @@ import errors from './../utils/errors';
     MONGODB API
 ------------------*/
 
-const monDB = {
+const mdbSetup = () => {
+  // Address server discovery deprecation warning
+  mongoose.set('useUnifiedTopology', true);
+  // Connect to MongoDB
+  mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true });
+  const mon = mongoose.connection;
+  // Capture connection errors
+  mon.on('error', console.error.bind(console, 'MongoDB Connection Error. Please make sure that', process.env.MONGO_URI, 'is running.'));
+  // Open connection
+  mon.once('open', function () {
+    console.info('Connected to MongoDB:', process.env.MONGO_URI);
+  });
+};
+
+const mdbApi = {
   /**
    * Get samples
    */
@@ -37,4 +52,4 @@ const monDB = {
   }
 };
 
-export default monDB;
+export { mdbSetup, mdbApi };
