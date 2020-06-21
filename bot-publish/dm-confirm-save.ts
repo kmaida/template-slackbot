@@ -19,4 +19,4 @@ const dmConfirmSave = async (app, atData) => {
   }
 };
 
-module.exports = dmConfirmSave;
+export default dmConfirmSave;

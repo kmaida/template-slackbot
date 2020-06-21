@@ -4,7 +4,7 @@
   "description": "Slack app for ...",
   "main": "dist/index.js",
   "scripts": {
-    "start": "tsc index.ts && node index.js"
+    "start": "tsc && node dist/index.js"
   },
   "dependencies": {
     "@slack/bolt": "^2.1.1",

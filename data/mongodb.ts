@@ -1,5 +1,5 @@
-const Sample = require('./SampleSchema');
-const errors = require('./../utils/errors');
+import Sample from './SampleSchema';
+import errors from './../utils/errors';
 
 /*------------------
     MONGODB API
@@ -36,4 +36,4 @@ const monDB = {
   }
 };
 
-module.exports = monDB;
+export default monDB;

@@ -1,10 +1,11 @@
-const base = require('airtable').base(process.env.AIRTABLE_BASE_ID);
+import * as base from 'airtable';
+base.base(process.env.AIRTABLE_BASE_ID);
 const table = process.env.AIRTABLE_TABLE;
 const tableID = process.env.AIRTABLE_TABLE_ID;
 const viewID = process.env.AIRTABLE_TABLE_VIEW_ID;
-const errors = require('./../utils/errors');
-const dmConfirmSave = require('./../bot-publish/dm-confirm-save');
-const channelPublishSave = require('../bot-publish/channel-publish-save');
+import errors from './../utils/errors';
+import dmConfirmSave from './../bot-publish/dm-confirm-save';
+import channelPublishSave from './../bot-publish/channel-publish-save';
 
 /*------------------
   AIRTABLE: TABLE
@@ -52,4 +53,4 @@ const at = {
   }
 };
 
-module.exports = at;
+export default at;

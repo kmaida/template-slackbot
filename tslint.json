@@ -5,7 +5,10 @@
     "rules": {
       "no-console": false,
       "no-var-requires": false,
-      "only-arrow-functions": false
+      "only-arrow-functions": false,
+      "no-string-literal": false,
+      "object-literal-shorthand": false,
+      "no-shadowed-variable": false
     },
     "rulesDirectory": []
   }

@@ -5,7 +5,7 @@ import { App } from '@slack/bolt';
 import at from './data/airtable';
 // MongoDB
 import mdb from './data/mongodb';
-import * as mongoose from 'mongoose';
+import mongoose from 'mongoose';
 
 /*------------------
   CREATE BOLT APP

@@ -10,4 +10,4 @@ const sampleSchema = new Schema({
   notes: String
 });
 
-module.exports = mongoose.model('SampleSchema', sampleSchema);
+export default mongoose.model('SampleSchema', sampleSchema);

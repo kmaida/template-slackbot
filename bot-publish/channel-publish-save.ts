@@ -1,10 +1,10 @@
-const errors = require('./../utils/errors');
+import errors from './../utils/errors';
 
 /*------------------
 CHANNEL PUBLISH SAVE
 ------------------*/
 
-const channelPublishSave = async (app, atData) => {
+const channelPublishSave = async (app, atData: {[key: string]: any}) => {
   const channel = process.env.SLACK_CHANNEL_ID;
   try {
     const sendMsg = await app.client.chat.postMessage({
@@ -19,4 +19,4 @@ const channelPublishSave = async (app, atData) => {
   }
 };
 
-module.exports = channelPublishSave;
+export default channelPublishSave;

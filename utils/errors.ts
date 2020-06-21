@@ -19,7 +19,7 @@ const errors = {
   @param: {string} channel to send error in
   @param: {string} error message
   --*/
-  async slackErr(app, channel, err) {
+  async slackErr(app, channel: string, err: any) {
     const msg = err.message || err;
     console.error('ERROR:', msg);
     try {
@@ -35,4 +35,4 @@ const errors = {
   }
 };
 
-module.exports = errors;
+export default errors;
