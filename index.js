@@ -33,8 +33,8 @@ mon.once('open', function () {
 /*------------------
   SET UP MODAL IX
 ------------------*/
-// require('./ix/modal')(app);
-// require('./ix/modal-view-submit')(app);
+require('./ix/modal')(app);
+require('./ix/modal-view-submit')(app, at);
 
 /*------------------
   APP HOME OPENED

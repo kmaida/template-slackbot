@@ -3,6 +3,7 @@ const table = process.env.AIRTABLE_TABLE;
 const tableID = process.env.AIRTABLE_TABLE_ID;
 const viewID = process.env.AIRTABLE_TABLE_VIEW_ID;
 const errors = require('./../utils/errors');
+const dmConfirmSave = require('./../bot-publish/dm-confirm-save');
 
 /*------------------
   AIRTABLE: TABLE
@@ -10,16 +11,17 @@ const errors = require('./../utils/errors');
 
 const at = {
   /*--
-  Save a new record
+  Save a new Airtable data record
   @Param: Slack app
   @Param: data to save (object)
   @Return: saved object
   --*/
-  async saveRecord(app, data) {
+  async saveData(app, data) {
     base(table).create([
       {
         "fields": {
           "Name": data.name,
+          "URL": data.url,
           "Notes": data.notes || '',
           "Slack ID": data.slackID
         }
@@ -32,12 +34,16 @@ const at = {
       const savedID = savedRecord.getId();
       const savedObj = {
         id: savedID,
-        fields: savedRecord.fields,
+        name: savedRecord.fields["Name"],
+        url: savedRecord.fields["URL"],
+        notes: savedRecord.fields["Notes"] || '',
+        slackID: savedRecord.fields["Slack ID"],
         link: `https://airtable.com/${tableID}/${viewID}/${savedID}`
       };
       console.log('AIRTABLE: Saved new record', savedObj);
       // If you want to update home view: need to have passed user's app home view ID
-      // Send Slack message (pass parameters for app, saved)
+      // Send Slack DM to submitter confirming successful save
+      dmConfirmSave(app, savedObj);
       return savedObj;
     });
   }
