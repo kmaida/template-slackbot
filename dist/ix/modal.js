@@ -15,11 +15,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const errors_1 = __importDefault(require("../utils/errors"));
 /*------------------
  MODAL DIALOG FORM
- Command & global shortcut
+    Command
+    Shortcut
+    Button
 ------------------*/
 const modal = (app) => {
     const openDialog = ({ ack, body, context }) => __awaiter(void 0, void 0, void 0, function* () {
         yield ack();
+        /**
+         * PASSING DATA FROM INTERACTION TO VIEW SUBMISSION:
+         * Hidden metadata can be sent in the modal view as private_metadata to modal-view-submit.ts.
+         * Any data available in params here (e.g., body, context) is available to use as metadata.
+         * This data comes from the interaction (command, shortcut, or button action) that triggers this modal.
+         * The data varies in format depending on which trigger is used; uncomment the console log
+         * below to examine this payload further.
+         */
+        // console.log(body);
+        // If button value metadata is available, set it as metadata (e.g., useful for getting home view data)
+        const btnMetadata = JSON.stringify(body.actions ? body.actions[0].value : {});
         try {
             const result = yield app.client.views.open({
                 token: context.botToken,
@@ -27,7 +40,7 @@ const modal = (app) => {
                 view: {
                     type: 'modal',
                     callback_id: 'add_airtable_data',
-                    private_metadata: JSON.stringify({ greeting: 'hi' }),
+                    private_metadata: btnMetadata,
                     title: {
                         type: 'plain_text',
                         text: 'Add Airtable Data'
@@ -99,6 +112,8 @@ const modal = (app) => {
     app.command('/add-data', openDialog);
     // Global shortcut to add Airtable data
     app.shortcut('add_airtable_data', openDialog);
+    // Button from App Home
+    app.action('btn_open_modal', openDialog);
 };
 exports.default = modal;
 //# sourceMappingURL=modal.js.map

@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const errors_1 = __importDefault(require("./../utils/errors"));
+const btn_open_modal_1 = __importDefault(require("./../ix/btn-open-modal"));
 /*------------------
   APP HOME OPENED
 ------------------*/
@@ -23,6 +24,11 @@ const appHomeOpened = (app) => __awaiter(void 0, void 0, void 0, function* () {
         // Open the App Home, and check console logs
         // console.log('Bot User ID:', context.botUserId);
         const userID = event.user;
+        // Sample metadata
+        const metadata = {
+            event: event,
+            msg: 'Data from user home'
+        };
         // Publish this user's home view
         try {
             const showHomeView = yield app.client.views.publish({
@@ -37,6 +43,12 @@ const appHomeOpened = (app) => __awaiter(void 0, void 0, void 0, function* () {
                                 "type": "mrkdwn",
                                 "text": `:wave: *Hello, <@${userID}>!* I'm <@${process.env.SLACK_BOT_ID}>.`
                             }
+                        },
+                        {
+                            "type": "actions",
+                            "elements": [
+                                btn_open_modal_1.default(metadata)
+                            ]
                         }
                     ]
                 }

@@ -1,4 +1,5 @@
 import errors from './../utils/errors';
+import btnOpenModal from './../ix/btn-open-modal';
 
 /*------------------
   APP HOME OPENED
@@ -11,6 +12,11 @@ const appHomeOpened = async (app) => {
     // Open the App Home, and check console logs
     // console.log('Bot User ID:', context.botUserId);
     const userID: string = event.user;
+    // Sample metadata
+    const metadata = {
+      event: event,
+      msg: 'Data from user home'
+    };
 
     // Publish this user's home view
     try {
@@ -26,6 +32,12 @@ const appHomeOpened = async (app) => {
                 "type": "mrkdwn",
                 "text": `:wave: *Hello, <@${userID}>!* I'm <@${process.env.SLACK_BOT_ID}>.`
               }
+            },
+            {
+              "type": "actions",
+              "elements": [
+                btnOpenModal(metadata)
+              ]
             }
           ]
         }

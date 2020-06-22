@@ -11,7 +11,7 @@ const submitModal = (app, at) => {
   app.view('add_airtable_data', async ({ ack, body, view }) => {
     const userID: string = body.user.id;
     const metadata: IObjectAny = view.private_metadata ? JSON.parse(view.private_metadata) : {};
-    console.log('Extra metadata received from modal form:', metadata);
+    console.log('Metadata received from modal form:', metadata);
     const payload: IObjectAny = view.state.values;
     // Capture data from modal interactions
     // Modal blocks data format: payload.[block_id].[action_id].value
