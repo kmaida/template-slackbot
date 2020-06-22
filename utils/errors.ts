@@ -32,7 +32,7 @@ const errors: IObjectAny = {
       });
     }
     catch (err) {
-      console.error('ERROR SENDING SLACK DM ERROR TO USER:', err);
+      console.error('ERROR DELIVERING SLACK MESSAGE ERROR:', err);
     }
   }
 };
