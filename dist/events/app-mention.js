@@ -13,25 +13,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const errors_1 = __importDefault(require("./../utils/errors"));
-const ignore_message_1 = __importDefault(require("./../middleware/ignore-message"));
 const utils_1 = __importDefault(require("./../utils/utils"));
 /*------------------
     APP MENTION
 ------------------*/
 const appMention = (app) => {
-    app.event('app_mention', ignore_message_1.default, ({ event, context }) => __awaiter(void 0, void 0, void 0, function* () {
+    app.event('app_mention', ({ event, context }) => __awaiter(void 0, void 0, void 0, function* () {
         // Ignore message edited and topic change subtypes
-        if (!utils_1.default.ignoreMention(event.subtype)) {
-            try {
-                const result = yield app.client.chat.postMessage({
-                    token: context.botToken,
-                    channel: event.channel,
-                    text: `:wave: Thanks for reaching out! Please go to my :house: *<slack://app?team=${process.env.SLACK_TEAM_ID}&id=${process.env.SLACK_APP_ID}&tab=home|App Home tab>*.`
-                });
-            }
-            catch (err) {
-                errors_1.default.slackErr(app, event.channel, err);
-            }
+        // (Slack bug causing listener middleware not to work)
+        // (This is an alternative solution)
+        if (utils_1.default.ignoreMention(event.subtype))
+            return;
+        try {
+            const result = yield app.client.chat.postMessage({
+                token: context.botToken,
+                channel: event.channel,
+                text: `:wave: Thanks for reaching out! Please go to my :house: *<slack://app?team=${process.env.SLACK_TEAM_ID}&id=${process.env.SLACK_APP_ID}&tab=home|App Home tab>*.`
+            });
+        }
+        catch (err) {
+            errors_1.default.slackErr(app, event.channel, err);
         }
     }));
 };
