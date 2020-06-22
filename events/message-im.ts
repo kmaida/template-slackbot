@@ -8,10 +8,10 @@ import { IObjectAny } from './../types';
 
 const botDM = (app: IObjectAny): void => {
   app.event('message', async ({ event, context }) => {
-    // Ignore message edited subtypes
+    // Ignore message edited events
     // (Slack bug causing listener middleware not to work)
     // (This is an alternative solution)
-    if (utils.ignoreMention(event.subtype)) return;
+    if (utils.ignoreMention(event)) return;
     try {
       const sendMsg = await app.client.chat.postMessage({
         token: context.botToken,

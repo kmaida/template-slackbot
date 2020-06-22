@@ -37,13 +37,13 @@ const utils = {
     }
   },
   /**
-   * Should this message be ignored by the bot in mentions?
-   * @param {string} subtype event mention subtype
-   * @return {boolean} is the passed subtype disallowed?
+   * Should this event be ignored by the bot?
+   * @param {IObjectAny} event event object
+   * @return {boolean} should the message event be ignored?
    */
-  ignoreMention(subtype: string): boolean {
-    const disallowedSubtypes: string[] = ['channel_topic', 'message_changed'];
-    return disallowedSubtypes.indexOf(subtype) > -1;
+  ignoreMention(event: IObjectAny): boolean {
+    const disallowedSubtypes = ['channel_topic', 'message_changed'];
+    return disallowedSubtypes.indexOf(event.subtype) > -1 || !!event.edited;
   }
 };
 

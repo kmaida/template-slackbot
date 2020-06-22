@@ -19,10 +19,10 @@ const utils_1 = __importDefault(require("./../utils/utils"));
 ------------------*/
 const botDM = (app) => {
     app.event('message', ({ event, context }) => __awaiter(void 0, void 0, void 0, function* () {
-        // Ignore message edited subtypes
+        // Ignore message edited events
         // (Slack bug causing listener middleware not to work)
         // (This is an alternative solution)
-        if (utils_1.default.ignoreMention(event.subtype))
+        if (utils_1.default.ignoreMention(event))
             return;
         try {
             const sendMsg = yield app.client.chat.postMessage({

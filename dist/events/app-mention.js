@@ -19,10 +19,10 @@ const utils_1 = __importDefault(require("./../utils/utils"));
 ------------------*/
 const appMention = (app) => {
     app.event('app_mention', ({ event, context }) => __awaiter(void 0, void 0, void 0, function* () {
-        // Ignore message edited and topic change subtypes
+        // Ignore message edited and topic changes
         // (Slack bug causing listener middleware not to work)
         // (This is an alternative solution)
-        if (utils_1.default.ignoreMention(event.subtype))
+        if (utils_1.default.ignoreMention(event))
             return;
         try {
             const result = yield app.client.chat.postMessage({
