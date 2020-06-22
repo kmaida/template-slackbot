@@ -13,21 +13,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const errors_1 = __importDefault(require("./../utils/errors"));
+const utils_1 = __importDefault(require("./../utils/utils"));
 const ignore_message_1 = __importDefault(require("./../middleware/ignore-message"));
 /*------------------
        BOT DM
 ------------------*/
 const botDM = (app) => {
     app.event('message', ignore_message_1.default, ({ event, context }) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const sendMsg = yield app.client.chat.postMessage({
-                token: context.botToken,
-                channel: event.channel,
-                text: `:shrug: I'm sorry, I didn't understand that. Please go to my :house: *<slack://app?team=${process.env.SLACK_TEAM_ID}&id=${process.env.SLACK_APP_ID}&tab=home|Home tab>*.`
-            });
-        }
-        catch (err) {
-            errors_1.default.slackErr(app, event.channel, err);
+        // Ignore message edited subtypes
+        if (utils_1.default.ignoreMention(event.subtype)) {
+            try {
+                const sendMsg = yield app.client.chat.postMessage({
+                    token: context.botToken,
+                    channel: event.channel,
+                    text: `:shrug: I'm sorry, I didn't understand that. Please go to my :house: *<slack://app?team=${process.env.SLACK_TEAM_ID}&id=${process.env.SLACK_APP_ID}&tab=home|Home tab>*.`
+                });
+            }
+            catch (err) {
+                errors_1.default.slackErr(app, event.channel, err);
+            }
         }
     }));
 };

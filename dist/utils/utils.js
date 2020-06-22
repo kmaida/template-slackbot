@@ -13,7 +13,7 @@ const utils = {
         const regexRaw = /((?:[A-Za-z]{3,9})(?::\/\/|@)(?:(?:[A-Za-z0-9\-.]+[.:])|(?:www\.|[-;:&=+$,\w]+@))(?:[A-Za-z0-9.-]+)(?:[/\-+=&;%@.\w_~()]*)(?:[.!/\\\w-?%#~&=+()]*))/g;
         const regex = new RegExp(regexRaw);
         const cleanStr = input.toString().trim();
-        return cleanStr.match(regex);
+        return !!cleanStr.match(regex);
     },
     /**
      * Does an object have properties?
@@ -35,6 +35,15 @@ const utils = {
         else {
             return input;
         }
+    },
+    /**
+     * Should this message be ignored by the bot in mentions?
+     * @param {string} subtype event mention subtype
+     * @return {boolean} is the passed subtype disallowed?
+     */
+    ignoreMention(subtype) {
+        const disallowedSubtypes = ['channel_topic', 'message_changed'];
+        return disallowedSubtypes.indexOf(subtype) > -1;
     }
 };
 exports.default = utils;
