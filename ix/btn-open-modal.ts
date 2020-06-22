@@ -1,9 +1,11 @@
+import { IObjectAny } from './../types';
+
 /*------------------
  BUTTON: OPEN MODAL
    with metadata
 ------------------*/
 
-const btnOpenModal = (metadata?: any) => {
+const btnOpenModal = (metadata?: any): IObjectAny => {
   return {
     "type": "button",
     "text": {

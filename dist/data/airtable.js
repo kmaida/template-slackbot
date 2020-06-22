@@ -25,13 +25,13 @@ const channel_publish_save_1 = __importDefault(require("./../bot-publish/channel
 const at = {
     /**
      * Save a new Airtable data record
-     * @param {App} App Slack app
+     * @param {IObjectAny} App Slack app
      * @param {IATData} data to save to Airtable
-     * @return {IATData} saved object
+     * @return {Promise<IATData>} promise resolving with saved object
      */
     saveData(app, data) {
         return __awaiter(this, void 0, void 0, function* () {
-            base(table).create([
+            return base(table).create([
                 {
                     "fields": {
                         "Name": data.name,

@@ -17,17 +17,19 @@ const btn_open_modal_1 = __importDefault(require("./../ix/btn-open-modal"));
 /*------------------
   APP HOME OPENED
 ------------------*/
-const appHomeOpened = (app) => __awaiter(void 0, void 0, void 0, function* () {
+const appHomeOpened = (app) => {
     app.event('app_home_opened', ({ event, context }) => __awaiter(void 0, void 0, void 0, function* () {
-        // Find the bot user ID to set in .env:
-        // Uncomment the following line
-        // Open the App Home, and check console logs
+        /**
+         * Find the bot user ID to set in .env:
+         * Uncomment the following line
+         * Open the App Home, and check console logs
+         */
         // console.log('Bot User ID:', context.botUserId);
         const userID = event.user;
-        // Sample metadata
+        // Sample metadata to pass through btn-open-modal.ts -> modal.ts -> modal-view-submit.ts
         const metadata = {
             event: event,
-            msg: 'Data from user home'
+            msg: 'Event data from user home'
         };
         // Publish this user's home view
         try {
@@ -58,6 +60,6 @@ const appHomeOpened = (app) => __awaiter(void 0, void 0, void 0, function* () {
             errors_1.default.slackErr(app, userID, err);
         }
     }));
-});
+};
 exports.default = appHomeOpened;
 //# sourceMappingURL=app-home-opened.js.map

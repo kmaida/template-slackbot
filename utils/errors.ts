@@ -4,24 +4,24 @@ import { IObjectAny } from './../types';
       ERRORS
 ------------------*/
 
-const errors = {
+const errors: IObjectAny = {
   /**
    * Simple log and return error
    * @param {IObjectAny|string} err object or error message
-   * @return Error
+   * @return {IObjectAny} error object
    */
-  storeErr(err: any) {
+  storeErr(err: any): IObjectAny {
     const msg: string = err.msg || err;
     console.error('STORE ERROR:', msg);
     return new Error(msg);
   },
   /**
    * Send error to Slack in specified channel
-   * @param app Slack app
+   * @param {IObjectAny} app Slack app
    * @param {string} channel to publish message in
    * @param {string} err message
    */
-  async slackErr(app, channel: string, err: any) {
+  async slackErr(app: IObjectAny, channel: string, err: any): Promise<void> {
     const msg: string = err.message || err;
     console.error('ERROR:', msg);
     try {

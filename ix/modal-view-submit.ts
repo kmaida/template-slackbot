@@ -6,7 +6,7 @@ import errors from './../utils/errors';
   MODAL VIEW SUBMIT
 ------------------*/
 
-const submitModal = (app, at) => {
+const submitModal = (app: IObjectAny, at: IObjectAny): void => {
   // Modal view submitted
   app.view('add_airtable_data', async ({ ack, body, view }) => {
     const userID: string = body.user.id;

@@ -1,9 +1,9 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /*------------------
  BUTTON: OPEN MODAL
    with metadata
 ------------------*/
-Object.defineProperty(exports, "__esModule", { value: true });
 const btnOpenModal = (metadata) => {
     return {
         "type": "button",

@@ -16,7 +16,7 @@ const errors = {
     /**
      * Simple log and return error
      * @param {IObjectAny|string} err object or error message
-     * @return Error
+     * @return {IObjectAny} error object
      */
     storeErr(err) {
         const msg = err.msg || err;
@@ -25,7 +25,7 @@ const errors = {
     },
     /**
      * Send error to Slack in specified channel
-     * @param app Slack app
+     * @param {IObjectAny} app Slack app
      * @param {string} channel to publish message in
      * @param {string} err message
      */

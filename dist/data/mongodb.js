@@ -21,6 +21,7 @@ const errors_1 = __importDefault(require("./../utils/errors"));
 ------------------*/
 /**
  * MongoDB setup
+ * Connect to database
  */
 const mdbSetup = () => {
     // Address server discovery deprecation warning
@@ -39,7 +40,7 @@ exports.mdbSetup = mdbSetup;
 const mdbApi = {
     /**
      * Get samples
-     * @return {IObjectAny[]} Array of sample data (promise)
+     * @return {Promise<IObjectAny[]>} Promise: array of sample data (promise)
      */
     getSamples() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -55,7 +56,7 @@ const mdbApi = {
     /**
      * Save sample to store
      * @param {IObjectAny} sampleData data to save to MongoDB
-     * @return {IObjectAny} successfully saved data (promise)
+     * @return {Promise<IObjectAny>} successfully saved data (promise)
      */
     saveSample(sampleData) {
         return __awaiter(this, void 0, void 0, function* () {

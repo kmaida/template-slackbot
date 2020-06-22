@@ -1,11 +1,12 @@
 import errors from './../utils/errors';
 import utils from './../utils/utils';
+import { IObjectAny } from './../types';
 
 /*------------------
        BOT DM
 ------------------*/
 
-const botDM = (app) => {
+const botDM = (app: IObjectAny): void => {
   app.event('message', async ({ event, context }) => {
     // Ignore message edited subtypes
     // (Slack bug causing listener middleware not to work)

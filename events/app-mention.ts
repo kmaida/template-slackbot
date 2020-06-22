@@ -1,11 +1,12 @@
 import errors from './../utils/errors';
 import utils from './../utils/utils';
+import { IObjectAny } from './../types';
 
 /*------------------
     APP MENTION
 ------------------*/
 
-const appMention = (app) => {
+const appMention = (app: IObjectAny): void => {
   app.event('app_mention', async ({ event, context }) => {
     // Ignore message edited and topic change subtypes
     // (Slack bug causing listener middleware not to work)

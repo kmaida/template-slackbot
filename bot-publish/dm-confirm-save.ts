@@ -1,12 +1,12 @@
 import errors from './../utils/errors';
-import { IATData } from './../types';
+import { IObjectAny, IATData } from './../types';
 
 /*------------------
   DM CONFIRM SAVE
 ------------------*/
 
-const dmConfirmSave = async (app, atData: IATData) => {
-  const userID = atData.slackID;
+const dmConfirmSave = async (app: IObjectAny, atData: IATData): Promise<any> => {
+  const userID: string = atData.slackID;
   try {
     const sendMsg = await app.client.chat.postMessage({
       token: process.env.SLACK_BOT_TOKEN,

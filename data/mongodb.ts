@@ -9,8 +9,9 @@ import errors from './../utils/errors';
 
 /**
  * MongoDB setup
+ * Connect to database
  */
-const mdbSetup = () => {
+const mdbSetup = (): void => {
   // Address server discovery deprecation warning
   mongoose.set('useUnifiedTopology', true);
   // Connect to MongoDB
@@ -27,9 +28,9 @@ const mdbSetup = () => {
 const mdbApi = {
   /**
    * Get samples
-   * @return {IObjectAny[]} Array of sample data (promise)
+   * @return {Promise<IObjectAny[]>} Promise: array of sample data (promise)
    */
-  async getSamples() {
+  async getSamples(): Promise<IObjectAny[]> {
     return Sample.find({}, (err, samples: IObjectAny) => {
       if (err) return errors.storeErr(err);
       if (!samples) return errors.storeErr('MONGODB: No samples are saved');
@@ -39,9 +40,9 @@ const mdbApi = {
   /**
    * Save sample to store
    * @param {IObjectAny} sampleData data to save to MongoDB
-   * @return {IObjectAny} successfully saved data (promise)
+   * @return {Promise<IObjectAny>} successfully saved data (promise)
    */
-  async saveSample(sampleData: IObjectAny) {
+  async saveSample(sampleData: IObjectAny): Promise<IObjectAny> {
     if (!sampleData) {
       errors.storeErr('MONGODB: No data provided to save to MongoDB');
     }

@@ -1,4 +1,5 @@
-import errors from '../utils/errors';
+import errors from './../utils/errors';
+import { IObjectAny } from './../types';
 
 /*------------------
  MODAL DIALOG FORM
@@ -7,7 +8,7 @@ import errors from '../utils/errors';
     Button
 ------------------*/
 
-const modal = (app) => {
+const modal = (app: IObjectAny): void => {
   const openDialog = async ({ ack, body, context }) => {
     await ack();
     /**
