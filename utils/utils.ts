@@ -37,13 +37,18 @@ const utils = {
     }
   },
   /**
-   * Should this event be ignored by the bot?
+   * Message middleware: ignore some kinds of messages
    * @param {IObjectAny} event event object
-   * @return {boolean} should the message event be ignored?
+   * @return {Promise<void>} continue if not ignored message type
    */
-  ignoreMention(event: IObjectAny): boolean {
+  async ignoreMention({ event, next }: IObjectAny): Promise<void> {
     const disallowedSubtypes = ['channel_topic', 'message_changed'];
-    return disallowedSubtypes.indexOf(event.subtype) > -1 || !!event.edited;
+    const ignoreSubtype = disallowedSubtypes.indexOf(event.subtype) > -1;
+    const messageChanged = !!event.edited;
+    // If not ignored subtype and not an edited message event, proceed
+    if (!ignoreSubtype && !messageChanged) {
+      await next();
+    }
   }
 };
 

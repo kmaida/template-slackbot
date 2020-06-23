@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 /*------------------
        UTILS
@@ -37,13 +46,20 @@ const utils = {
         }
     },
     /**
-     * Should this event be ignored by the bot?
+     * Message middleware: ignore some kinds of messages
      * @param {IObjectAny} event event object
-     * @return {boolean} should the message event be ignored?
+     * @return {Promise<void>} continue if not ignored message type
      */
-    ignoreMention(event) {
-        const disallowedSubtypes = ['channel_topic', 'message_changed'];
-        return disallowedSubtypes.indexOf(event.subtype) > -1 || !!event.edited;
+    ignoreMention({ event, next }) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const disallowedSubtypes = ['channel_topic', 'message_changed'];
+            const ignoreSubtype = disallowedSubtypes.indexOf(event.subtype) > -1;
+            const messageChanged = !!event.edited;
+            // If not ignored subtype and not an edited message event, proceed
+            if (!ignoreSubtype && !messageChanged) {
+                yield next();
+            }
+        });
     }
 };
 exports.default = utils;
