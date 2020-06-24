@@ -27,6 +27,7 @@ const mdbSetup = (): void => {
 
 /**
  * Object containing API endpoints
+ * NOTE: Not used anywhere, also needs much more robust typing
  */
 const mdbApi: IObjectAny = {
   /**

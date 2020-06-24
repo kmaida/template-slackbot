@@ -7,10 +7,11 @@ ADMINS SETTINGS API
 
 /**
  * Database error handler
+ * Private (not exported)
  * @param {IObjectAny}
  * @return {IObjectAny} Error object
  */
-const dbErrHandler = (err: IObjectAny): IObjectAny => {
+const _dbErrHandler = (err: IObjectAny): IObjectAny => {
   const errMsg = `ADMIN SETTINGS DB Error: ${err.message || err}`;
   console.error(errMsg);
   return new Error(errMsg);
@@ -22,14 +23,14 @@ const dbErrHandler = (err: IObjectAny): IObjectAny => {
    */
 const initAdminSettings = async (): Promise<IAdminDocument> => {
   return Admin.findOne({}, (err: IObjectAny, settings: IAdminDocument) => {
-    if (err) return dbErrHandler(err);
+    if (err) return _dbErrHandler(err);
     if (!settings) {
       const newSettings: IAdminDocument = new Admin({
         channel: process.env.SLACK_CHANNEL_ID,
         admins: process.env.SLACK_ADMINS.split(',')
       });
       newSettings.save((err) => {
-        if (err) return dbErrHandler(err);
+        if (err) return _dbErrHandler(err);
         console.log('ADMIN DB: Set new admin settings from environment variables');
         return newSettings;
       });
@@ -47,7 +48,7 @@ const adminApi: IObjectAny = {
    */
   async getSettings(): Promise<IAdminDocument> {
     return Admin.findOne({}, (err: IObjectAny, settings: IAdminDocument) => {
-      if (err) return dbErrHandler(err);
+      if (err) return _dbErrHandler(err);
       if (!settings) return new Error('ADMIN DB: No admin settings are saved');
       return settings;
     });
@@ -59,8 +60,8 @@ const adminApi: IObjectAny = {
    */
   async setChannel(channel: string): Promise<IAdminDocument> {
     return Admin.findOne({}, (err: IObjectAny, settings: IAdminDocument) => {
-      if (err) return dbErrHandler(err);
-      if (!channel) return dbErrHandler({message: 'No channel provided'});
+      if (err) return _dbErrHandler(err);
+      if (!channel) return _dbErrHandler({message: 'No channel provided'});
       // No settings exist yet; save new settings document
       if (!settings) {
         const newSettings: IAdminDocument = new Admin({
@@ -68,7 +69,7 @@ const adminApi: IObjectAny = {
           admins: process.env.SLACK_ADMINS.split(',')
         });
         newSettings.save((err: IObjectAny) => {
-          if (err) return dbErrHandler(err);
+          if (err) return _dbErrHandler(err);
           return newSettings;
         });
       }
@@ -76,7 +77,7 @@ const adminApi: IObjectAny = {
       else {
         settings.channel = channel;
         settings.save((err: IObjectAny) => {
-          if (err) return dbErrHandler(err);
+          if (err) return _dbErrHandler(err);
           console.log('ADMIN DB: successfully set channel to', settings.channel);
           return settings;
         });
@@ -90,8 +91,8 @@ const adminApi: IObjectAny = {
    */
   async setAdmins(admins: string[]): Promise<IAdminDocument> {
     return Admin.findOne({}, (err: IObjectAny, settings: IAdminDocument) => {
-      if (err) return dbErrHandler(err);
-      if (!admins || !admins.length) return dbErrHandler({message: 'No users provided'});
+      if (err) return _dbErrHandler(err);
+      if (!admins || !admins.length) return _dbErrHandler({message: 'No users provided'});
       // No settings exist yet; save new settings document
       if (!settings) {
         const newSettings: IAdminDocument = new Admin({
@@ -99,7 +100,7 @@ const adminApi: IObjectAny = {
           admins: admins
         });
         newSettings.save((err: IObjectAny) => {
-          if (err) return dbErrHandler(err);
+          if (err) return _dbErrHandler(err);
           return newSettings;
         });
       }
@@ -107,7 +108,7 @@ const adminApi: IObjectAny = {
       else {
         settings.admins = admins;
         settings.save((err: IObjectAny) => {
-          if (err) return dbErrHandler(err);
+          if (err) return _dbErrHandler(err);
           console.log('ADMIN DB: successfully updated admin list to', settings.admins);
           return settings;
         });
