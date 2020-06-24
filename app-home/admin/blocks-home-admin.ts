@@ -62,23 +62,23 @@ const blocksHomeAdmin = (initialChannel: string, initialAdmins: string[]): IObje
         }
       ]
     },
-    // {
-    //   "type": "section",
-    //   "block_id": "select_admins",
-    //   "text": {
-    //     "type": "mrkdwn",
-    //     "text": `*Select users with admin privileges* to control ${_botMention}:`
-    //   },
-    //   "accessory": {
-    //     "action_id": "a_select_admins",
-    //     "type": "multi_users_select",
-    //     "placeholder": {
-    //       "type": "plain_text",
-    //       "text": "Select Admin Users"
-    //     },
-    //     "initial_users": initialAdmins
-    //   }
-    // },
+    {
+      "type": "section",
+      "block_id": "select_admins",
+      "text": {
+        "type": "mrkdwn",
+        "text": `*Select users with admin privileges* to control ${_botMention}:`
+      },
+      "accessory": {
+        "action_id": "a_select_admins",
+        "type": "multi_users_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select Admin Users"
+        },
+        "initial_users": initialAdmins
+      }
+    },
     // {
     //   "type": "section",
     //   "text": {

@@ -13,10 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const errors_1 = __importDefault(require("../utils/errors"));
-const btn_open_modal_1 = __importDefault(require("../modal/btn-open-modal"));
-const blocks_home_admin_1 = __importDefault(require("./admin/blocks-home-admin"));
 const action_select_channel_1 = __importDefault(require("./admin/action-select-channel"));
-const data_admin_1 = require("./admin/data-admin");
+const action_select_admins_1 = __importDefault(require("./admin/action-select-admins"));
+const blocks_home_1 = __importDefault(require("./blocks-home"));
 /*------------------
   APP HOME OPENED
 ------------------*/
@@ -34,39 +33,6 @@ const appHomeOpened = (app) => {
             event: event.type,
             msg: 'Event data from user home'
         };
-        const adminSettings = yield data_admin_1.adminApi.getSettings();
-        const initialChannel = adminSettings.channel;
-        const initialAdmins = adminSettings.admins;
-        const allUserBlocks = [
-            {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": `:wave: *Hello, <@${userID}>!* I'm <@${process.env.SLACK_BOT_ID}>.`
-                }
-            },
-            {
-                "type": "actions",
-                "elements": [
-                    btn_open_modal_1.default(metadata)
-                ]
-            }
-        ];
-        /**
-         * Determine if user is admin
-         * If admin, add admin blocks to view
-         * @returns {IObjectAny[]} array of home block objects
-         */
-        function composeHomeBlocks() {
-            if (initialAdmins.indexOf(userID) > -1) {
-                const admin = blocks_home_admin_1.default(initialChannel, initialAdmins);
-                return [...allUserBlocks, ...admin];
-            }
-            else {
-                return allUserBlocks;
-            }
-        }
-        ;
         /**
          * Publish user's App Home view
          */
@@ -76,7 +42,7 @@ const appHomeOpened = (app) => {
                 user_id: userID,
                 view: {
                     "type": "home",
-                    "blocks": composeHomeBlocks()
+                    "blocks": yield blocks_home_1.default(userID, metadata)
                 }
             });
         }
@@ -88,6 +54,7 @@ const appHomeOpened = (app) => {
      * Set up action listeners for Home View
      */
     action_select_channel_1.default(app);
+    action_select_admins_1.default(app);
 };
 exports.default = appHomeOpened;
 //# sourceMappingURL=event-app-home-opened.js.map

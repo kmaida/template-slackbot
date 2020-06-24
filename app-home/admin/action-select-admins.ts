@@ -1,20 +1,19 @@
-import errors from '../../utils/errors';
 import { adminApi } from './data-admin';
 import { IAdminDocument, IObjectAny } from '../../types';
 
 /*------------------
- ACTION: SELECT CHANNEL
+ ACTION: SELECT ADMINS
  Admins can select
- reporting channel
+ admin users
 ------------------*/
 
-const actionSelectChannel = (app: IObjectAny): void => {
-  app.action('a_select_channel', async ({ action, ack, context, body }) => {
+const actionSelectAdmins = (app: IObjectAny): void => {
+  app.action('a_select_admins', async ({ action, ack, context, body }) => {
     await ack();
-    // Set the new channel
-    const newChannel: string = action.selected_channel;
-    const settings: IAdminDocument = await adminApi.setChannel(newChannel);
-    // Update the reporting channel in the home view for all users
+    // Set the new admins
+    const newAdmins: string[] = action.selected_users;
+    const settings: IAdminDocument = await adminApi.setAdmins(newAdmins);
+    // Update the admins in the home view for all users
     // try {
     //   const allUserHomes = await userHomeStore.getUserHomes();
     //   allUserHomes.forEach(async (userHome) => {
@@ -22,16 +21,16 @@ const actionSelectChannel = (app: IObjectAny): void => {
     //       userID: userHome.userID,
     //       viewID: userHome.viewID,
     //       botID: context.botUserId,
-    //       channel: newChannel,
-    //       admins: settings.admins
+    //       channel: settings.channel,
+    //       admins: newAdmins
     //     };
     //     await triggerHomeViewUpdate(app, userHomeParams, at);
     //   });
     // }
     // catch (err) {
-    //   errors.slackErr(app, body.user.id, err);
+    //   errSlack(app, body.user.id, err);
     // }
   });
 };
 
-export default actionSelectChannel;
+export default actionSelectAdmins;

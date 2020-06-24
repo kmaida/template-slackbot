@@ -1,9 +1,8 @@
 import errors from '../utils/errors';
-import btnOpenModal from '../modal/btn-open-modal';
-import { IObjectAny, IAdminDocument } from '../types';
-import blocksHomeAdmin from './admin/blocks-home-admin';
+import { IObjectAny } from '../types';
 import actionSelectChannel from './admin/action-select-channel';
-import { adminApi } from './admin/data-admin';
+import actionSelectAdmins from './admin/action-select-admins';
+import blocksHome from './blocks-home';
 
 /*------------------
   APP HOME OPENED
@@ -24,38 +23,6 @@ const appHomeOpened = (app: IObjectAny): void => {
       event: event.type,
       msg: 'Event data from user home'
     };
-    const adminSettings: IAdminDocument = await adminApi.getSettings();
-    const initialChannel: string = adminSettings.channel;
-    const initialAdmins: string[] = adminSettings.admins;
-    const allUserBlocks: IObjectAny[] = [
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": `:wave: *Hello, <@${userID}>!* I'm <@${process.env.SLACK_BOT_ID}>.`
-        }
-      },
-      {
-        "type": "actions",
-        "elements": [
-          btnOpenModal(metadata)
-        ]
-      }
-    ];
-    /**
-     * Determine if user is admin
-     * If admin, add admin blocks to view
-     * @returns {IObjectAny[]} array of home block objects
-     */
-    function composeHomeBlocks(): IObjectAny[] {
-      if (initialAdmins.indexOf(userID) > -1) {
-        const admin = blocksHomeAdmin(initialChannel, initialAdmins);
-        return [...allUserBlocks, ...admin];
-      } else {
-        return allUserBlocks;
-      }
-    };
-    
     /**
      * Publish user's App Home view
      */
@@ -65,7 +32,7 @@ const appHomeOpened = (app: IObjectAny): void => {
         user_id: userID,
         view: {
           "type": "home",
-          "blocks": composeHomeBlocks()
+          "blocks": await blocksHome(userID, metadata)
         }
       });
     }
@@ -78,6 +45,7 @@ const appHomeOpened = (app: IObjectAny): void => {
    * Set up action listeners for Home View
    */
   actionSelectChannel(app);
+  actionSelectAdmins(app);
 }
 
 export default appHomeOpened;

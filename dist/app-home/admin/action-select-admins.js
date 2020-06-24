@@ -11,17 +11,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const data_admin_1 = require("./data-admin");
 /*------------------
- ACTION: SELECT CHANNEL
+ ACTION: SELECT ADMINS
  Admins can select
- reporting channel
+ admin users
 ------------------*/
-const actionSelectChannel = (app) => {
-    app.action('a_select_channel', ({ action, ack, context, body }) => __awaiter(void 0, void 0, void 0, function* () {
+const actionSelectAdmins = (app) => {
+    app.action('a_select_admins', ({ action, ack, context, body }) => __awaiter(void 0, void 0, void 0, function* () {
         yield ack();
-        // Set the new channel
-        const newChannel = action.selected_channel;
-        const settings = yield data_admin_1.adminApi.setChannel(newChannel);
-        // Update the reporting channel in the home view for all users
+        // Set the new admins
+        const newAdmins = action.selected_users;
+        const settings = yield data_admin_1.adminApi.setAdmins(newAdmins);
+        // Update the admins in the home view for all users
         // try {
         //   const allUserHomes = await userHomeStore.getUserHomes();
         //   allUserHomes.forEach(async (userHome) => {
@@ -29,16 +29,16 @@ const actionSelectChannel = (app) => {
         //       userID: userHome.userID,
         //       viewID: userHome.viewID,
         //       botID: context.botUserId,
-        //       channel: newChannel,
-        //       admins: settings.admins
+        //       channel: settings.channel,
+        //       admins: newAdmins
         //     };
         //     await triggerHomeViewUpdate(app, userHomeParams, at);
         //   });
         // }
         // catch (err) {
-        //   errors.slackErr(app, body.user.id, err);
+        //   errSlack(app, body.user.id, err);
         // }
     }));
 };
-exports.default = actionSelectChannel;
-//# sourceMappingURL=action-select-channel.js.map
+exports.default = actionSelectAdmins;
+//# sourceMappingURL=action-select-admins.js.map
