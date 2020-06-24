@@ -1,6 +1,7 @@
 import errors from './../utils/errors';
 import btnOpenModal from './../ix/btn-open-modal';
 import { IObjectAny } from './../types';
+import actionSelectChannel from './../ix/action-select-channel'; 
 
 /*------------------
   APP HOME OPENED
@@ -51,6 +52,9 @@ const appHomeOpened = (app: IObjectAny): void => {
       errors.slackErr(app, userID, err);
     }
   });
+
+  // Home action listeners
+  actionSelectChannel(app);
 }
 
 export default appHomeOpened;
