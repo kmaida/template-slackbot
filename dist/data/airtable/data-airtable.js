@@ -16,7 +16,7 @@ const base = require('airtable').base('appEKCgBRM6kj1eaD');
 const table = process.env.AIRTABLE_TABLE;
 const tableID = process.env.AIRTABLE_TABLE_ID;
 const viewID = process.env.AIRTABLE_TABLE_VIEW_ID;
-const errors_1 = __importDefault(require("../utils/errors"));
+const errors_1 = __importDefault(require("../../utils/errors"));
 const dm_confirm_save_1 = __importDefault(require("./dm-confirm-save"));
 const channel_publish_save_1 = __importDefault(require("./channel-publish-save"));
 /*------------------

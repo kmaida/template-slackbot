@@ -22,7 +22,6 @@ const modal = (app: IObjectAny): void => {
     // console.log(body.actions);
     // If button value metadata is available, set it as metadata (e.g., useful for getting home view data)
     const btnMetadata = JSON.stringify(body.actions ? body.actions[0].value : {});
-    console.log(btnMetadata);
     try {
       const result = await app.client.views.open({
         token: context.botToken,

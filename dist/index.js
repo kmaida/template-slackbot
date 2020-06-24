@@ -35,7 +35,7 @@ const dotenv = __importStar(require("dotenv"));
 dotenv.config();
 const bolt_1 = require("@slack/bolt");
 // Airtable
-const data_airtable_1 = __importDefault(require("./data/data-airtable"));
+const data_airtable_1 = __importDefault(require("./data/airtable/data-airtable"));
 // MongoDB
 const data_mongodb_1 = require("./data/data-mongodb");
 const data_admin_1 = require("./app-home/admin/data-admin");

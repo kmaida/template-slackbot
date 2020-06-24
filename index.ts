@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import { App } from '@slack/bolt';
 // Airtable
-import at from './data/data-airtable';
+import at from './data/airtable/data-airtable';
 // MongoDB
 import { mdbSetup } from './data/data-mongodb';
 import { initAdminSettings } from './app-home/admin/data-admin';
