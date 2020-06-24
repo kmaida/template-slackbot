@@ -1,5 +1,5 @@
-import errors from './../utils/errors';
-import { IObjectAny } from './../types';
+import errors from '../utils/errors';
+import { IObjectAny } from '../types';
 
 /*------------------
  MODAL DIALOG FORM
@@ -19,9 +19,10 @@ const modal = (app: IObjectAny): void => {
      * The data varies in format depending on which trigger is used; uncomment the console log
      * below to examine this payload further.
      */
-    // console.log(body);
+    // console.log(body.actions);
     // If button value metadata is available, set it as metadata (e.g., useful for getting home view data)
     const btnMetadata = JSON.stringify(body.actions ? body.actions[0].value : {});
+    console.log(btnMetadata);
     try {
       const result = await app.client.views.open({
         token: context.botToken,

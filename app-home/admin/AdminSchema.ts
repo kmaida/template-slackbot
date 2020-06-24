@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
-import { IAdminDocument } from './../types';
+import { IAdminDocument } from '../../types';
 
 /*------------------
    ADMIN SCHEMA

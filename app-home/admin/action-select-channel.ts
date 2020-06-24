@@ -1,5 +1,5 @@
-import errors from './../utils/errors';
-import { adminApi } from './../data/admin';
+import errors from '../../utils/errors';
+import { adminApi } from './data-admin';
 
 /*------------------
  ACTION: SELECT CHANNEL

@@ -1,4 +1,4 @@
-import { IObjectAny, IAdminDocument } from './../types';
+import { IObjectAny, IAdminDocument } from '../../types';
 import Admin from './AdminSchema';
 
 /*------------------

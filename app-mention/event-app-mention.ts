@@ -1,6 +1,6 @@
-import errors from './../utils/errors';
-import utils from './../utils/utils';
-import { IObjectAny } from './../types';
+import errors from '../utils/errors';
+import utils from '../utils/utils';
+import { IObjectAny } from '../types';
 
 /*------------------
     APP MENTION

@@ -1,6 +1,6 @@
-import { IObjectAny, IATData } from './../types';
-import utils from './../utils/utils';
-import errors from './../utils/errors';
+import { IObjectAny, IATData } from '../types';
+import utils from '../utils/utils';
+import errors from '../utils/errors';
 
 /*------------------
   MODAL VIEW SUBMIT

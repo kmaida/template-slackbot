@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-import { IObjectAny } from './../types';
+import { IObjectAny } from '../types';
 import Sample from './SampleSchema';
-import errors from './../utils/errors';
+import errors from '../utils/errors';
 
 /*------------------
     MONGODB API

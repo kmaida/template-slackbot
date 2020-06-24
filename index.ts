@@ -2,16 +2,16 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import { App } from '@slack/bolt';
 // Airtable
-import at from './data/airtable';
+import at from './data/data-airtable';
 // MongoDB
-import { mdbSetup } from './data/mongodb';
-import { initAdminSettings } from './data/admin';
+import { mdbSetup } from './data/data-mongodb';
+import { initAdminSettings } from './app-home/admin/data-admin';
 // App functionality
-import modal from './ix/modal';
-import submitModal from './ix/modal-view-submit';
-import appHomeOpened from './events/app-home-opened';
-import appMention from './events/app-mention';
-import botDM from './events/message-im';
+import modal from './modal/modal';
+import submitModal from './modal/modal-view-submit';
+import appHomeOpened from './app-home/event-app-home-opened';
+import appMention from './app-mention/event-app-mention';
+import botDM from './message-im/event-message-im';
 
 /*------------------
   CREATE BOLT APP

@@ -35,16 +35,16 @@ const dotenv = __importStar(require("dotenv"));
 dotenv.config();
 const bolt_1 = require("@slack/bolt");
 // Airtable
-const airtable_1 = __importDefault(require("./data/airtable"));
+const data_airtable_1 = __importDefault(require("./data/data-airtable"));
 // MongoDB
-const mongodb_1 = require("./data/mongodb");
-const admin_1 = require("./data/admin");
+const data_mongodb_1 = require("./data/data-mongodb");
+const data_admin_1 = require("./app-home/admin/data-admin");
 // App functionality
-const modal_1 = __importDefault(require("./ix/modal"));
-const modal_view_submit_1 = __importDefault(require("./ix/modal-view-submit"));
-const app_home_opened_1 = __importDefault(require("./events/app-home-opened"));
-const app_mention_1 = __importDefault(require("./events/app-mention"));
-const message_im_1 = __importDefault(require("./events/message-im"));
+const modal_1 = __importDefault(require("./modal/modal"));
+const modal_view_submit_1 = __importDefault(require("./modal/modal-view-submit"));
+const event_app_home_opened_1 = __importDefault(require("./app-home/event-app-home-opened"));
+const event_app_mention_1 = __importDefault(require("./app-mention/event-app-mention"));
+const event_message_im_1 = __importDefault(require("./message-im/event-message-im"));
 /*------------------
   CREATE BOLT APP
 ------------------*/
@@ -57,26 +57,26 @@ const port = process.env.PORT || 3000;
     ON APP INIT
 ------------------*/
 // Set up MongoDB store
-mongodb_1.mdbSetup();
+data_mongodb_1.mdbSetup();
 // Set up admin settings from environment variables
-admin_1.initAdminSettings();
+data_admin_1.initAdminSettings();
 /*------------------
   SET UP MODAL IX
 ------------------*/
 modal_1.default(app);
-modal_view_submit_1.default(app, airtable_1.default);
+modal_view_submit_1.default(app, data_airtable_1.default);
 /*------------------
   APP HOME OPENED
 ------------------*/
-app_home_opened_1.default(app);
+event_app_home_opened_1.default(app);
 /*------------------
     APP MENTION
 ------------------*/
-app_mention_1.default(app);
+event_app_mention_1.default(app);
 /*------------------
        BOT DM
 ------------------*/
-message_im_1.default(app);
+event_message_im_1.default(app);
 /*------------------
      START APP
 ------------------*/

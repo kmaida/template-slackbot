@@ -1,7 +1,7 @@
-import errors from './../utils/errors';
-import btnOpenModal from './../ix/btn-open-modal';
-import { IObjectAny } from './../types';
-import actionSelectChannel from './../ix/action-select-channel'; 
+import errors from '../utils/errors';
+import btnOpenModal from '../modal/btn-open-modal';
+import { IObjectAny } from '../types';
+import actionSelectChannel from './admin/action-select-channel'; 
 
 /*------------------
   APP HOME OPENED
@@ -19,10 +19,9 @@ const appHomeOpened = (app: IObjectAny): void => {
     const userID: string = event.user;
     // Sample metadata to pass through btn-open-modal.ts -> modal.ts -> modal-view-submit.ts
     const metadata: IObjectAny = {
-      event: event,
+      event: event.type,
       msg: 'Event data from user home'
     };
-
     // Publish this user's home view
     try {
       const showHomeView = await app.client.views.publish({

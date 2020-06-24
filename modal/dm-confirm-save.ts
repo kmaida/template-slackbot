@@ -1,5 +1,5 @@
-import errors from './../utils/errors';
-import { IObjectAny, IATData } from './../types';
+import errors from '../utils/errors';
+import { IObjectAny, IATData } from '../types';
 
 /*------------------
   DM CONFIRM SAVE
