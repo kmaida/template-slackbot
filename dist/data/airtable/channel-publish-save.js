@@ -13,11 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const errors_1 = __importDefault(require("../../utils/errors"));
+const data_admin_1 = require("../../app-home/admin/data-admin");
 /*------------------
 CHANNEL PUBLISH SAVE
 ------------------*/
 const channelPublishSave = (app, atData) => __awaiter(void 0, void 0, void 0, function* () {
-    const channel = process.env.SLACK_CHANNEL_ID;
+    const settings = yield data_admin_1.adminApi.getSettings();
+    const channel = settings.channel;
     try {
         const sendMsg = yield app.client.chat.postMessage({
             token: process.env.SLACK_BOT_TOKEN,

@@ -1,12 +1,14 @@
 import errors from '../../utils/errors';
-import { IObjectAny, IATData } from '../../types';
+import { IObjectAny, IATData, IAdminDocument } from '../../types';
+import { adminApi } from '../../app-home/admin/data-admin';
 
 /*------------------
 CHANNEL PUBLISH SAVE
 ------------------*/
 
 const channelPublishSave = async (app: IObjectAny, atData: IATData): Promise<any> => {
-  const channel = process.env.SLACK_CHANNEL_ID;
+  const settings: IAdminDocument = await adminApi.getSettings();
+  const channel: string = settings.channel;
   try {
     const sendMsg = await app.client.chat.postMessage({
       token: process.env.SLACK_BOT_TOKEN,

@@ -14,7 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const errors_1 = __importDefault(require("../utils/errors"));
 const btn_open_modal_1 = __importDefault(require("../modal/btn-open-modal"));
+const blocks_home_admin_1 = __importDefault(require("./admin/blocks-home-admin"));
 const action_select_channel_1 = __importDefault(require("./admin/action-select-channel"));
+const data_admin_1 = require("./admin/data-admin");
 /*------------------
   APP HOME OPENED
 ------------------*/
@@ -32,28 +34,49 @@ const appHomeOpened = (app) => {
             event: event.type,
             msg: 'Event data from user home'
         };
-        // Publish this user's home view
+        const adminSettings = yield data_admin_1.adminApi.getSettings();
+        const initialChannel = adminSettings.channel;
+        const initialAdmins = adminSettings.admins;
+        const allUserBlocks = [
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": `:wave: *Hello, <@${userID}>!* I'm <@${process.env.SLACK_BOT_ID}>.`
+                }
+            },
+            {
+                "type": "actions",
+                "elements": [
+                    btn_open_modal_1.default(metadata)
+                ]
+            }
+        ];
+        /**
+         * Determine if user is admin
+         * If admin, add admin blocks to view
+         * @returns {IObjectAny[]} array of home block objects
+         */
+        function composeHomeBlocks() {
+            if (initialAdmins.indexOf(userID) > -1) {
+                const admin = blocks_home_admin_1.default(initialChannel, initialAdmins);
+                return [...allUserBlocks, ...admin];
+            }
+            else {
+                return allUserBlocks;
+            }
+        }
+        ;
+        /**
+         * Publish user's App Home view
+         */
         try {
             const showHomeView = yield app.client.views.publish({
                 token: context.botToken,
                 user_id: userID,
                 view: {
                     "type": "home",
-                    "blocks": [
-                        {
-                            "type": "section",
-                            "text": {
-                                "type": "mrkdwn",
-                                "text": `:wave: *Hello, <@${userID}>!* I'm <@${process.env.SLACK_BOT_ID}>.`
-                            }
-                        },
-                        {
-                            "type": "actions",
-                            "elements": [
-                                btn_open_modal_1.default(metadata)
-                            ]
-                        }
-                    ]
+                    "blocks": composeHomeBlocks()
                 }
             });
         }
@@ -61,7 +84,9 @@ const appHomeOpened = (app) => {
             errors_1.default.slackErr(app, userID, err);
         }
     }));
-    // Home action listeners
+    /**
+     * Set up action listeners for Home View
+     */
     action_select_channel_1.default(app);
 };
 exports.default = appHomeOpened;
