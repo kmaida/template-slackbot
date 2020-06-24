@@ -17,29 +17,30 @@ const dbErrHandler = (err: IObjectAny): IObjectAny => {
 };
 
 /**
- * Exported object containing API endpoints
- */
-const adminApi: IObjectAny = {
-  /**
    * Initialize and set settings from ENV if there are no settings in DB
    * @return {Promise<IAdminDocument>} promise: admin settings document
    */
-  async initSettings(): Promise<IAdminDocument> {
-    return Admin.findOne({}, (err: IObjectAny, settings: IAdminDocument) => {
-      if (err) return dbErrHandler(err);
-      if (!settings) {
-        const newSettings: IAdminDocument = new Admin({
-          channel: process.env.SLACK_CHANNEL_ID,
-          admins: process.env.SLACK_ADMINS.split(',')
-        });
-        newSettings.save((err) => {
-          if (err) return dbErrHandler(err);
-          console.log('ADMIN DB: Set new admin settings from environment variables');
-          return newSettings;
-        });
-      }
-    });
-  },
+const initAdminSettings = async (): Promise<IAdminDocument> => {
+  return Admin.findOne({}, (err: IObjectAny, settings: IAdminDocument) => {
+    if (err) return dbErrHandler(err);
+    if (!settings) {
+      const newSettings: IAdminDocument = new Admin({
+        channel: process.env.SLACK_CHANNEL_ID,
+        admins: process.env.SLACK_ADMINS.split(',')
+      });
+      newSettings.save((err) => {
+        if (err) return dbErrHandler(err);
+        console.log('ADMIN DB: Set new admin settings from environment variables');
+        return newSettings;
+      });
+    }
+  });
+};
+
+/**
+ * Exported object containing API endpoints
+ */
+const adminApi: IObjectAny = {
   /**
    * Get settings object
    * @return {Promise<IAdminDocument>} promise: admin settings document
@@ -115,4 +116,4 @@ const adminApi: IObjectAny = {
   }
 };
 
-export default adminApi;
+export { initAdminSettings, adminApi };

@@ -5,7 +5,7 @@ import { App } from '@slack/bolt';
 import at from './data/airtable';
 // MongoDB
 import { mdbSetup } from './data/mongodb';
-import adminApi from './data/admin';
+import { initAdminSettings } from './data/admin';
 // App functionality
 import modal from './ix/modal';
 import submitModal from './ix/modal-view-submit';
@@ -28,7 +28,7 @@ const port = process.env.PORT || 3000;
 // Set up MongoDB store
 mdbSetup();
 // Set up admin settings from environment variables
-adminApi.initSettings();
+initAdminSettings();
 
 /*------------------
   SET UP MODAL IX

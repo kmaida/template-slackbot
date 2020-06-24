@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.adminApi = exports.initAdminSettings = void 0;
 const AdminSchema_1 = __importDefault(require("./AdminSchema"));
 /*------------------
 ADMINS SETTINGS API
@@ -27,33 +28,32 @@ const dbErrHandler = (err) => {
     return new Error(errMsg);
 };
 /**
- * Object containing API endpoints
- */
-const adminApi = {
-    /**
-     * Initialize and set settings from ENV if there are no settings
-     * @return {Promise<IAdminDocument>} promise: admin settings document
-     */
-    initSettings() {
-        return __awaiter(this, void 0, void 0, function* () {
-            return AdminSchema_1.default.findOne({}, (err, settings) => {
+   * Initialize and set settings from ENV if there are no settings in DB
+   * @return {Promise<IAdminDocument>} promise: admin settings document
+   */
+const initAdminSettings = () => __awaiter(void 0, void 0, void 0, function* () {
+    return AdminSchema_1.default.findOne({}, (err, settings) => {
+        if (err)
+            return dbErrHandler(err);
+        if (!settings) {
+            const newSettings = new AdminSchema_1.default({
+                channel: process.env.SLACK_CHANNEL_ID,
+                admins: process.env.SLACK_ADMINS.split(',')
+            });
+            newSettings.save((err) => {
                 if (err)
                     return dbErrHandler(err);
-                if (!settings) {
-                    const newSettings = new AdminSchema_1.default({
-                        channel: process.env.SLACK_CHANNEL_ID,
-                        admins: process.env.SLACK_ADMINS.split(',')
-                    });
-                    newSettings.save((err) => {
-                        if (err)
-                            return dbErrHandler(err);
-                        console.log('ADMIN DB: Set new admin settings from environment variables');
-                        return newSettings;
-                    });
-                }
+                console.log('ADMIN DB: Set new admin settings from environment variables');
+                return newSettings;
             });
-        });
-    },
+        }
+    });
+});
+exports.initAdminSettings = initAdminSettings;
+/**
+ * Exported object containing API endpoints
+ */
+const adminApi = {
     /**
      * Get settings object
      * @return {Promise<IAdminDocument>} promise: admin settings document
@@ -71,7 +71,7 @@ const adminApi = {
     },
     /**
      * Save reporting channel to store
-     * @param {string} channel channel to save to DB
+     * @param {string} channel channel ID to save to DB
      * @return {Promise<IAdminDocument>} promise: admin settings document
      */
     setChannel(channel) {
@@ -80,7 +80,7 @@ const adminApi = {
                 if (err)
                     return dbErrHandler(err);
                 if (!channel)
-                    return new Error('ADMIN DB: No channel provided');
+                    return dbErrHandler({ message: 'No channel provided' });
                 // No settings exist yet; save new settings document
                 if (!settings) {
                     const newSettings = new AdminSchema_1.default({
@@ -117,7 +117,7 @@ const adminApi = {
                 if (err)
                     return dbErrHandler(err);
                 if (!admins || !admins.length)
-                    return new Error('No users provided');
+                    return dbErrHandler({ message: 'No users provided' });
                 // No settings exist yet; save new settings document
                 if (!settings) {
                     const newSettings = new AdminSchema_1.default({
@@ -144,5 +144,5 @@ const adminApi = {
         });
     }
 };
-exports.default = adminApi;
+exports.adminApi = adminApi;
 //# sourceMappingURL=admin.js.map

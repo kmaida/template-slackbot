@@ -38,7 +38,7 @@ const bolt_1 = require("@slack/bolt");
 const airtable_1 = __importDefault(require("./data/airtable"));
 // MongoDB
 const mongodb_1 = require("./data/mongodb");
-const admin_1 = __importDefault(require("./data/admin"));
+const admin_1 = require("./data/admin");
 // App functionality
 const modal_1 = __importDefault(require("./ix/modal"));
 const modal_view_submit_1 = __importDefault(require("./ix/modal-view-submit"));
@@ -59,7 +59,7 @@ const port = process.env.PORT || 3000;
 // Set up MongoDB store
 mongodb_1.mdbSetup();
 // Set up admin settings from environment variables
-admin_1.default.initSettings();
+admin_1.initAdminSettings();
 /*------------------
   SET UP MODAL IX
 ------------------*/
