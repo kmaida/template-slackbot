@@ -25,7 +25,10 @@ const mdbSetup = (): void => {
   });
 };
 
-const mdbApi = {
+/**
+ * Object containing API endpoints
+ */
+const mdbApi: IObjectAny = {
   /**
    * Get samples
    * @return {Promise<IObjectAny[]>} Promise: array of sample data (promise)

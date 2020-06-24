@@ -37,6 +37,9 @@ const mdbSetup = () => {
     });
 };
 exports.mdbSetup = mdbSetup;
+/**
+ * Object containing API endpoints
+ */
 const mdbApi = {
     /**
      * Get samples
