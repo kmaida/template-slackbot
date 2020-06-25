@@ -6,8 +6,8 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist",
-    "allowSyntheticDefaultImports": true,
-    "typeRoots": [ "./typings", "./node_modules/@types"]
+    "typeRoots": [ "./typings", "./node_modules/@types"],
+    "alwaysStrict": true
   },
   "exclude": ["node_modules", "typings"],
   "lib": ["es2015"]
