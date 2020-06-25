@@ -20,7 +20,7 @@ const actionSelectChannel = (app) => {
         yield ack();
         // Set the new channel
         const newChannel = action.selected_channel;
-        const settings = yield data_admin_1.adminApi.setChannel(newChannel);
+        const settings = yield data_admin_1.setChannel(newChannel);
         // Update the reporting channel in the home view for all users
         // try {
         //   const allUserHomes = await userHomeStore.getUserHomes();

@@ -1,4 +1,4 @@
-import { adminApi } from './data-admin';
+import { setAdmins } from './data-admin';
 import { IAdminDocument, IObjectAny } from '../../types';
 
 /*------------------
@@ -12,7 +12,7 @@ const actionSelectAdmins = (app: IObjectAny): void => {
     await ack();
     // Set the new admins
     const newAdmins: string[] = action.selected_users;
-    const settings: IAdminDocument = await adminApi.setAdmins(newAdmins);
+    const settings: IAdminDocument = await setAdmins(newAdmins);
     // Update the admins in the home view for all users
     // try {
     //   const allUserHomes = await userHomeStore.getUserHomes();

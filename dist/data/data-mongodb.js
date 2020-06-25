@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mdbApi = exports.mdbSetup = void 0;
+exports.saveSample = exports.getSamples = exports.mdbSetup = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const SampleSchema_1 = __importDefault(require("./SampleSchema"));
 const errors_1 = require("../utils/errors");
@@ -38,47 +38,38 @@ const mdbSetup = () => {
 };
 exports.mdbSetup = mdbSetup;
 /**
- * Object containing API endpoints
- * NOTE: Not used anywhere, also needs much more robust typing
+ * Get samples
+ * @return {Promise<IObjectAny[]>} Promise: array of sample data (promise)
  */
-const mdbApi = {
-    /**
-     * Get samples
-     * @return {Promise<IObjectAny[]>} Promise: array of sample data (promise)
-     */
-    getSamples() {
-        return __awaiter(this, void 0, void 0, function* () {
-            return SampleSchema_1.default.find({}, (err, samples) => {
-                if (err)
-                    return errors_1.storeErr(err);
-                if (!samples)
-                    return errors_1.storeErr('MONGODB: No samples are saved');
-                return samples;
-            });
-        });
-    },
-    /**
-     * Save sample to store
-     * @param {IObjectAny} sampleData data to save to MongoDB
-     * @return {Promise<IObjectAny>} successfully saved data (promise)
-     */
-    saveSample(sampleData) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (!sampleData) {
-                errors_1.storeErr('MONGODB: No data provided to save to MongoDB');
-            }
-            return SampleSchema_1.default.findOne({}, (err, sample) => {
-                if (err)
-                    return errors_1.storeErr(err);
-                const newSample = new SampleSchema_1.default(sampleData);
-                newSample.save((err) => {
-                    if (err)
-                        return errors_1.storeErr(err);
-                    return newSample;
-                });
-            });
-        });
+const getSamples = () => __awaiter(void 0, void 0, void 0, function* () {
+    return SampleSchema_1.default.find({}, (err, samples) => {
+        if (err)
+            return errors_1.storeErr(err);
+        if (!samples)
+            return errors_1.storeErr('MONGODB: No samples are saved');
+        return samples;
+    });
+});
+exports.getSamples = getSamples;
+/**
+ * Save sample to store
+ * @param {IObjectAny} sampleData data to save to MongoDB
+ * @return {Promise<IObjectAny>} successfully saved data (promise)
+ */
+const saveSample = (sampleData) => __awaiter(void 0, void 0, void 0, function* () {
+    if (!sampleData) {
+        errors_1.storeErr('MONGODB: No data provided to save to MongoDB');
     }
-};
-exports.mdbApi = mdbApi;
+    return SampleSchema_1.default.findOne({}, (err, sample) => {
+        if (err)
+            return errors_1.storeErr(err);
+        const newSample = new SampleSchema_1.default(sampleData);
+        newSample.save((err) => {
+            if (err)
+                return errors_1.storeErr(err);
+            return newSample;
+        });
+    });
+});
+exports.saveSample = saveSample;
 //# sourceMappingURL=data-mongodb.js.map

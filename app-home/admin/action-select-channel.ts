@@ -1,5 +1,5 @@
 import { slackErr } from '../../utils/errors';
-import { adminApi } from './data-admin';
+import { setChannel } from './data-admin';
 import { IAdminDocument, IObjectAny } from '../../types';
 
 /*------------------
@@ -13,7 +13,7 @@ const actionSelectChannel = (app: IObjectAny): void => {
     await ack();
     // Set the new channel
     const newChannel: string = action.selected_channel;
-    const settings: IAdminDocument = await adminApi.setChannel(newChannel);
+    const settings: IAdminDocument = await setChannel(newChannel);
     // Update the reporting channel in the home view for all users
     // try {
     //   const allUserHomes = await userHomeStore.getUserHomes();

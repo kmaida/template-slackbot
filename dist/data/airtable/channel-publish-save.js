@@ -15,7 +15,7 @@ const data_admin_1 = require("../../app-home/admin/data-admin");
 CHANNEL PUBLISH SAVE
 ------------------*/
 const channelPublishSave = (app, atData) => __awaiter(void 0, void 0, void 0, function* () {
-    const settings = yield data_admin_1.adminApi.getSettings();
+    const settings = yield data_admin_1.getAdminSettings();
     const channel = settings.channel;
     try {
         const sendMsg = yield app.client.chat.postMessage({

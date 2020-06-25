@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.adminApi = exports.initAdminSettings = void 0;
+exports.setAdmins = exports.setChannel = exports.getAdminSettings = exports.initAdminSettings = void 0;
 const AdminSchema_1 = __importDefault(require("./AdminSchema"));
 /*------------------
 ADMINS SETTINGS API
@@ -52,98 +52,89 @@ const initAdminSettings = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.initAdminSettings = initAdminSettings;
 /**
- * Exported object containing API endpoints
+ * Get settings object
+ * @return {Promise<IAdminDocument>} promise: admin settings document
  */
-const adminApi = {
-    /**
-     * Get settings object
-     * @return {Promise<IAdminDocument>} promise: admin settings document
-     */
-    getSettings() {
-        return __awaiter(this, void 0, void 0, function* () {
-            return AdminSchema_1.default.findOne({}, (err, settings) => {
+const getAdminSettings = () => __awaiter(void 0, void 0, void 0, function* () {
+    return AdminSchema_1.default.findOne({}, (err, settings) => {
+        if (err)
+            return _dbErrHandler(err);
+        if (!settings)
+            return new Error('ADMIN DB: No admin settings are saved');
+        return settings;
+    });
+});
+exports.getAdminSettings = getAdminSettings;
+/**
+ * Save reporting channel to store
+ * @param {string} channel channel ID to save to DB
+ * @return {Promise<IAdminDocument>} promise: admin settings document
+ */
+const setChannel = (channel) => __awaiter(void 0, void 0, void 0, function* () {
+    return AdminSchema_1.default.findOne({}, (err, settings) => {
+        if (err)
+            return _dbErrHandler(err);
+        if (!channel)
+            return _dbErrHandler({ message: 'No channel provided' });
+        // No settings exist yet; save new settings document
+        if (!settings) {
+            const newSettings = new AdminSchema_1.default({
+                channel: channel,
+                admins: process.env.SLACK_ADMINS.split(',')
+            });
+            newSettings.save((err) => {
                 if (err)
                     return _dbErrHandler(err);
-                if (!settings)
-                    return new Error('ADMIN DB: No admin settings are saved');
+                return newSettings;
+            });
+        }
+        // Update existing settings object
+        else {
+            settings.channel = channel;
+            settings.save((err) => {
+                if (err)
+                    return _dbErrHandler(err);
+                console.log('ADMIN DB: successfully set channel to', settings.channel);
                 return settings;
             });
-        });
-    },
-    /**
-     * Save reporting channel to store
-     * @param {string} channel channel ID to save to DB
-     * @return {Promise<IAdminDocument>} promise: admin settings document
-     */
-    setChannel(channel) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return AdminSchema_1.default.findOne({}, (err, settings) => {
+        }
+    });
+});
+exports.setChannel = setChannel;
+/**
+ * Save admins to settings
+ * @param {string[]} admins array of Slack user IDs for admins
+ * @return {Promise<IAdminDocument>} promise: new settings
+ */
+const setAdmins = (admins) => __awaiter(void 0, void 0, void 0, function* () {
+    return AdminSchema_1.default.findOne({}, (err, settings) => {
+        if (err)
+            return _dbErrHandler(err);
+        if (!admins || !admins.length)
+            return _dbErrHandler({ message: 'No users provided' });
+        // No settings exist yet; save new settings document
+        if (!settings) {
+            const newSettings = new AdminSchema_1.default({
+                channel: process.env.SLACK_CHANNEL_ID,
+                admins: admins
+            });
+            newSettings.save((err) => {
                 if (err)
                     return _dbErrHandler(err);
-                if (!channel)
-                    return _dbErrHandler({ message: 'No channel provided' });
-                // No settings exist yet; save new settings document
-                if (!settings) {
-                    const newSettings = new AdminSchema_1.default({
-                        channel: channel,
-                        admins: process.env.SLACK_ADMINS.split(',')
-                    });
-                    newSettings.save((err) => {
-                        if (err)
-                            return _dbErrHandler(err);
-                        return newSettings;
-                    });
-                }
-                // Update existing settings object
-                else {
-                    settings.channel = channel;
-                    settings.save((err) => {
-                        if (err)
-                            return _dbErrHandler(err);
-                        console.log('ADMIN DB: successfully set channel to', settings.channel);
-                        return settings;
-                    });
-                }
+                return newSettings;
             });
-        });
-    },
-    /**
-     * Save admins to settings
-     * @param {string[]} admins array of Slack user IDs for admins
-     * @return {Promise<IAdminDocument>} promise: new settings
-     */
-    setAdmins(admins) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return AdminSchema_1.default.findOne({}, (err, settings) => {
+        }
+        // Update existing settings object
+        else {
+            settings.admins = admins;
+            settings.save((err) => {
                 if (err)
                     return _dbErrHandler(err);
-                if (!admins || !admins.length)
-                    return _dbErrHandler({ message: 'No users provided' });
-                // No settings exist yet; save new settings document
-                if (!settings) {
-                    const newSettings = new AdminSchema_1.default({
-                        channel: process.env.SLACK_CHANNEL_ID,
-                        admins: admins
-                    });
-                    newSettings.save((err) => {
-                        if (err)
-                            return _dbErrHandler(err);
-                        return newSettings;
-                    });
-                }
-                // Update existing settings object
-                else {
-                    settings.admins = admins;
-                    settings.save((err) => {
-                        if (err)
-                            return _dbErrHandler(err);
-                        console.log('ADMIN DB: successfully updated admin list to', settings.admins);
-                        return settings;
-                    });
-                }
+                console.log('ADMIN DB: successfully updated admin list to', settings.admins);
+                return settings;
             });
-        });
-    }
-};
-exports.adminApi = adminApi;
+        }
+    });
+});
+exports.setAdmins = setAdmins;
 //# sourceMappingURL=data-admin.js.map

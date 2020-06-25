@@ -1,14 +1,14 @@
 import btnOpenModal from '../modal/btn-open-modal';
 import { IObjectAny, IAdminDocument } from '../types';
 import blocksHomeAdmin from './admin/blocks-home-admin';
-import { adminApi } from './admin/data-admin';
+import { getAdminSettings } from './admin/data-admin';
 
 /*------------------
  BLOCKS: HOME VIEW
 ------------------*/
 
 const blocksHome = async (userID: string, metadata: any): Promise<IObjectAny> => {
-  const adminSettings: IAdminDocument = await adminApi.getSettings();
+  const adminSettings: IAdminDocument = await getAdminSettings();
   const initialChannel: string = adminSettings.channel;
   const initialAdmins: string[] = adminSettings.admins;
   const allUserBlocks: IObjectAny[] = [

@@ -1,13 +1,13 @@
 import { slackErr } from '../../utils/errors';
 import { IObjectAny, IATData, IAdminDocument } from '../../types';
-import { adminApi } from '../../app-home/admin/data-admin';
+import { getAdminSettings } from '../../app-home/admin/data-admin';
 
 /*------------------
 CHANNEL PUBLISH SAVE
 ------------------*/
 
 const channelPublishSave = async (app: IObjectAny, atData: IATData): Promise<any> => {
-  const settings: IAdminDocument = await adminApi.getSettings();
+  const settings: IAdminDocument = await getAdminSettings();
   const channel: string = settings.channel;
   try {
     const sendMsg = await app.client.chat.postMessage({

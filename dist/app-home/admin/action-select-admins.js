@@ -20,7 +20,7 @@ const actionSelectAdmins = (app) => {
         yield ack();
         // Set the new admins
         const newAdmins = action.selected_users;
-        const settings = yield data_admin_1.adminApi.setAdmins(newAdmins);
+        const settings = yield data_admin_1.setAdmins(newAdmins);
         // Update the admins in the home view for all users
         // try {
         //   const allUserHomes = await userHomeStore.getUserHomes();

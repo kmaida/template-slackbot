@@ -19,7 +19,7 @@ const data_admin_1 = require("./admin/data-admin");
  BLOCKS: HOME VIEW
 ------------------*/
 const blocksHome = (userID, metadata) => __awaiter(void 0, void 0, void 0, function* () {
-    const adminSettings = yield data_admin_1.adminApi.getSettings();
+    const adminSettings = yield data_admin_1.getAdminSettings();
     const initialChannel = adminSettings.channel;
     const initialAdmins = adminSettings.admins;
     const allUserBlocks = [
