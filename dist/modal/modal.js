@@ -8,8 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const errors_1 = require("../utils/errors");
+const blocks_modal_1 = __importDefault(require("./blocks-modal"));
 /*------------------
  MODAL DIALOG FORM
     Command
@@ -42,58 +46,7 @@ const modal = (app) => {
                         type: 'plain_text',
                         text: 'Add Airtable Data'
                     },
-                    blocks: [
-                        {
-                            "type": "input",
-                            "block_id": "b_name",
-                            "element": {
-                                "type": "plain_text_input",
-                                "action_id": "a_name",
-                                "placeholder": {
-                                    "type": "plain_text",
-                                    "text": "Name"
-                                }
-                            },
-                            "label": {
-                                "type": "plain_text",
-                                "text": "Name:"
-                            }
-                        },
-                        {
-                            "type": "input",
-                            "block_id": "b_url",
-                            "element": {
-                                "type": "plain_text_input",
-                                "action_id": "a_url",
-                                "placeholder": {
-                                    "type": "plain_text",
-                                    "text": "URL"
-                                }
-                            },
-                            "label": {
-                                "type": "plain_text",
-                                "text": "URL:"
-                            }
-                        },
-                        {
-                            "type": "input",
-                            "block_id": "b_notes",
-                            "element": {
-                                "type": "plain_text_input",
-                                "action_id": "a_notes",
-                                "multiline": true,
-                                "placeholder": {
-                                    "type": "plain_text",
-                                    "text": "Add notes"
-                                }
-                            },
-                            "label": {
-                                "type": "plain_text",
-                                "text": "Notes:"
-                            },
-                            "optional": true
-                        }
-                    ],
+                    blocks: blocks_modal_1.default(),
                     submit: {
                         type: 'plain_text',
                         text: 'Save'
@@ -105,7 +58,10 @@ const modal = (app) => {
             errors_1.slackErr(app, body.user.id, err);
         }
     });
-    // Command /add-data
+    /**
+     * Interactions that trigger the modal
+     */
+    // Slash command: /add-data
     app.command('/add-data', openDialog);
     // Global shortcut to add Airtable data
     app.shortcut('add_airtable_data', openDialog);

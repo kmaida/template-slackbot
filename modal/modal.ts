@@ -1,5 +1,6 @@
 import { slackErr } from '../utils/errors';
 import { IObjectAny } from '../types';
+import blocksModal from './blocks-modal';
 
 /*------------------
  MODAL DIALOG FORM
@@ -34,58 +35,7 @@ const modal = (app: IObjectAny): void => {
             type: 'plain_text',
             text: 'Add Airtable Data'
           },
-          blocks: [
-            {
-              "type": "input",
-              "block_id": "b_name",
-              "element": {
-                "type": "plain_text_input",
-                "action_id": "a_name",
-                "placeholder": {
-                  "type": "plain_text",
-                  "text": "Name"
-                }
-              },
-              "label": {
-                "type": "plain_text",
-                "text": "Name:"
-              }
-            },
-            {
-              "type": "input",
-              "block_id": "b_url",
-              "element": {
-                "type": "plain_text_input",
-                "action_id": "a_url",
-                "placeholder": {
-                  "type": "plain_text",
-                  "text": "URL"
-                }
-              },
-              "label": {
-                "type": "plain_text",
-                "text": "URL:"
-              }
-            },
-            {
-              "type": "input",
-              "block_id": "b_notes",
-              "element": {
-                "type": "plain_text_input",
-                "action_id": "a_notes",
-                "multiline": true,
-                "placeholder": {
-                  "type": "plain_text",
-                  "text": "Add notes"
-                }
-              },
-              "label": {
-                "type": "plain_text",
-                "text": "Notes:"
-              },
-              "optional": true
-            }
-          ],
+          blocks: blocksModal(),
           submit: {
             type: 'plain_text',
             text: 'Save'
@@ -97,7 +47,11 @@ const modal = (app: IObjectAny): void => {
       slackErr(app, body.user.id, err);
     }
   };
-  // Command /add-data
+
+  /**
+   * Interactions that trigger the modal
+   */
+  // Slash command: /add-data
   app.command('/add-data', openDialog);
   // Global shortcut to add Airtable data
   app.shortcut('add_airtable_data', openDialog);
