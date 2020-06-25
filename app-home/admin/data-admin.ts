@@ -1,5 +1,5 @@
-import { IObjectAny, IAdminDocument } from '../../types';
-import Admin from './AdminSchema';
+import { IObjectAny, IAdminDocument, IAppHomeData, IAppHomeDocument } from '../../types';
+import { AdminSettingsModel, AppHomeModel } from './AdminSchema';
 
 /*------------------
 ADMINS SETTINGS API
@@ -22,10 +22,10 @@ const _dbErrHandler = (err: IObjectAny): IObjectAny => {
    * @return {Promise<IAdminDocument>} promise: admin settings document
    */
 const initAdminSettings = async (): Promise<IAdminDocument> => {
-  return Admin.findOne({}, (err: IObjectAny, settings: IAdminDocument) => {
+  return AdminSettingsModel.findOne({}, (err: IObjectAny, settings: IAdminDocument) => {
     if (err) return _dbErrHandler(err);
     if (!settings) {
-      const newSettings: IAdminDocument = new Admin({
+      const newSettings: IAdminDocument = new AdminSettingsModel({
         channel: process.env.SLACK_CHANNEL_ID,
         admins: process.env.SLACK_ADMINS.split(',')
       });
@@ -43,12 +43,12 @@ const initAdminSettings = async (): Promise<IAdminDocument> => {
  * @return {Promise<IAdminDocument>} promise: admin settings document
  */
 const getAdminSettings = async (): Promise<IAdminDocument> => {
-  return Admin.findOne({}, (err: IObjectAny, settings: IAdminDocument) => {
+  return AdminSettingsModel.findOne({}, (err: IObjectAny, settings: IAdminDocument) => {
     if (err) return _dbErrHandler(err);
     if (!settings) return new Error('ADMIN DB: No admin settings are saved');
     return settings;
   });
-}
+};
 
 /**
  * Save reporting channel to store
@@ -56,12 +56,12 @@ const getAdminSettings = async (): Promise<IAdminDocument> => {
  * @return {Promise<IAdminDocument>} promise: admin settings document
  */
 const setChannel = async (channel: string): Promise<IAdminDocument> => {
-  return Admin.findOne({}, (err: IObjectAny, settings: IAdminDocument) => {
+  return AdminSettingsModel.findOne({}, (err: IObjectAny, settings: IAdminDocument) => {
     if (err) return _dbErrHandler(err);
     if (!channel) return _dbErrHandler({message: 'No channel provided'});
     // No settings exist yet; save new settings document
     if (!settings) {
-      const newSettings: IAdminDocument = new Admin({
+      const newSettings: IAdminDocument = new AdminSettingsModel({
         channel: channel,
         admins: process.env.SLACK_ADMINS.split(',')
       });
@@ -80,7 +80,7 @@ const setChannel = async (channel: string): Promise<IAdminDocument> => {
       });
     }
   });
-}
+};
 
 /**
  * Save admins to settings
@@ -88,12 +88,12 @@ const setChannel = async (channel: string): Promise<IAdminDocument> => {
  * @return {Promise<IAdminDocument>} promise: new settings
  */
 const setAdmins = async (admins: string[]): Promise<IAdminDocument> => {
-  return Admin.findOne({}, (err: IObjectAny, settings: IAdminDocument) => {
+  return AdminSettingsModel.findOne({}, (err: IObjectAny, settings: IAdminDocument) => {
     if (err) return _dbErrHandler(err);
     if (!admins || !admins.length) return _dbErrHandler({message: 'No users provided'});
     // No settings exist yet; save new settings document
     if (!settings) {
-      const newSettings: IAdminDocument = new Admin({
+      const newSettings: IAdminDocument = new AdminSettingsModel({
         channel: process.env.SLACK_CHANNEL_ID,
         admins: admins
       });
@@ -112,6 +112,41 @@ const setAdmins = async (admins: string[]): Promise<IAdminDocument> => {
       });
     }
   });
-}
+};
 
-export { initAdminSettings, getAdminSettings, setChannel, setAdmins };
+/**
+ * Save user's home view data the first time they open their home view
+ * @param {string} userID user's ID 
+ * @param {string} viewID user's app home view ID
+ * @returns {Promise<IAppHomeDocument>} saved view data document
+ */
+const saveHomeView = async (userID: string, viewID: string): Promise<IAppHomeDocument> => {
+  return AppHomeModel.findOne({userID}, (err: IObjectAny, appHome: IAppHomeData) => {
+    if (err) return _dbErrHandler(err);
+    if (!viewID) return _dbErrHandler({message: 'No view ID provided'});
+    if (!appHome) {
+      const newAppHome: IAppHomeDocument = new AppHomeModel({userID, viewID});
+      newAppHome.save((err: IObjectAny) => {
+        if (err) return _dbErrHandler(err);
+        console.log('ADMIN DB: successfully saved user\'s App Home viewID');
+        return newAppHome;
+      });
+    } else {
+      return appHome;
+    }
+  });
+};
+
+/**
+ * Get all App Home views for users who have previously opened App Home
+ * @returns {Promise<IAppHomeDocument[]} array of app home objects
+ */
+const getHomeViews = async (): Promise<IAppHomeDocument[]> => {
+  return AppHomeModel.find({}, (err, appHomes) => {
+    if (err) return _dbErrHandler(err);
+    if (!appHomes) return new Error('No user homes found');
+    return appHomes;
+  });
+};
+
+export { initAdminSettings, getAdminSettings, setChannel, setAdmins, saveHomeView, getHomeViews };

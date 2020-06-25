@@ -12,7 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.updateAllHomes = exports.updateHomeView = void 0;
 const blocks_home_1 = __importDefault(require("./blocks-home"));
+const data_admin_1 = require("./admin/data-admin");
 const errors_1 = require("./../utils/errors");
 /*------------------
 BLOCKS: UPDATE HOME VIEW
@@ -23,6 +25,7 @@ BLOCKS: UPDATE HOME VIEW
  * @param {string} userID Slack ID of user whose home view is being updated
  * @param {string} viewID view ID of user whose home view is being updated
  * @param {any} metadata metadata passing from home view to modal button
+ * @returns {Promise<void>}
  */
 const updateHomeView = (app, userID, viewID, metadata) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -35,11 +38,36 @@ const updateHomeView = (app, userID, viewID, metadata) => __awaiter(void 0, void
                 "blocks": yield blocks_home_1.default(userID, metadata)
             }
         });
-        console.log('TRIGGER HOME VIEW UPDATE: app home view updated for viewID', viewID);
+        console.log('TRIGGER HOME VIEW UPDATE: app home view updated for userID', userID);
     }
     catch (err) {
         errors_1.slackErr(app, userID, err);
     }
 });
-module.exports = updateHomeView;
+exports.updateHomeView = updateHomeView;
+/**
+ * Fetch all saved user App Homes from database and update each one
+ * @param {IObjectAny} app Slack App
+ * @param {any} metadata some kind of metadata to pass to home view
+ * @returns {Promise<void>}
+ */
+const updateAllHomes = (app, metadata) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        // Get all saved App Home views
+        const allAppHomes = yield data_admin_1.getHomeViews();
+        // Iterate over each user home in array and update home view
+        allAppHomes.forEach((userHome) => __awaiter(void 0, void 0, void 0, function* () {
+            try {
+                const update = yield updateHomeView(app, userHome.userID, userHome.viewID, metadata);
+            }
+            catch (err) {
+                errors_1.slackErr(app, userHome.userID, err);
+            }
+        }));
+    }
+    catch (err) {
+        console.error(err);
+    }
+});
+exports.updateAllHomes = updateAllHomes;
 //# sourceMappingURL=update-view-home.js.map

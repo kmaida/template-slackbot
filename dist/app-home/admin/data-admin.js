@@ -8,12 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.setAdmins = exports.setChannel = exports.getAdminSettings = exports.initAdminSettings = void 0;
-const AdminSchema_1 = __importDefault(require("./AdminSchema"));
+exports.getHomeViews = exports.saveHomeView = exports.setAdmins = exports.setChannel = exports.getAdminSettings = exports.initAdminSettings = void 0;
+const AdminSchema_1 = require("./AdminSchema");
 /*------------------
 ADMINS SETTINGS API
 ------------------*/
@@ -33,11 +30,11 @@ const _dbErrHandler = (err) => {
    * @return {Promise<IAdminDocument>} promise: admin settings document
    */
 const initAdminSettings = () => __awaiter(void 0, void 0, void 0, function* () {
-    return AdminSchema_1.default.findOne({}, (err, settings) => {
+    return AdminSchema_1.AdminSettingsModel.findOne({}, (err, settings) => {
         if (err)
             return _dbErrHandler(err);
         if (!settings) {
-            const newSettings = new AdminSchema_1.default({
+            const newSettings = new AdminSchema_1.AdminSettingsModel({
                 channel: process.env.SLACK_CHANNEL_ID,
                 admins: process.env.SLACK_ADMINS.split(',')
             });
@@ -56,7 +53,7 @@ exports.initAdminSettings = initAdminSettings;
  * @return {Promise<IAdminDocument>} promise: admin settings document
  */
 const getAdminSettings = () => __awaiter(void 0, void 0, void 0, function* () {
-    return AdminSchema_1.default.findOne({}, (err, settings) => {
+    return AdminSchema_1.AdminSettingsModel.findOne({}, (err, settings) => {
         if (err)
             return _dbErrHandler(err);
         if (!settings)
@@ -71,14 +68,14 @@ exports.getAdminSettings = getAdminSettings;
  * @return {Promise<IAdminDocument>} promise: admin settings document
  */
 const setChannel = (channel) => __awaiter(void 0, void 0, void 0, function* () {
-    return AdminSchema_1.default.findOne({}, (err, settings) => {
+    return AdminSchema_1.AdminSettingsModel.findOne({}, (err, settings) => {
         if (err)
             return _dbErrHandler(err);
         if (!channel)
             return _dbErrHandler({ message: 'No channel provided' });
         // No settings exist yet; save new settings document
         if (!settings) {
-            const newSettings = new AdminSchema_1.default({
+            const newSettings = new AdminSchema_1.AdminSettingsModel({
                 channel: channel,
                 admins: process.env.SLACK_ADMINS.split(',')
             });
@@ -107,14 +104,14 @@ exports.setChannel = setChannel;
  * @return {Promise<IAdminDocument>} promise: new settings
  */
 const setAdmins = (admins) => __awaiter(void 0, void 0, void 0, function* () {
-    return AdminSchema_1.default.findOne({}, (err, settings) => {
+    return AdminSchema_1.AdminSettingsModel.findOne({}, (err, settings) => {
         if (err)
             return _dbErrHandler(err);
         if (!admins || !admins.length)
             return _dbErrHandler({ message: 'No users provided' });
         // No settings exist yet; save new settings document
         if (!settings) {
-            const newSettings = new AdminSchema_1.default({
+            const newSettings = new AdminSchema_1.AdminSettingsModel({
                 channel: process.env.SLACK_CHANNEL_ID,
                 admins: admins
             });
@@ -137,4 +134,45 @@ const setAdmins = (admins) => __awaiter(void 0, void 0, void 0, function* () {
     });
 });
 exports.setAdmins = setAdmins;
+/**
+ * Save user's home view data the first time they open their home view
+ * @param {string} userID user's ID
+ * @param {string} viewID user's app home view ID
+ * @returns {Promise<IAppHomeDocument>} saved view data document
+ */
+const saveHomeView = (userID, viewID) => __awaiter(void 0, void 0, void 0, function* () {
+    return AdminSchema_1.AppHomeModel.findOne({ userID }, (err, appHome) => {
+        if (err)
+            return _dbErrHandler(err);
+        if (!viewID)
+            return _dbErrHandler({ message: 'No view ID provided' });
+        if (!appHome) {
+            const newAppHome = new AdminSchema_1.AppHomeModel({ userID, viewID });
+            newAppHome.save((err) => {
+                if (err)
+                    return _dbErrHandler(err);
+                console.log('ADMIN DB: successfully saved user\'s App Home viewID');
+                return newAppHome;
+            });
+        }
+        else {
+            return appHome;
+        }
+    });
+});
+exports.saveHomeView = saveHomeView;
+/**
+ * Get all App Home views for users who have previously opened App Home
+ * @returns {Promise<IAppHomeDocument[]} array of app home objects
+ */
+const getHomeViews = () => __awaiter(void 0, void 0, void 0, function* () {
+    return AdminSchema_1.AppHomeModel.find({}, (err, appHomes) => {
+        if (err)
+            return _dbErrHandler(err);
+        if (!appHomes)
+            return new Error('No user homes found');
+        return appHomes;
+    });
+});
+exports.getHomeViews = getHomeViews;
 //# sourceMappingURL=data-admin.js.map

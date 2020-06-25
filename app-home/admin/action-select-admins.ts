@@ -1,5 +1,7 @@
 import { setAdmins } from './data-admin';
 import { IAdminDocument, IObjectAny } from '../../types';
+import { updateAllHomes } from '../update-view-home';
+import { slackErr } from '../../utils/errors';
 
 /*------------------
  ACTION: SELECT ADMINS
@@ -7,29 +9,19 @@ import { IAdminDocument, IObjectAny } from '../../types';
  admin users
 ------------------*/
 
-const actionSelectAdmins = (app: IObjectAny): void => {
-  app.action('a_select_admins', async ({ action, ack, context, body }) => {
+const actionSelectAdmins = (app: IObjectAny, metadata: any): void => {
+  app.action('a_select_admins', async ({ action, ack, body }) => {
     await ack();
     // Set the new admins
     const newAdmins: string[] = action.selected_users;
     const settings: IAdminDocument = await setAdmins(newAdmins);
-    // Update the admins in the home view for all users
-    // try {
-    //   const allUserHomes = await userHomeStore.getUserHomes();
-    //   allUserHomes.forEach(async (userHome) => {
-    //     const userHomeParams = {
-    //       userID: userHome.userID,
-    //       viewID: userHome.viewID,
-    //       botID: context.botUserId,
-    //       channel: settings.channel,
-    //       admins: newAdmins
-    //     };
-    //     await triggerHomeViewUpdate(app, userHomeParams, at);
-    //   });
-    // }
-    // catch (err) {
-    //   errSlack(app, body.user.id, err);
-    // }
+    // Update the admins home view for all users
+    try {
+      const updateViews = await updateAllHomes(app, metadata);
+    }
+    catch (err) {
+      slackErr(app, body.user.id, err);
+    }
   });
 };
 

@@ -21,7 +21,7 @@ const blocksHomeAdmin = (initialChannel, initialAdmins) => {
             "block_id": "select_channel",
             "text": {
                 "type": "mrkdwn",
-                "text": `*Select the channel* ${_botMention} should post to when event listings and event reports are submitted:`
+                "text": `*Select the channel* ${_botMention} should post to when data is submitted:`
             },
             "accessory": {
                 "action_id": "a_select_channel",

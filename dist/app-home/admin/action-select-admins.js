@@ -10,34 +10,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const data_admin_1 = require("./data-admin");
+const update_view_home_1 = require("../update-view-home");
+const errors_1 = require("../../utils/errors");
 /*------------------
  ACTION: SELECT ADMINS
  Admins can select
  admin users
 ------------------*/
-const actionSelectAdmins = (app) => {
-    app.action('a_select_admins', ({ action, ack, context, body }) => __awaiter(void 0, void 0, void 0, function* () {
+const actionSelectAdmins = (app, metadata) => {
+    app.action('a_select_admins', ({ action, ack, body }) => __awaiter(void 0, void 0, void 0, function* () {
         yield ack();
         // Set the new admins
         const newAdmins = action.selected_users;
         const settings = yield data_admin_1.setAdmins(newAdmins);
-        // Update the admins in the home view for all users
-        // try {
-        //   const allUserHomes = await userHomeStore.getUserHomes();
-        //   allUserHomes.forEach(async (userHome) => {
-        //     const userHomeParams = {
-        //       userID: userHome.userID,
-        //       viewID: userHome.viewID,
-        //       botID: context.botUserId,
-        //       channel: settings.channel,
-        //       admins: newAdmins
-        //     };
-        //     await triggerHomeViewUpdate(app, userHomeParams, at);
-        //   });
-        // }
-        // catch (err) {
-        //   errSlack(app, body.user.id, err);
-        // }
+        // Update the admins home view for all users
+        try {
+            const updateViews = yield update_view_home_1.updateAllHomes(app, metadata);
+        }
+        catch (err) {
+            errors_1.slackErr(app, body.user.id, err);
+        }
     }));
 };
 exports.default = actionSelectAdmins;

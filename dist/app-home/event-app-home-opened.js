@@ -16,9 +16,11 @@ const errors_1 = require("../utils/errors");
 const action_select_channel_1 = __importDefault(require("./admin/action-select-channel"));
 const action_select_admins_1 = __importDefault(require("./admin/action-select-admins"));
 const blocks_home_1 = __importDefault(require("./blocks-home"));
+const data_admin_1 = require("./admin/data-admin");
 /*------------------
   APP HOME OPENED
 ------------------*/
+let metadata;
 const appHomeOpened = (app) => {
     app.event('app_home_opened', ({ event, context }) => __awaiter(void 0, void 0, void 0, function* () {
         /**
@@ -28,10 +30,10 @@ const appHomeOpened = (app) => {
          */
         // console.log('Bot User ID:', context.botUserId);
         const userID = event.user;
-        // Sample metadata to pass through btn-open-modal.ts -> modal.ts -> modal-view-submit.ts
-        const metadata = {
+        // Sample home view metadata to pass through btn-open-modal.ts -> modal.ts -> modal-view-submit.ts
+        metadata = {
             event: event.type,
-            msg: 'Event data from user home'
+            msg: 'Metadata from user home'
         };
         /**
          * Publish user's App Home view
@@ -45,6 +47,8 @@ const appHomeOpened = (app) => {
                     "blocks": yield blocks_home_1.default(userID, metadata)
                 }
             });
+            // Set this user's home view ID in database
+            const saveView = yield data_admin_1.saveHomeView(userID, showHomeView.view.id);
         }
         catch (err) {
             errors_1.slackErr(app, userID, err);
@@ -53,8 +57,8 @@ const appHomeOpened = (app) => {
     /**
      * Set up action listeners for Home View
      */
-    action_select_channel_1.default(app);
-    action_select_admins_1.default(app);
+    action_select_channel_1.default(app, metadata);
+    action_select_admins_1.default(app, metadata);
 };
 exports.default = appHomeOpened;
 //# sourceMappingURL=event-app-home-opened.js.map

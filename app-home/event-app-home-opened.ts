@@ -3,10 +3,13 @@ import { IObjectAny } from '../types';
 import actionSelectChannel from './admin/action-select-channel';
 import actionSelectAdmins from './admin/action-select-admins';
 import blocksHome from './blocks-home';
+import { saveHomeView } from './admin/data-admin';
 
 /*------------------
   APP HOME OPENED
 ------------------*/
+
+let metadata: IObjectAny;
 
 const appHomeOpened = (app: IObjectAny): void => {
   app.event('app_home_opened', async ({ event, context }) => {
@@ -18,10 +21,10 @@ const appHomeOpened = (app: IObjectAny): void => {
     // console.log('Bot User ID:', context.botUserId);
 
     const userID: string = event.user;
-    // Sample metadata to pass through btn-open-modal.ts -> modal.ts -> modal-view-submit.ts
-    const metadata: IObjectAny = {
+    // Sample home view metadata to pass through btn-open-modal.ts -> modal.ts -> modal-view-submit.ts
+    metadata = {
       event: event.type,
-      msg: 'Event data from user home'
+      msg: 'Metadata from user home'
     };
     /**
      * Publish user's App Home view
@@ -35,6 +38,8 @@ const appHomeOpened = (app: IObjectAny): void => {
           "blocks": await blocksHome(userID, metadata)
         }
       });
+      // Set this user's home view ID in database
+      const saveView = await saveHomeView(userID, showHomeView.view.id);
     }
     catch (err) {
       slackErr(app, userID, err);
@@ -44,8 +49,8 @@ const appHomeOpened = (app: IObjectAny): void => {
   /**
    * Set up action listeners for Home View
    */
-  actionSelectChannel(app);
-  actionSelectAdmins(app);
+  actionSelectChannel(app, metadata);
+  actionSelectAdmins(app, metadata);
 }
 
 export default appHomeOpened;

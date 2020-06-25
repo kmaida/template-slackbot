@@ -9,35 +9,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const errors_1 = require("../../utils/errors");
 const data_admin_1 = require("./data-admin");
+const update_view_home_1 = require("../update-view-home");
 /*------------------
  ACTION: SELECT CHANNEL
  Admins can select
  reporting channel
 ------------------*/
-const actionSelectChannel = (app) => {
+const actionSelectChannel = (app, metadata) => {
     app.action('a_select_channel', ({ action, ack, context, body }) => __awaiter(void 0, void 0, void 0, function* () {
         yield ack();
         // Set the new channel
         const newChannel = action.selected_channel;
         const settings = yield data_admin_1.setChannel(newChannel);
         // Update the reporting channel in the home view for all users
-        // try {
-        //   const allUserHomes = await userHomeStore.getUserHomes();
-        //   allUserHomes.forEach(async (userHome) => {
-        //     const userHomeParams = {
-        //       userID: userHome.userID,
-        //       viewID: userHome.viewID,
-        //       botID: context.botUserId,
-        //       channel: newChannel,
-        //       admins: settings.admins
-        //     };
-        //     await triggerHomeViewUpdate(app, userHomeParams, at);
-        //   });
-        // }
-        // catch (err) {
-        //   slackErr(app, body.user.id, err);
-        // }
+        try {
+            const updateViews = yield update_view_home_1.updateAllHomes(app, metadata);
+        }
+        catch (err) {
+            errors_1.slackErr(app, body.user.id, err);
+        }
     }));
 };
 exports.default = actionSelectChannel;

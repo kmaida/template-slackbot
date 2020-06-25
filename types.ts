@@ -3,28 +3,41 @@ import mongoose from 'mongoose';
 /**
  * @interface IObjectAny An object with any properties
  */
-export interface IObjectAny {
+interface IObjectAny {
   [key: string]: any;
 }
+
 /**
  * @interface IATData Airtable data object
  */
-export interface IATData {
+interface IATData {
   id?: string;
   name: string;
   url: string;
   notes: string;
   slackID: string;
   link?: string;
-}
+};
+
 /**
  * @interface IAdminData Simple admin data object
  */
-export interface IAdminData {
+interface IAdminData {
   channel: string;
   admins: string[];
-}
+};
+interface IAdminDocument extends IAdminData, mongoose.Document { }
+
 /**
- * @interface IAdminDocument Admin data MongoDB document object
+ * @interface IAppHomeData user's App Home data
  */
-export interface IAdminDocument extends IAdminData, mongoose.Document {}
+interface IAppHomeData {
+  userID: string;
+  viewID: string;
+};
+interface IAppHomeDocument extends IAppHomeData, mongoose.Document {}
+
+/**
+ * Exports
+ */
+export { IObjectAny, IATData, IAdminData, IAdminDocument, IAppHomeData, IAppHomeDocument };
