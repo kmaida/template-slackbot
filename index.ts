@@ -1,8 +1,6 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 import { App } from '@slack/bolt';
-// Airtable
-import at from './data/airtable/data-airtable';
 // MongoDB
 import { mdbSetup } from './data/data-mongodb';
 import { initAdminSettings } from './app-home/admin/data-admin';
@@ -34,7 +32,7 @@ initAdminSettings();
   SET UP MODAL IX
 ------------------*/
 modal(app);
-submitModal(app, at);
+submitModal(app);
 
 /*------------------
   APP HOME OPENED

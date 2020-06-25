@@ -1,12 +1,13 @@
 import { IObjectAny, IATData } from '../types';
 import utils from '../utils/utils';
+import { saveData } from '../data/airtable/data-airtable';
 import { slackErr } from '../utils/errors';
 
 /*------------------
   MODAL VIEW SUBMIT
 ------------------*/
 
-const submitModal = (app: IObjectAny, at: IObjectAny): void => {
+const submitModal = (app: IObjectAny): void => {
   // Modal view submitted
   app.view('add_airtable_data', async ({ ack, body, view }) => {
     const userID: string = body.user.id;
@@ -37,7 +38,7 @@ const submitModal = (app: IObjectAny, at: IObjectAny): void => {
     await ack();
     // Save data to Airtable
     try {
-      const saveData = await at.saveData(app, data);
+      const saveToAirtable = await saveData(app, data);
     }
     catch (err) {
       slackErr(app, userID, err);

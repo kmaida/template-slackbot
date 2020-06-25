@@ -34,8 +34,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv = __importStar(require("dotenv"));
 dotenv.config();
 const bolt_1 = require("@slack/bolt");
-// Airtable
-const data_airtable_1 = __importDefault(require("./data/airtable/data-airtable"));
 // MongoDB
 const data_mongodb_1 = require("./data/data-mongodb");
 const data_admin_1 = require("./app-home/admin/data-admin");
@@ -64,7 +62,7 @@ data_admin_1.initAdminSettings();
   SET UP MODAL IX
 ------------------*/
 modal_1.default(app);
-modal_view_submit_1.default(app, data_airtable_1.default);
+modal_view_submit_1.default(app);
 /*------------------
   APP HOME OPENED
 ------------------*/
