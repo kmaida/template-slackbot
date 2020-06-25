@@ -1,4 +1,4 @@
-import errors from '../utils/errors';
+import { slackErr } from '../utils/errors';
 import utils from '../utils/utils';
 import { IObjectAny } from '../types';
 
@@ -16,7 +16,7 @@ const appMention = (app: IObjectAny): void => {
       });
     }
     catch (err) {
-      errors.slackErr(app, event.channel, err);
+      slackErr(app, event.channel, err);
     }
   });
 };

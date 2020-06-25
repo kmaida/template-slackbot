@@ -8,11 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const errors_1 = __importDefault(require("../../utils/errors"));
+const errors_1 = require("../../utils/errors");
 /*------------------
   DM CONFIRM SAVE
 ------------------*/
@@ -27,7 +24,7 @@ const dmConfirmSave = (app, atData) => __awaiter(void 0, void 0, void 0, functio
         });
     }
     catch (err) {
-        errors_1.default.slackErr(app, userID, err);
+        errors_1.slackErr(app, userID, err);
     }
 });
 exports.default = dmConfirmSave;

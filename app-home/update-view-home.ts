@@ -1,6 +1,6 @@
 import { IObjectAny } from "../types";
 import blocksHome from './blocks-home';
-import errors from './../utils/errors';
+import { slackErr } from './../utils/errors';
 
 /*------------------
 BLOCKS: UPDATE HOME VIEW
@@ -27,7 +27,7 @@ const updateHomeView = async (app: IObjectAny, userID: string, viewID: string, m
     console.log('TRIGGER HOME VIEW UPDATE: app home view updated for viewID', viewID);
   }
   catch (err) {
-    errors.slackErr(app, userID, err);
+    slackErr(app, userID, err);
   }
 }
 

@@ -1,4 +1,4 @@
-import errors from '../../utils/errors';
+import { slackErr } from '../../utils/errors';
 import { IObjectAny, IATData, IAdminDocument } from '../../types';
 import { adminApi } from '../../app-home/admin/data-admin';
 
@@ -18,7 +18,7 @@ const channelPublishSave = async (app: IObjectAny, atData: IATData): Promise<any
     });
   }
   catch (err) {
-    errors.slackErr(app, channel, err);
+    slackErr(app, channel, err);
   }
 };
 

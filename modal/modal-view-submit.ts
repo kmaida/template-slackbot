@@ -1,6 +1,6 @@
 import { IObjectAny, IATData } from '../types';
 import utils from '../utils/utils';
-import errors from '../utils/errors';
+import { slackErr } from '../utils/errors';
 
 /*------------------
   MODAL VIEW SUBMIT
@@ -40,7 +40,7 @@ const submitModal = (app: IObjectAny, at: IObjectAny): void => {
       const saveData = await at.saveData(app, data);
     }
     catch (err) {
-      errors.slackErr(app, userID, err);
+      slackErr(app, userID, err);
     }
   });
 };

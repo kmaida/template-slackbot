@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const utils_1 = __importDefault(require("../utils/utils"));
-const errors_1 = __importDefault(require("../utils/errors"));
+const errors_1 = require("../utils/errors");
 /*------------------
   MODAL VIEW SUBMIT
 ------------------*/
@@ -51,7 +51,7 @@ const submitModal = (app, at) => {
             const saveData = yield at.saveData(app, data);
         }
         catch (err) {
-            errors_1.default.slackErr(app, userID, err);
+            errors_1.slackErr(app, userID, err);
         }
     }));
 };

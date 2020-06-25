@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const errors_1 = __importDefault(require("../utils/errors"));
+const errors_1 = require("../utils/errors");
 const utils_1 = __importDefault(require("../utils/utils"));
 /*------------------
     APP MENTION
@@ -27,7 +27,7 @@ const appMention = (app) => {
             });
         }
         catch (err) {
-            errors_1.default.slackErr(app, event.channel, err);
+            errors_1.slackErr(app, event.channel, err);
         }
     }));
 };

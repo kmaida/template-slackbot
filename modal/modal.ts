@@ -1,4 +1,4 @@
-import errors from '../utils/errors';
+import { slackErr } from '../utils/errors';
 import { IObjectAny } from '../types';
 
 /*------------------
@@ -94,7 +94,7 @@ const modal = (app: IObjectAny): void => {
       });
     }
     catch (err) {
-      errors.slackErr(app, body.user.id, err);
+      slackErr(app, body.user.id, err);
     }
   };
   // Command /add-data

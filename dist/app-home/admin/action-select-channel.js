@@ -36,7 +36,7 @@ const actionSelectChannel = (app) => {
         //   });
         // }
         // catch (err) {
-        //   errors.slackErr(app, body.user.id, err);
+        //   slackErr(app, body.user.id, err);
         // }
     }));
 };

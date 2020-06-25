@@ -3,7 +3,7 @@ const table = process.env.AIRTABLE_TABLE;
 const tableID = process.env.AIRTABLE_TABLE_ID;
 const viewID = process.env.AIRTABLE_TABLE_VIEW_ID;
 import { IObjectAny, IATData } from '../../types';
-import errors from '../../utils/errors';
+import { storeErr } from '../../utils/errors';
 import dmConfirmSave from './dm-confirm-save';
 import channelPublishSave from './channel-publish-save';
 
@@ -30,7 +30,7 @@ const at = {
       }
     ], (err: string, records: IObjectAny) => {
       if (err) {
-        errors.storeErr(err);
+        storeErr(err);
       }
       const savedRecord: IObjectAny = records[0];
       const savedID: string = savedRecord.getId();

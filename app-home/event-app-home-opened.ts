@@ -1,4 +1,4 @@
-import errors from '../utils/errors';
+import { slackErr } from '../utils/errors';
 import { IObjectAny } from '../types';
 import actionSelectChannel from './admin/action-select-channel';
 import actionSelectAdmins from './admin/action-select-admins';
@@ -37,7 +37,7 @@ const appHomeOpened = (app: IObjectAny): void => {
       });
     }
     catch (err) {
-      errors.slackErr(app, userID, err);
+      slackErr(app, userID, err);
     }
   });
 

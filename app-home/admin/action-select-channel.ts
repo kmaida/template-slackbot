@@ -1,4 +1,4 @@
-import errors from '../../utils/errors';
+import { slackErr } from '../../utils/errors';
 import { adminApi } from './data-admin';
 import { IAdminDocument, IObjectAny } from '../../types';
 
@@ -29,7 +29,7 @@ const actionSelectChannel = (app: IObjectAny): void => {
     //   });
     // }
     // catch (err) {
-    //   errors.slackErr(app, body.user.id, err);
+    //   slackErr(app, body.user.id, err);
     // }
   });
 };

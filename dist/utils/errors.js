@@ -9,42 +9,40 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.slackErr = exports.storeErr = void 0;
 /*------------------
       ERRORS
 ------------------*/
-const errors = {
-    /**
-     * Simple log and return error
-     * @param {IObjectAny|string} err object or error message
-     * @return {IObjectAny} error object
-     */
-    storeErr(err) {
-        const msg = err.msg || err;
-        console.error('STORE ERROR:', msg);
-        return new Error(msg);
-    },
-    /**
-     * Send error to Slack in specified channel
-     * @param {IObjectAny} app Slack app
-     * @param {string} channel to publish message in
-     * @param {string} err message
-     */
-    slackErr(app, channel, err) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const msg = err.message || err;
-            console.error('ERROR:', msg);
-            try {
-                const sendErr = yield app.client.chat.postMessage({
-                    token: process.env.SLACK_BOT_TOKEN,
-                    channel: channel,
-                    text: ":x: I'm sorry, I couldn't do that because an error occurred: ```" + JSON.stringify(msg) + "```"
-                });
-            }
-            catch (err) {
-                console.error('ERROR DELIVERING SLACK MESSAGE ERROR:', err);
-            }
+/**
+ * Simple log and return error
+ * @param {IObjectAny|string} err object or error message
+ * @return {IObjectAny} error object
+ */
+const storeErr = (err) => {
+    const msg = err.msg || err;
+    console.error('STORE ERROR:', msg);
+    return new Error(msg);
+};
+exports.storeErr = storeErr;
+/**
+ * Send error to Slack in specified channel
+ * @param {IObjectAny} app Slack app
+ * @param {string} channel to publish message in
+ * @param {string} err message
+ */
+const slackErr = (app, channel, err) => __awaiter(void 0, void 0, void 0, function* () {
+    const msg = err.message || err;
+    console.error('ERROR:', msg);
+    try {
+        const sendErr = yield app.client.chat.postMessage({
+            token: process.env.SLACK_BOT_TOKEN,
+            channel: channel,
+            text: ":x: I'm sorry, I couldn't do that because an error occurred: ```" + JSON.stringify(msg) + "```"
         });
     }
-};
-exports.default = errors;
+    catch (err) {
+        console.error('ERROR DELIVERING SLACK MESSAGE ERROR:', err);
+    }
+});
+exports.slackErr = slackErr;
 //# sourceMappingURL=errors.js.map

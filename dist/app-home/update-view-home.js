@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const blocks_home_1 = __importDefault(require("./blocks-home"));
-const errors_1 = __importDefault(require("./../utils/errors"));
+const errors_1 = require("./../utils/errors");
 /*------------------
 BLOCKS: UPDATE HOME VIEW
 ------------------*/
@@ -38,7 +38,7 @@ const updateHomeView = (app, userID, viewID, metadata) => __awaiter(void 0, void
         console.log('TRIGGER HOME VIEW UPDATE: app home view updated for viewID', viewID);
     }
     catch (err) {
-        errors_1.default.slackErr(app, userID, err);
+        errors_1.slackErr(app, userID, err);
     }
 });
 module.exports = updateHomeView;

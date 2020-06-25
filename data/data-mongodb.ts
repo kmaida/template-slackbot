@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { IObjectAny } from '../types';
 import Sample from './SampleSchema';
-import errors from '../utils/errors';
+import { storeErr } from '../utils/errors';
 
 /*------------------
     MONGODB API
@@ -36,8 +36,8 @@ const mdbApi: IObjectAny = {
    */
   async getSamples(): Promise<IObjectAny[]> {
     return Sample.find({}, (err, samples: IObjectAny) => {
-      if (err) return errors.storeErr(err);
-      if (!samples) return errors.storeErr('MONGODB: No samples are saved');
+      if (err) return storeErr(err);
+      if (!samples) return storeErr('MONGODB: No samples are saved');
       return samples;
     });
   },
@@ -48,13 +48,13 @@ const mdbApi: IObjectAny = {
    */
   async saveSample(sampleData: IObjectAny): Promise<IObjectAny> {
     if (!sampleData) {
-      errors.storeErr('MONGODB: No data provided to save to MongoDB');
+      storeErr('MONGODB: No data provided to save to MongoDB');
     }
     return Sample.findOne({}, (err, sample: IObjectAny) => {
-      if (err) return errors.storeErr(err);
+      if (err) return storeErr(err);
       const newSample = new Sample(sampleData);
       newSample.save((err) => {
-        if (err) return errors.storeErr(err);
+        if (err) return storeErr(err);
         return newSample;
       });
     });

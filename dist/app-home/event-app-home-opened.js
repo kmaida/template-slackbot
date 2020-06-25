@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const errors_1 = __importDefault(require("../utils/errors"));
+const errors_1 = require("../utils/errors");
 const action_select_channel_1 = __importDefault(require("./admin/action-select-channel"));
 const action_select_admins_1 = __importDefault(require("./admin/action-select-admins"));
 const blocks_home_1 = __importDefault(require("./blocks-home"));
@@ -47,7 +47,7 @@ const appHomeOpened = (app) => {
             });
         }
         catch (err) {
-            errors_1.default.slackErr(app, userID, err);
+            errors_1.slackErr(app, userID, err);
         }
     }));
     /**

@@ -1,4 +1,4 @@
-import errors from '../../utils/errors';
+import { slackErr } from '../../utils/errors';
 import { IObjectAny, IATData } from '../../types';
 
 /*------------------
@@ -16,7 +16,7 @@ const dmConfirmSave = async (app: IObjectAny, atData: IATData): Promise<any> => 
     });
   }
   catch (err) {
-    errors.slackErr(app, userID, err);
+    slackErr(app, userID, err);
   }
 };
 
