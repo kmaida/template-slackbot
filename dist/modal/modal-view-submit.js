@@ -8,11 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const utils_1 = __importDefault(require("../utils/utils"));
+const utils_1 = require("../utils/utils");
 const data_airtable_1 = require("../data/airtable/data-airtable");
 const errors_1 = require("../utils/errors");
 /*------------------
@@ -39,10 +36,10 @@ const submitModal = (app) => {
             response_action: 'errors',
             errors: {}
         };
-        if (!utils_1.default.validUrl(data.url)) {
+        if (!utils_1.validUrl(data.url)) {
             ackParams.errors.b_url = 'Please provide a valid URL.';
         }
-        if (utils_1.default.objNotEmpty(ackParams.errors)) {
+        if (utils_1.objNotEmpty(ackParams.errors)) {
             yield ack(ackParams);
             return;
         }

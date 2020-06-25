@@ -1,5 +1,5 @@
 import { IObjectAny, IATData } from '../types';
-import utils from '../utils/utils';
+import { validUrl, objNotEmpty } from '../utils/utils';
 import { saveData } from '../data/airtable/data-airtable';
 import { slackErr } from '../utils/errors';
 
@@ -28,10 +28,10 @@ const submitModal = (app: IObjectAny): void => {
       response_action: 'errors',
       errors: {}
     };
-    if (!utils.validUrl(data.url)) {
+    if (!validUrl(data.url)) {
       ackParams.errors.b_url = 'Please provide a valid URL.';
     }
-    if (utils.objNotEmpty(ackParams.errors)) {
+    if (objNotEmpty(ackParams.errors)) {
       await ack(ackParams);
       return;
     }

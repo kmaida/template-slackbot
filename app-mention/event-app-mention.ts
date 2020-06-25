@@ -1,5 +1,5 @@
 import { slackErr } from '../utils/errors';
-import utils from '../utils/utils';
+import { ignoreMention } from '../utils/utils';
 import { IObjectAny } from '../types';
 
 /*------------------
@@ -7,7 +7,7 @@ import { IObjectAny } from '../types';
 ------------------*/
 
 const appMention = (app: IObjectAny): void => {
-  app.event('app_mention', utils.ignoreMention, async ({ event, context }) => {
+  app.event('app_mention', ignoreMention, async ({ event, context }) => {
     try {
       const result = await app.client.chat.postMessage({
         token: context.botToken,
