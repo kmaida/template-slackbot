@@ -1,5 +1,9 @@
 import mongoose from 'mongoose';
 
+/*------------------
+  TYPE INTERFACES
+------------------*/
+
 /**
  * @interface IObjectAny An object with any properties
  */

@@ -11,7 +11,6 @@ import channelPublishSave from './channel-publish-save';
   AIRTABLE: TABLE
 ------------------*/
 
-
 /**
  * Save a new Airtable data record
  * @param {IObjectAny} App Slack app
