@@ -25,7 +25,7 @@ const getUserData = (userID, app) => __awaiter(void 0, void 0, void 0, function*
             token: process.env.SLACK_BOT_TOKEN,
             user: userID
         });
-        // console.log(_userInfo);
+        console.log(_userInfo);
         const userData = {
             name: _userInfo.user.profile.real_name_normalized,
             email: _userInfo.user.profile.email

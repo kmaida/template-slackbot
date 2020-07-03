@@ -1,6 +1,6 @@
 import { IObjectAny, IATData } from '../types';
 import { validUrl, objNotEmpty, emailIsh } from '../utils/utils';
-import { saveData } from './data-airtable';
+import { saveData } from './data/data-airtable';
 import { slackErr } from '../utils/errors';
 
 /*------------------

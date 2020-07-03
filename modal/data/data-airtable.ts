@@ -2,10 +2,10 @@ const base = require('airtable').base(process.env.AIRTABLE_BASE_ID);
 const table = process.env.AIRTABLE_TABLE;
 const tableID = process.env.AIRTABLE_TABLE_ID;
 const viewID = process.env.AIRTABLE_TABLE_VIEW_ID;
-import { IObjectAny, IATData } from '../types';
-import { storeErr } from './../utils/errors';
-import dmConfirmSave from './dm-confirm-save';
-import channelPublishSave from './channel-publish-save';
+import { IObjectAny, IATData } from '../../types';
+import { storeErr } from '../../utils/errors';
+import dmConfirmSave from '../dm-confirm-save';
+import channelPublishSave from '../channel-publish-save';
 
 /*------------------
   AIRTABLE: TABLE

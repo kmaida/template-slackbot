@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const utils_1 = require("../utils/utils");
-const data_airtable_1 = require("./data-airtable");
+const data_airtable_1 = require("./data/data-airtable");
 const errors_1 = require("../utils/errors");
 /*------------------
   MODAL VIEW SUBMIT
