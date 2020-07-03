@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const errors_1 = require("../utils/errors");
 const blocks_modal_1 = __importDefault(require("./blocks-modal"));
+const data_slack_1 = require("../utils/data-slack");
 /*------------------
  MODAL DIALOG FORM
     Command
@@ -35,6 +36,8 @@ const modal = (app) => {
         // If button value metadata is available, set it as metadata (e.g., useful for getting home view data)
         const btnMetadata = JSON.stringify(body.actions ? body.actions[0].value : {});
         try {
+            // Get user profile data from Slack API
+            const userData = yield data_slack_1.getUserData(body.user.id, app);
             const result = yield app.client.views.open({
                 token: context.botToken,
                 trigger_id: body.trigger_id,
@@ -46,7 +49,7 @@ const modal = (app) => {
                         type: 'plain_text',
                         text: 'Add Airtable Data'
                     },
-                    blocks: blocks_modal_1.default(),
+                    blocks: blocks_modal_1.default(userData),
                     submit: {
                         type: 'plain_text',
                         text: 'Save'

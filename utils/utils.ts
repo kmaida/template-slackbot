@@ -5,6 +5,15 @@ import { IObjectAny } from './../types';
 ------------------*/
 
 /**
+ * Convert any input to a trimmed string
+ * @param {any} input some input
+ * @returns {string}
+ */
+const _cleanStr = (input: any): string => {
+  return input.toString().trim();
+}
+
+/**
  * Is the string a valid URL?
  * @param {string} input
  * @return {boolean}
@@ -12,7 +21,19 @@ import { IObjectAny } from './../types';
 const validUrl = (input: string): boolean => {
   const regexRaw = /((?:[A-Za-z]{3,9})(?::\/\/|@)(?:(?:[A-Za-z0-9\-.]+[.:])|(?:www\.|[-;:&=+$,\w]+@))(?:[A-Za-z0-9.-]+)(?:[/\-+=&;%@.\w_~()]*)(?:[.!/\\\w-?%#~&=+()]*))/g;
   const regex = new RegExp(regexRaw);
-  const cleanStr = input.toString().trim();
+  const cleanStr = _cleanStr(input);
+  return !!cleanStr.match(regex);
+}
+
+/**
+ * Is the string formatted sort of like an email address?
+ * @param {string} input https://stackoverflow.com/a/38137215
+ * @return {boolean}
+ */
+const emailIsh = (input: string): boolean => {
+  const regexRaw = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+[^<>()\.,;:\s@\"]{2,})$/g;
+  const regex = new RegExp(regexRaw);
+  const cleanStr = _cleanStr(input);
   return !!cleanStr.match(regex);
 }
 
@@ -59,4 +80,15 @@ const ignoreMention = async ({ message, event, next }: IObjectAny): Promise<void
   await next();
 }
 
-export { validUrl, objNotEmpty, clearNewline, ignoreMention };
+/**
+ * Takes an undefined or null value and outputs an empty string
+ * Useful for prefilling initial form values that don't exist
+ * (Avoids printing "undefined" as a value in fields)
+ * @param {string} input A string or falsey value
+ * @returns {string}
+ */
+const falseyToEmptyStr = (input: string): string => {
+  return (!!input === false) ? '' : input;
+}
+
+export { validUrl, emailIsh, objNotEmpty, clearNewline, ignoreMention, falseyToEmptyStr };

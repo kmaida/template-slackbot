@@ -1,6 +1,6 @@
 import { IObjectAny, IATData } from '../types';
-import { validUrl, objNotEmpty } from '../utils/utils';
-import { saveData } from '../data/airtable/data-airtable';
+import { validUrl, objNotEmpty, emailIsh } from '../utils/utils';
+import { saveData } from './data-airtable';
 import { slackErr } from '../utils/errors';
 
 /*------------------
@@ -18,6 +18,7 @@ const submitModal = (app: IObjectAny): void => {
     // Modal blocks data format: payload.[block_id].[action_id].value
     const data: IATData = {
       name: payload.b_name.a_name.value,
+      email: payload.b_email.a_email.value,
       url: payload.b_url.a_url.value,
       notes: payload.b_notes.a_notes.value || '',
       slackID: userID
@@ -30,6 +31,9 @@ const submitModal = (app: IObjectAny): void => {
     };
     if (!validUrl(data.url)) {
       ackParams.errors.b_url = 'Please provide a valid URL.';
+    }
+    if (!emailIsh(data.email)) {
+      ackParams.errors.b_email = 'Please provide a valid email address.';
     }
     if (objNotEmpty(ackParams.errors)) {
       await ack(ackParams);

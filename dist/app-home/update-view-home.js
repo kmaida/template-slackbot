@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateAllHomes = exports.updateHomeView = void 0;
 const blocks_home_1 = __importDefault(require("./blocks-home"));
-const data_admin_1 = require("./admin/data-admin");
+const data_admin_1 = require("./admin/data/data-admin");
 const errors_1 = require("./../utils/errors");
 /*------------------
 BLOCKS: UPDATE HOME VIEW

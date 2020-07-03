@@ -1,4 +1,4 @@
-import { IObjectAny, IAdminDocument, IAppHomeData, IAppHomeDocument } from '../../types';
+import { IObjectAny, IAdminDocument, IAppHomeData, IAppHomeDocument } from '../../../types';
 import { AdminSettingsModel, AppHomeModel } from './AdminSchema';
 
 /*------------------

@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const errors_1 = require("../../utils/errors");
-const data_admin_1 = require("./data-admin");
+const data_admin_1 = require("./data/data-admin");
 const update_view_home_1 = require("../update-view-home");
 /*------------------
  ACTION: SELECT CHANNEL

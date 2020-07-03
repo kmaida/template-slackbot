@@ -1,6 +1,6 @@
-import { slackErr } from '../../utils/errors';
-import { IObjectAny, IATData, IAdminDocument } from '../../types';
-import { getAdminSettings } from '../../app-home/admin/data-admin';
+import { slackErr } from '../utils/errors';
+import { IObjectAny, IATData, IAdminDocument } from '../types';
+import { getAdminSettings } from '../app-home/admin/data/data-admin';
 
 /*------------------
 CHANNEL PUBLISH SAVE
@@ -13,7 +13,7 @@ const channelPublishSave = async (app: IObjectAny, atData: IATData): Promise<any
     const sendMsg = await app.client.chat.postMessage({
       token: process.env.SLACK_BOT_TOKEN,
       channel: channel,
-      text: `:tada: \`<@${atData.slackID}>\` has added:\n*Name:* ${atData.name}\n*URL:* ${atData.url}\n*Notes:* ${atData.notes}\n<${atData.link}|View in Airtable>`,
+      text: `:tada: \`<@${atData.slackID}>\` has added:\n*Name:* ${atData.name}\n*Email:* ${atData.email}\n*URL:* ${atData.url}\n*Notes:* ${atData.notes}\n<${atData.link}|View in Airtable>`,
       unfurl_links: false
     });
   }

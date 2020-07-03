@@ -1,5 +1,5 @@
 import { slackErr } from '../../utils/errors';
-import { setChannel } from './data-admin';
+import { setChannel } from './data/data-admin';
 import { IAdminDocument, IObjectAny } from '../../types';
 import { updateAllHomes } from '../update-view-home';
 

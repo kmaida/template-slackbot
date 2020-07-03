@@ -2,8 +2,8 @@ const base = require('airtable').base(process.env.AIRTABLE_BASE_ID);
 const table = process.env.AIRTABLE_TABLE;
 const tableID = process.env.AIRTABLE_TABLE_ID;
 const viewID = process.env.AIRTABLE_TABLE_VIEW_ID;
-import { IObjectAny, IATData } from '../../types';
-import { storeErr } from '../../utils/errors';
+import { IObjectAny, IATData } from '../types';
+import { storeErr } from './../utils/errors';
 import dmConfirmSave from './dm-confirm-save';
 import channelPublishSave from './channel-publish-save';
 
@@ -22,6 +22,7 @@ const saveData = async (app: IObjectAny, data: IATData): Promise<IATData> => {
     {
       "fields": {
         "Name": data.name,
+        "Email": data.email,
         "URL": data.url,
         "Notes": data.notes || '',
         "Slack ID": data.slackID
@@ -36,6 +37,7 @@ const saveData = async (app: IObjectAny, data: IATData): Promise<IATData> => {
     const savedObj: IATData = {
       id: savedID,
       name: savedRecord.fields["Name"],
+      email: savedRecord.fields["Email"],
       url: savedRecord.fields["URL"],
       notes: savedRecord.fields["Notes"] || '',
       slackID: savedRecord.fields["Slack ID"],

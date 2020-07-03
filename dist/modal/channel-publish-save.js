@@ -8,26 +8,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const errors_1 = __importDefault(require("../utils/errors"));
+const errors_1 = require("../utils/errors");
+const data_admin_1 = require("../app-home/admin/data/data-admin");
 /*------------------
 CHANNEL PUBLISH SAVE
 ------------------*/
 const channelPublishSave = (app, atData) => __awaiter(void 0, void 0, void 0, function* () {
-    const channel = process.env.SLACK_CHANNEL_ID;
+    const settings = yield data_admin_1.getAdminSettings();
+    const channel = settings.channel;
     try {
         const sendMsg = yield app.client.chat.postMessage({
             token: process.env.SLACK_BOT_TOKEN,
             channel: channel,
-            text: `:tada: \`<@${atData.slackID}>\` has added:\n*Name:* ${atData.name}\n*URL:* ${atData.url}\n*Notes:* ${atData.notes}\n<${atData.link}|View in Airtable>`,
+            text: `:tada: \`<@${atData.slackID}>\` has added:\n*Name:* ${atData.name}\n*Email:* ${atData.email}\n*URL:* ${atData.url}\n*Notes:* ${atData.notes}\n<${atData.link}|View in Airtable>`,
             unfurl_links: false
         });
     }
     catch (err) {
-        errors_1.default.slackErr(app, channel, err);
+        errors_1.slackErr(app, channel, err);
     }
 });
 exports.default = channelPublishSave;

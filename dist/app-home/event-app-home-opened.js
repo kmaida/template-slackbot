@@ -16,7 +16,7 @@ const errors_1 = require("../utils/errors");
 const action_select_channel_1 = __importDefault(require("./admin/action-select-channel"));
 const action_select_admins_1 = __importDefault(require("./admin/action-select-admins"));
 const blocks_home_1 = __importDefault(require("./blocks-home"));
-const data_admin_1 = require("./admin/data-admin");
+const data_admin_1 = require("./admin/data/data-admin");
 /*------------------
   APP HOME OPENED
 ------------------*/

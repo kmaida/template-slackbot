@@ -3,7 +3,7 @@ import { IObjectAny } from '../types';
 import actionSelectChannel from './admin/action-select-channel';
 import actionSelectAdmins from './admin/action-select-admins';
 import blocksHome from './blocks-home';
-import { saveHomeView } from './admin/data-admin';
+import { saveHomeView } from './admin/data/data-admin';
 
 /*------------------
   APP HOME OPENED

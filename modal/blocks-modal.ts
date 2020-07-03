@@ -1,8 +1,11 @@
+import { IATDataInitial } from '../types';
+import { falseyToEmptyStr } from '../utils/utils';
+
 /*------------------
  BLOCKS: MODAL FORM
 ------------------*/
 
-const blocksModal = () => {
+const blocksModal = (prefill: IATDataInitial = { name: '', email: '' }) => {
   return [
     {
       "type": "input",
@@ -12,12 +15,30 @@ const blocksModal = () => {
         "action_id": "a_name",
         "placeholder": {
           "type": "plain_text",
-          "text": "Name"
-        }
+          "text": "Firstname Lastname"
+        },
+        "initial_value": prefill.name
       },
       "label": {
         "type": "plain_text",
         "text": "Name:"
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "b_email",
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "a_email",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "you@domain.com"
+        },
+        "initial_value": prefill.email
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Email:"
       }
     },
     {
@@ -28,8 +49,9 @@ const blocksModal = () => {
         "action_id": "a_url",
         "placeholder": {
           "type": "plain_text",
-          "text": "URL"
-        }
+          "text": "https://"
+        },
+        "initial_value": falseyToEmptyStr(prefill.url)
       },
       "label": {
         "type": "plain_text",
@@ -46,7 +68,8 @@ const blocksModal = () => {
         "placeholder": {
           "type": "plain_text",
           "text": "Add notes"
-        }
+        },
+        "initial_value": falseyToEmptyStr(prefill.notes),
       },
       "label": {
         "type": "plain_text",

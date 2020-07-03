@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const utils_1 = require("../utils/utils");
-const data_airtable_1 = require("../data/airtable/data-airtable");
+const data_airtable_1 = require("./data-airtable");
 const errors_1 = require("../utils/errors");
 /*------------------
   MODAL VIEW SUBMIT
@@ -26,6 +26,7 @@ const submitModal = (app) => {
         // Modal blocks data format: payload.[block_id].[action_id].value
         const data = {
             name: payload.b_name.a_name.value,
+            email: payload.b_email.a_email.value,
             url: payload.b_url.a_url.value,
             notes: payload.b_notes.a_notes.value || '',
             slackID: userID
@@ -38,6 +39,9 @@ const submitModal = (app) => {
         };
         if (!utils_1.validUrl(data.url)) {
             ackParams.errors.b_url = 'Please provide a valid URL.';
+        }
+        if (!utils_1.emailIsh(data.email)) {
+            ackParams.errors.b_email = 'Please provide a valid email address.';
         }
         if (utils_1.objNotEmpty(ackParams.errors)) {
             yield ack(ackParams);

@@ -35,8 +35,8 @@ const dotenv = __importStar(require("dotenv"));
 dotenv.config();
 const bolt_1 = require("@slack/bolt");
 // MongoDB
-const data_mongodb_1 = require("./data/data-mongodb");
-const data_admin_1 = require("./app-home/admin/data-admin");
+const setup_mongodb_1 = __importDefault(require("./data-init/setup-mongodb"));
+const data_admin_1 = require("./app-home/admin/data/data-admin");
 // App functionality
 const modal_1 = __importDefault(require("./modal/modal"));
 const modal_view_submit_1 = __importDefault(require("./modal/modal-view-submit"));
@@ -55,7 +55,7 @@ const port = process.env.PORT || 3000;
     ON APP INIT
 ------------------*/
 // Set up MongoDB store
-data_mongodb_1.mdbSetup();
+setup_mongodb_1.default();
 // Set up admin settings from environment variables
 data_admin_1.initAdminSettings();
 /*------------------

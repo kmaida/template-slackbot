@@ -1,6 +1,7 @@
 import { slackErr } from '../utils/errors';
 import { IObjectAny } from '../types';
 import blocksModal from './blocks-modal';
+import { getUserData } from '../utils/data-slack';
 
 /*------------------
  MODAL DIALOG FORM
@@ -24,6 +25,8 @@ const modal = (app: IObjectAny): void => {
     // If button value metadata is available, set it as metadata (e.g., useful for getting home view data)
     const btnMetadata = JSON.stringify(body.actions ? body.actions[0].value : {});
     try {
+      // Get user profile data from Slack API
+      const userData = await getUserData(body.user.id, app);
       const result = await app.client.views.open({
         token: context.botToken,
         trigger_id: body.trigger_id,
@@ -35,7 +38,7 @@ const modal = (app: IObjectAny): void => {
             type: 'plain_text',
             text: 'Add Airtable Data'
           },
-          blocks: blocksModal(),
+          blocks: blocksModal(userData),
           submit: {
             type: 'plain_text',
             text: 'Save'

@@ -1,9 +1,9 @@
-import * as dotenv from "dotenv";
+import * as dotenv from 'dotenv';
 dotenv.config();
 import { App } from '@slack/bolt';
 // MongoDB
-import { mdbSetup } from './data/data-mongodb';
-import { initAdminSettings } from './app-home/admin/data-admin';
+import mdbSetup from './data-init/setup-mongodb';
+import { initAdminSettings } from './app-home/admin/data/data-admin';
 // App functionality
 import modal from './modal/modal';
 import submitModal from './modal/modal-view-submit';

@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const btn_open_modal_1 = __importDefault(require("../modal/btn-open-modal"));
 const blocks_home_admin_1 = __importDefault(require("./admin/blocks-home-admin"));
-const data_admin_1 = require("./admin/data-admin");
+const data_admin_1 = require("./admin/data/data-admin");
 /*------------------
  BLOCKS: HOME VIEW
 ------------------*/

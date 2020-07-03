@@ -9,23 +9,32 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const errors_1 = require("../utils/errors");
+exports.getUserData = void 0;
 /*------------------
-  DM CONFIRM SAVE
+     SLACK DATA
 ------------------*/
-const dmConfirmSave = (app, atData) => __awaiter(void 0, void 0, void 0, function* () {
-    const userID = atData.slackID;
+/**
+ * Get user data from Slack API (user profile)
+ * @param {string} userID user's Slack ID
+ * @param {IObjectAny} app Slack App
+ * @returns {Promise<ISlackUserData}
+ */
+const getUserData = (userID, app) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const sendMsg = yield app.client.chat.postMessage({
+        const _userInfo = yield app.client.users.info({
             token: process.env.SLACK_BOT_TOKEN,
-            channel: userID,
-            text: `:tada: Your data has been saved successfully:\n*Name:* ${atData.name}\n*Email:* ${atData.email}\n*URL:* ${atData.url}\n*Notes:* ${atData.notes}\n<${atData.link}|View in Airtable>`,
-            unfurl_links: false
+            user: userID
         });
+        // console.log(_userInfo);
+        const userData = {
+            name: _userInfo.user.profile.real_name_normalized,
+            email: _userInfo.user.profile.email
+        };
+        return userData;
     }
     catch (err) {
-        errors_1.slackErr(app, userID, err);
+        console.error(err);
     }
 });
-exports.default = dmConfirmSave;
-//# sourceMappingURL=dm-confirm-save.js.map
+exports.getUserData = getUserData;
+//# sourceMappingURL=data-slack.js.map
