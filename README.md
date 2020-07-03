@@ -10,4 +10,6 @@ This is a template repo for Slack app development using [TypeScript](https://www
   * [Development: Slack App](docs/development-slack-app.md)
 * [Deployment](docs/deployment.md)
 
+---
+
 [LICENSE](license.txt)
