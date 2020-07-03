@@ -1,6 +1,6 @@
 import { slackErr } from '../utils/errors';
 import { IObjectAny } from '../types';
-import blocksModal from './blocks-modal';
+import blocksModalProfile from './blocks-modal-profile';
 import { getUserData } from '../utils/data-slack';
 
 /*------------------
@@ -10,9 +10,10 @@ import { getUserData } from '../utils/data-slack';
     Button
 ------------------*/
 
-const modal = (app: IObjectAny): void => {
+const modalProfile = (app: IObjectAny): void => {
   const openDialog = async ({ ack, body, context }) => {
     await ack();
+    const userID = body.user.id;
     /**
      * PASSING DATA FROM INTERACTION TO VIEW SUBMISSION:
      * Hidden metadata can be sent in the modal view as private_metadata to modal-view-submit.ts.
@@ -22,44 +23,49 @@ const modal = (app: IObjectAny): void => {
      * below to examine this payload further.
      */
     // console.log(body.actions);
-    // If button value metadata is available, set it as metadata (e.g., useful for getting home view data)
-    const btnMetadata = JSON.stringify(body.actions ? body.actions[0].value : {});
+    // If button value metadata is available, set it as metadata (e.g., useful for getting home view data, for example)
+    const btnData = body.actions ? body.actions[0].value : {};
+    const userData = await getUserData(userID, app);
+    const metadata = JSON.stringify({
+      btnData,
+      userData
+    });
     try {
       // Get user profile data from Slack API
-      const userData = await getUserData(body.user.id, app);
-      const result = await app.client.views.open({
+      const userData = await getUserData(userID, app);
+      const openView = await app.client.views.open({
         token: context.botToken,
         trigger_id: body.trigger_id,
         view: {
           type: 'modal',
-          callback_id: 'add_airtable_data',
-          private_metadata: btnMetadata,
+          callback_id: 'add_profile',
+          private_metadata: metadata,
           title: {
             type: 'plain_text',
-            text: 'Add Airtable Data'
+            text: 'Add Profile'
           },
-          blocks: blocksModal(userData),
+          blocks: blocksModalProfile(userData),
           submit: {
             type: 'plain_text',
-            text: 'Save'
+            text: 'Save Profile'
           }
         }
       });
     }
     catch (err) {
-      slackErr(app, body.user.id, err);
+      slackErr(app, userID, err);
     }
   };
 
   /**
    * Interactions that trigger the modal
    */
-  // Slash command: /add-data
-  app.command('/add-data', openDialog);
+  // Slash command: /profile
+  app.command('/profile', openDialog);
   // Global shortcut to add Airtable data
-  app.shortcut('add_airtable_data', openDialog);
+  app.shortcut('add_profile', openDialog);
   // Button from App Home
-  app.action('btn_open_modal', openDialog);
+  app.action('btn_open_modal_profile', openDialog);
 };
 
-export default modal;
+export default modalProfile;

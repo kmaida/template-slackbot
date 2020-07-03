@@ -1,11 +1,11 @@
-import { IATDataInitial } from '../types';
+import { IProfileInitial } from './profile.interface';
 import { falseyToEmptyStr } from '../utils/utils';
 
 /*------------------
- BLOCKS: MODAL FORM
+BLOCKS: MODAL PROFILE FORM
 ------------------*/
 
-const blocksModal = (prefill: IATDataInitial = { name: '', email: '' }) => {
+const blocksModalProfile = (prefill: IProfileInitial = { name: '', email: '' }) => {
   return [
     {
       "type": "input",
@@ -60,24 +60,20 @@ const blocksModal = (prefill: IATDataInitial = { name: '', email: '' }) => {
     },
     {
       "type": "input",
-      "block_id": "b_notes",
+      "block_id": "b_bio",
       "element": {
         "type": "plain_text_input",
-        "action_id": "a_notes",
+        "action_id": "a_bio",
         "multiline": true,
-        "placeholder": {
-          "type": "plain_text",
-          "text": "Add notes"
-        },
-        "initial_value": falseyToEmptyStr(prefill.notes),
+        "initial_value": falseyToEmptyStr(prefill.bio),
       },
       "label": {
         "type": "plain_text",
-        "text": "Notes:"
+        "text": "Bio:"
       },
       "optional": true
     }
   ];
 }
 
-export default blocksModal;
+export default blocksModalProfile;

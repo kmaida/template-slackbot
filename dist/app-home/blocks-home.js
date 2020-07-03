@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const btn_open_modal_1 = __importDefault(require("../modal/btn-open-modal"));
+const btn_open_modal_profile_1 = __importDefault(require("../modal-profile/btn-open-modal-profile"));
 const blocks_home_admin_1 = __importDefault(require("./admin/blocks-home-admin"));
 const data_admin_1 = require("./admin/data/data-admin");
 /*------------------
@@ -46,7 +46,7 @@ const blocksHome = (userID, metadata) => __awaiter(void 0, void 0, void 0, funct
         {
             "type": "actions",
             "elements": [
-                btn_open_modal_1.default(metadata)
+                btn_open_modal_profile_1.default(metadata)
             ]
         }
     ];

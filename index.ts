@@ -5,8 +5,8 @@ import { App } from '@slack/bolt';
 import mdbSetup from './data-init/setup-mongodb';
 import { initAdminSettings } from './app-home/admin/data/data-admin';
 // App functionality
-import modal from './modal/modal';
-import submitModal from './modal/modal-view-submit';
+import modalProfile from './modal-profile/modal-profile';
+import submitModalProfile from './modal-profile/modal-profile-view-submit';
 import appHomeOpened from './app-home/event-app-home-opened';
 import appMention from './app-mention/event-app-mention';
 import botDM from './message-im/event-message-im';
@@ -31,8 +31,8 @@ initAdminSettings();
 /*------------------
   SET UP MODAL IX
 ------------------*/
-modal(app);
-submitModal(app);
+modalProfile(app);
+submitModalProfile(app);
 
 /*------------------
   APP HOME OPENED

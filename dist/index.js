@@ -38,8 +38,8 @@ const bolt_1 = require("@slack/bolt");
 const setup_mongodb_1 = __importDefault(require("./data-init/setup-mongodb"));
 const data_admin_1 = require("./app-home/admin/data/data-admin");
 // App functionality
-const modal_1 = __importDefault(require("./modal/modal"));
-const modal_view_submit_1 = __importDefault(require("./modal/modal-view-submit"));
+const modal_profile_1 = __importDefault(require("./modal-profile/modal-profile"));
+const modal_profile_view_submit_1 = __importDefault(require("./modal-profile/modal-profile-view-submit"));
 const event_app_home_opened_1 = __importDefault(require("./app-home/event-app-home-opened"));
 const event_app_mention_1 = __importDefault(require("./app-mention/event-app-mention"));
 const event_message_im_1 = __importDefault(require("./message-im/event-message-im"));
@@ -61,8 +61,8 @@ data_admin_1.initAdminSettings();
 /*------------------
   SET UP MODAL IX
 ------------------*/
-modal_1.default(app);
-modal_view_submit_1.default(app);
+modal_profile_1.default(app);
+modal_profile_view_submit_1.default(app);
 /*------------------
   APP HOME OPENED
 ------------------*/

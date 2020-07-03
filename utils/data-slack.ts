@@ -19,7 +19,8 @@ const getUserData = async (userID: string, app: IObjectAny): Promise<ISlackUserD
     // console.log(_userInfo);
     const userData: ISlackUserData = {
       name: _userInfo.user.profile.real_name_normalized,
-      email: _userInfo.user.profile.email
+      email: _userInfo.user.profile.email,
+      image: _userInfo.user.profile.image_512
     };
     return userData;
   }

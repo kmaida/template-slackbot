@@ -1,6 +1,7 @@
-import { IObjectAny, IATData } from '../types';
+import { IObjectAny } from '../types';
+import { IProfile } from './profile.interface';
 import { validUrl, objNotEmpty, emailIsh } from '../utils/utils';
-import { saveData } from './data/data-airtable';
+import { saveData } from './data/data-profile-airtable';
 import { slackErr } from '../utils/errors';
 
 /*------------------
@@ -9,18 +10,19 @@ import { slackErr } from '../utils/errors';
 
 const submitModal = (app: IObjectAny): void => {
   // Modal view submitted
-  app.view('add_airtable_data', async ({ ack, body, view }) => {
+  app.view('add_profile', async ({ ack, body, view }) => {
     const userID: string = body.user.id;
     const metadata: IObjectAny = view.private_metadata ? JSON.parse(view.private_metadata) : {};
     console.log('Metadata received from modal form:', metadata);
     const payload: IObjectAny = view.state.values;
     // Capture data from modal interactions
     // Modal blocks data format: payload.[block_id].[action_id].value
-    const data: IATData = {
+    const data: IProfile = {
       name: payload.b_name.a_name.value,
+      image: metadata.userData.image,
       email: payload.b_email.a_email.value,
       url: payload.b_url.a_url.value,
-      notes: payload.b_notes.a_notes.value || '',
+      bio: payload.b_bio.a_bio.value || '',
       slackID: userID
     };
     // Validate form fields and handle errors

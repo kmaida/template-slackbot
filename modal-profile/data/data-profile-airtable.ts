@@ -2,10 +2,11 @@ const base = require('airtable').base(process.env.AIRTABLE_BASE_ID);
 const table = process.env.AIRTABLE_TABLE;
 const tableID = process.env.AIRTABLE_TABLE_ID;
 const viewID = process.env.AIRTABLE_TABLE_VIEW_ID;
-import { IObjectAny, IATData } from '../../types';
+import { IObjectAny } from '../../types';
+import { IProfile } from '../profile.interface';
 import { storeErr } from '../../utils/errors';
-import dmConfirmSave from '../dm-confirm-save';
-import channelPublishSave from '../channel-publish-save';
+import dmConfirmSave from '../dm-confirm-save-profile';
+import channelPublishSave from '../channel-publish-save-profile';
 
 /*------------------
   AIRTABLE: TABLE
@@ -17,14 +18,15 @@ import channelPublishSave from '../channel-publish-save';
  * @param {IATData} data to save to Airtable
  * @return {Promise<IATData>} promise resolving with saved object
  */
-const saveData = async (app: IObjectAny, data: IATData): Promise<IATData> => {
+const saveData = async (app: IObjectAny, data: IProfile): Promise<IProfile> => {
   return base(table).create([
     {
       "fields": {
         "Name": data.name,
+        "Image": data.image,
         "Email": data.email,
         "URL": data.url,
-        "Notes": data.notes || '',
+        "Bio": data.bio || '',
         "Slack ID": data.slackID
       }
     }
@@ -34,12 +36,13 @@ const saveData = async (app: IObjectAny, data: IATData): Promise<IATData> => {
     }
     const savedRecord: IObjectAny = records[0];
     const savedID: string = savedRecord.getId();
-    const savedObj: IATData = {
+    const savedObj: IProfile = {
       id: savedID,
       name: savedRecord.fields["Name"],
+      image: savedRecord.fields["Image"],
       email: savedRecord.fields["Email"],
       url: savedRecord.fields["URL"],
-      notes: savedRecord.fields["Notes"] || '',
+      bio: savedRecord.fields["Bio"] || '',
       slackID: savedRecord.fields["Slack ID"],
       link: `https://airtable.com/${tableID}/${viewID}/${savedID}`
     };

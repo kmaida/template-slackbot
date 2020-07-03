@@ -30,7 +30,7 @@ const appHomeOpened = (app) => {
          */
         // console.log('Bot User ID:', context.botUserId);
         const userID = event.user;
-        // Sample home view metadata to pass through btn-open-modal.ts -> modal.ts -> modal-view-submit.ts
+        // Sample home view metadata to pass through btn-open-modal-profile.ts -> modal.ts -> modal-view-submit.ts
         metadata = {
             event: event.type,
             msg: 'Metadata from user home'

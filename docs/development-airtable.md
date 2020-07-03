@@ -14,8 +14,9 @@ Now we need to set up a base and table to store some sample data.
 7. Modify/add the table fields as described below. It's very important that the fields be named and formatted _exactly_ as shown, otherwise, the app will not be able to read or save the data properly without further code edits:
   * **Name** | Single line text
   * **Email** | Single line text
+  * **Image** | URL
   * **URL** | URL
-  * **Notes** | Long text (no rich text formatting)
+  * **Bio** | Long text (no rich text formatting)
   * **Slack ID** | Single line text
 8. Add your table's name to your `.env` file in the `AIRTABLE_TABLE` variable.
 9. Examine the table's URL in the browser. It should look something like this: `https://airtable.com/[tblXXXxxx]/[viwXXXxxx]?blocks=...`

@@ -1,4 +1,4 @@
-import btnOpenModal from '../modal/btn-open-modal';
+import btnOpenModalProfile from '../modal-profile/btn-open-modal-profile';
 import { IObjectAny, IAdminDocument } from '../types';
 import blocksHomeAdmin from './admin/blocks-home-admin';
 import { getAdminSettings } from './admin/data/data-admin';
@@ -35,7 +35,7 @@ const blocksHome = async (userID: string, metadata: any): Promise<IObjectAny[]> 
     {
       "type": "actions",
       "elements": [
-        btnOpenModal(metadata)
+        btnOpenModalProfile(metadata)
       ]
     }
   ];

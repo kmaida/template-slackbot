@@ -12,30 +12,6 @@ interface IObjectAny {
 }
 
 /**
- * @interface IATData Airtable data object
- */
-interface IATData {
-  id?: string;
-  name: string;
-  email: string;
-  url: string;
-  notes: string;
-  slackID: string;
-  link?: string;
-};
-
-/**
- * @interface IATDataInitial Prefilled data for initial modal form values
- */
-interface IATDataInitial {
-  id?: string;
-  name: string;
-  email: string;
-  url?: string;
-  notes?: string;
-};
-
-/**
  * @interface IAdminData Simple admin data object
  */
 interface IAdminData {
@@ -59,9 +35,10 @@ interface IAppHomeDocument extends IAppHomeData, mongoose.Document {};
 interface ISlackUserData {
   name: string;
   email: string;
+  image: string;
 };
 
 /**
  * Exports
  */
-export { IObjectAny, IATData, IATDataInitial, IAdminData, IAdminDocument, IAppHomeData, IAppHomeDocument, ISlackUserData };
+export { IObjectAny, IAdminData, IAdminDocument, IAppHomeData, IAppHomeDocument, ISlackUserData };

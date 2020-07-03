@@ -79,17 +79,17 @@ Now that you have a tunnel pointing to your Slack app code, you can finish setti
 
 Create a new _global_ shortcut:
 
-* Name: `Add Airtable Data`
-* Short Description: `Add sample data to Airtable`
-* Callback ID: `add_airtable_data`
+* Name: `Add Profile`
+* Short Description: `Add profile data to Airtable`
+* Callback ID: `add_profile`
 
 ### Slash Commands
 
 Create a new command:
 
-* Command: `/add-data`
+* Command: `/profile`
 * Request URL: `https://[your-ngrok-tunnel]/slack/events`
-* Short Description: `Add data to Airtable`
+* Short Description: `Add profile data to Airtable`
 * Escape channels, users, and links sent to your app: `off`
 
 ### OAuth & Permissions

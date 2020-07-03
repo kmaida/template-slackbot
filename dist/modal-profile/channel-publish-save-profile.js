@@ -9,33 +9,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUserData = void 0;
+const errors_1 = require("../utils/errors");
+const data_admin_1 = require("../app-home/admin/data/data-admin");
 /*------------------
-     SLACK DATA
+CHANNEL PUBLISH SAVE PROFILE
 ------------------*/
-/**
- * Get user data from Slack API (user profile)
- * @param {string} userID user's Slack ID
- * @param {IObjectAny} app Slack App
- * @returns {Promise<ISlackUserData}
- */
-const getUserData = (userID, app) => __awaiter(void 0, void 0, void 0, function* () {
+const channelPublishSave = (app, atData) => __awaiter(void 0, void 0, void 0, function* () {
+    const settings = yield data_admin_1.getAdminSettings();
+    const channel = settings.channel;
     try {
-        const _userInfo = yield app.client.users.info({
+        const sendMsg = yield app.client.chat.postMessage({
             token: process.env.SLACK_BOT_TOKEN,
-            user: userID
+            channel: channel,
+            text: `:tada: \`<@${atData.slackID}>\` has added:\n*Name:* ${atData.name}\n*Email:* ${atData.email}\n*Image:* ${atData.image}\n*URL:* ${atData.url}\n*Bio:* ${atData.bio}\n<${atData.link}|View in Airtable>`,
+            unfurl_links: false
         });
-        // console.log(_userInfo);
-        const userData = {
-            name: _userInfo.user.profile.real_name_normalized,
-            email: _userInfo.user.profile.email,
-            image: _userInfo.user.profile.image_512
-        };
-        return userData;
     }
     catch (err) {
-        console.error(err);
+        errors_1.slackErr(app, channel, err);
     }
 });
-exports.getUserData = getUserData;
-//# sourceMappingURL=data-slack.js.map
+exports.default = channelPublishSave;
+//# sourceMappingURL=channel-publish-save-profile.js.map

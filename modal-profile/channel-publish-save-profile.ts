@@ -1,19 +1,20 @@
 import { slackErr } from '../utils/errors';
-import { IObjectAny, IATData, IAdminDocument } from '../types';
+import { IObjectAny, IAdminDocument } from '../types';
 import { getAdminSettings } from '../app-home/admin/data/data-admin';
+import { IProfile } from './profile.interface';
 
 /*------------------
-CHANNEL PUBLISH SAVE
+CHANNEL PUBLISH SAVE PROFILE
 ------------------*/
 
-const channelPublishSave = async (app: IObjectAny, atData: IATData): Promise<any> => {
+const channelPublishSave = async (app: IObjectAny, atData: IProfile): Promise<any> => {
   const settings: IAdminDocument = await getAdminSettings();
   const channel: string = settings.channel;
   try {
     const sendMsg = await app.client.chat.postMessage({
       token: process.env.SLACK_BOT_TOKEN,
       channel: channel,
-      text: `:tada: \`<@${atData.slackID}>\` has added:\n*Name:* ${atData.name}\n*Email:* ${atData.email}\n*URL:* ${atData.url}\n*Notes:* ${atData.notes}\n<${atData.link}|View in Airtable>`,
+      text: `:tada: \`<@${atData.slackID}>\` has added:\n*Name:* ${atData.name}\n*Email:* ${atData.email}\n*Image:* ${atData.image}\n*URL:* ${atData.url}\n*Bio:* ${atData.bio}\n<${atData.link}|View in Airtable>`,
       unfurl_links: false
     });
   }
