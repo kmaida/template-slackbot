@@ -10,15 +10,6 @@ interface IObjectAny {
 }
 
 /**
- * @interface ISlackUserData User profile data
- */
-interface ISlackUserData {
-  name: string;
-  email: string;
-  image: string;
-};
-
-/**
  * Exports
  */
-export { IObjectAny, ISlackUserData };
+export { IObjectAny };

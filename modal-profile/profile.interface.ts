@@ -28,4 +28,13 @@ interface IProfileInitial {
   bio?: string;
 };
 
-export { IProfile, IProfileInitial };
+/**
+ * @interface ISlackUserData User profile data
+ */
+interface ISlackUserData {
+  name: string;
+  email: string;
+  image: string;
+};
+
+export { IProfile, IProfileInitial, ISlackUserData };

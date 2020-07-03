@@ -1,7 +1,8 @@
-import { IObjectAny, ISlackUserData } from '../types';
+import { IObjectAny } from '../../types';
+import { ISlackUserData } from './../profile.interface';
 
 /*------------------
-     SLACK DATA
+ SLACK PROFILE DATA
 ------------------*/
 
 /**

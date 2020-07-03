@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const errors_1 = require("../utils/errors");
 const blocks_modal_profile_1 = __importDefault(require("./blocks-modal-profile"));
-const data_slack_1 = require("../utils/data-slack");
+const data_profile_slack_1 = require("./data/data-profile-slack");
 /*------------------
  MODAL DIALOG FORM
     Command
@@ -36,14 +36,14 @@ const modalProfile = (app) => {
         // console.log(body.actions);
         // If button value metadata is available, set it as metadata (e.g., useful for getting home view data, for example)
         const btnData = body.actions ? body.actions[0].value : {};
-        const userData = yield data_slack_1.getUserData(userID, app);
+        const userData = yield data_profile_slack_1.getUserData(userID, app);
         const metadata = JSON.stringify({
             btnData,
             userData
         });
         try {
             // Get user profile data from Slack API
-            const userData = yield data_slack_1.getUserData(userID, app);
+            const userData = yield data_profile_slack_1.getUserData(userID, app);
             const openView = yield app.client.views.open({
                 token: context.botToken,
                 trigger_id: body.trigger_id,

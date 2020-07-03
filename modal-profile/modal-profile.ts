@@ -1,7 +1,7 @@
 import { slackErr } from '../utils/errors';
 import { IObjectAny } from '../types';
 import blocksModalProfile from './blocks-modal-profile';
-import { getUserData } from '../utils/data-slack';
+import { getUserData } from './data/data-profile-slack';
 
 /*------------------
  MODAL DIALOG FORM
