@@ -1,7 +1,5 @@
-import mongoose from 'mongoose';
-
 /*------------------
-  TYPE INTERFACES
+GENERAL TYPE INTERFACES
 ------------------*/
 
 /**
@@ -10,15 +8,6 @@ import mongoose from 'mongoose';
 interface IObjectAny {
   [key: string]: any;
 }
-
-/**
- * @interface IAppHomeData user's App Home data
- */
-interface IAppHomeData {
-  userID: string;
-  viewID: string;
-};
-interface IAppHomeDocument extends IAppHomeData, mongoose.Document {};
 
 /**
  * @interface ISlackUserData User profile data
@@ -32,4 +21,4 @@ interface ISlackUserData {
 /**
  * Exports
  */
-export { IObjectAny, IAppHomeData, IAppHomeDocument, ISlackUserData };
+export { IObjectAny, ISlackUserData };
