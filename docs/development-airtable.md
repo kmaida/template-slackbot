@@ -13,6 +13,7 @@ Now we need to set up a base and table to store some sample data.
 6. Rename "Table 1" to a name of your choosing. This will be the table where the Slack bot saves and reads data. For example, I called the table `Slackbot Template`.
 7. Modify/add the table fields as described below. It's very important that the fields be named and formatted _exactly_ as shown, otherwise, the app will not be able to read or save the data properly without further code edits:
   * **Name** | Single line text
+  * **Email** | Single line text
   * **URL** | URL
   * **Notes** | Long text (no rich text formatting)
   * **Slack ID** | Single line text
