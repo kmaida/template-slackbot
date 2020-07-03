@@ -26,8 +26,8 @@ const channel_publish_save_profile_1 = __importDefault(require("../channel-publi
 /**
  * Save a new Airtable data record
  * @param {IObjectAny} App Slack app
- * @param {IATData} data to save to Airtable
- * @return {Promise<IATData>} promise resolving with saved object
+ * @param {IProfile} data to save to Airtable
+ * @return {Promise<IProfile>} promise resolving with saved object
  */
 const saveData = (app, data) => __awaiter(void 0, void 0, void 0, function* () {
     return base(table).create([
@@ -53,7 +53,7 @@ const saveData = (app, data) => __awaiter(void 0, void 0, void 0, function* () {
             image: savedRecord.fields["Image"],
             email: savedRecord.fields["Email"],
             url: savedRecord.fields["URL"],
-            bio: savedRecord.fields["Notes"] || '',
+            bio: savedRecord.fields["Bio"] || '',
             slackID: savedRecord.fields["Slack ID"],
             link: `https://airtable.com/${tableID}/${viewID}/${savedID}`
         };

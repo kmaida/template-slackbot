@@ -15,8 +15,8 @@ import channelPublishSave from '../channel-publish-save-profile';
 /**
  * Save a new Airtable data record
  * @param {IObjectAny} App Slack app
- * @param {IATData} data to save to Airtable
- * @return {Promise<IATData>} promise resolving with saved object
+ * @param {IProfile} data to save to Airtable
+ * @return {Promise<IProfile>} promise resolving with saved object
  */
 const saveData = async (app: IObjectAny, data: IProfile): Promise<IProfile> => {
   return base(table).create([
