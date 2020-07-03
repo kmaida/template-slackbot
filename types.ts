@@ -12,15 +12,6 @@ interface IObjectAny {
 }
 
 /**
- * @interface IAdminData Simple admin data object
- */
-interface IAdminData {
-  channel: string;
-  admins: string[];
-};
-interface IAdminDocument extends IAdminData, mongoose.Document {};
-
-/**
  * @interface IAppHomeData user's App Home data
  */
 interface IAppHomeData {
@@ -41,4 +32,4 @@ interface ISlackUserData {
 /**
  * Exports
  */
-export { IObjectAny, IAdminData, IAdminDocument, IAppHomeData, IAppHomeDocument, ISlackUserData };
+export { IObjectAny, IAppHomeData, IAppHomeDocument, ISlackUserData };

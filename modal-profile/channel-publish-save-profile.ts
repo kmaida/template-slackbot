@@ -1,5 +1,6 @@
 import { slackErr } from '../utils/errors';
-import { IObjectAny, IAdminDocument } from '../types';
+import { IObjectAny } from '../types';
+import { IAdminDocument } from './../app-home/admin/admin.interface';
 import { getAdminSettings } from '../app-home/admin/data/data-admin';
 import { IProfile } from './profile.interface';
 
