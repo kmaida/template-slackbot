@@ -1,12 +1,12 @@
 # Development: Slack App Setup
 
-It's time to set up our new Slack app that will become your Slack bot. We'll need credentials from the Slack app in order to set our environment variables for the app's code to run properly.
+It's time to set up our new Slack app. We'll need credentials from the Slack app in order to set our environment variables for the app's code to run properly.
 
 ## Slack App Settings
 
 1. Make sure you're signed into your new Slack workspace.
 2. Go to the [Slack App API](https://api.slack.com/apps) and click the **Create New App** button.
-3. Name your app `Speakerbot` and select your Development Slack Workspace. Click **Create App**.
+3. Name your app `[Your App Name]` and select your Development Slack Workspace. Click **Create App**.
 4. Next, follow the steps below going section-by-section through the Slack App settings and features:
 
 ### Basic Information
@@ -110,10 +110,6 @@ Add the following Bot Token OAuth Scopes / make sure these scopes are present:
 * `users.profile:read`
 * `users:read`
 * `users:read.email`
-
-Add the following User Token Scope:
-
-* `files:write`
 
 > **Note:** Changing permissions / scopes will cause Slack to instruct you to re-install your Slack app. Do so whenever prompted.
 

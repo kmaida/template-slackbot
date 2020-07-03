@@ -1,6 +1,6 @@
 # Development: Getting Started
 
-Speakerbot is custom-built for internal team use at [Gatsby](https://gatsbyjs.com) (therefore, it has several references in it to Gatsby Developer Relations goals, motivations, and internal docs). However, it is freely available open-source, and can be forked and modified to suit your needs.
+This Slackbot template can be used to create a repo with all of the existing structure that you can then build off of to create your own full-featured Slack app.
 
 ## Prerequisites
 
@@ -21,6 +21,8 @@ Speakerbot is custom-built for internal team use at [Gatsby](https://gatsbyjs.co
 5. Open your Slack workspace _in the web browser_ by navigating to its URL (e.g., `https://[your-team-name].slack.com`). The URL will update automatically to look like this: `https://app.slack.com/client/[TXXXXXX]`. Copy the segment of the URL that begins with "T". This is your `SLACK_TEAM_ID`. Add it to the `.env` file.
 6. Create a new channel in your Slack workspace where you'd like the bot to output notifications about new data being added. Navigate to the channel _in the web browser_. The URL will look like this: `https://app.slack.com/client/[SLACK_TEAM_ID]/[CXXXXXX]`. Copy the URL segment that begins with "C". This is your `SLACK_CHANNEL_ID`. Add it to your `.env` file. (Once we set up our Slack app, we will need to invite `@Speakerbot` into this channel so it can post there).
 7. View your own user profile in Slack. You can do this by clicking the Direct Message with yourself, and then clicking on your profile image / name in the DM space. This will open your profile in a sidebar. Click on the ellipsis `... / More` item and then select **Copy member ID** from the dropdown. Paste your Slack member ID into the `.env` file as the `SLACK_ADMINS` variable. This will set you as an admin by default.
+
+> **Note:** You will not be able to fill in the `SLACK_BOT_ID` variable in the `.env` file just yet. Don't worry, we'll get to that!
 
 ## Airtable Setup
 
