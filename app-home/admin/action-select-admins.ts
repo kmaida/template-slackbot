@@ -1,5 +1,5 @@
 import { setAdmins } from './data/data-admin';
-import { IObjectAny } from '../../types';
+import { IObjectAny } from '../../utils/types';
 import { IAdminDocument } from './admin.interface';
 import { updateAllHomes } from '../update-view-home';
 import { slackErr } from '../../utils/errors';

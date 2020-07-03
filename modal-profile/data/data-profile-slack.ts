@@ -1,4 +1,4 @@
-import { IObjectAny } from '../../types';
+import { IObjectAny } from '../../utils/types';
 import { ISlackUserData } from './../profile.interface';
 
 /*------------------

@@ -1,4 +1,4 @@
-import { IObjectAny } from './../types';
+import { IObjectAny } from './types';
 
 /*------------------
        UTILS

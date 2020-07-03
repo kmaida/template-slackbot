@@ -2,7 +2,7 @@ const base = require('airtable').base(process.env.AIRTABLE_BASE_ID);
 const table = process.env.AIRTABLE_TABLE;
 const tableID = process.env.AIRTABLE_TABLE_ID;
 const viewID = process.env.AIRTABLE_TABLE_VIEW_ID;
-import { IObjectAny } from '../../types';
+import { IObjectAny } from '../../utils/types';
 import { IProfile } from '../profile.interface';
 import { storeErr } from '../../utils/errors';
 import dmConfirmSave from '../dm-confirm-save-profile';

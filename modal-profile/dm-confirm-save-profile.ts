@@ -1,5 +1,5 @@
 import { slackErr } from '../utils/errors';
-import { IObjectAny } from '../types';
+import { IObjectAny } from '../utils/types';
 import { IProfile } from './profile.interface';
 
 /*------------------

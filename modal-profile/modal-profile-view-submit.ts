@@ -1,4 +1,4 @@
-import { IObjectAny } from '../types';
+import { IObjectAny } from '../utils/types';
 import { IProfile } from './profile.interface';
 import { validUrl, objNotEmpty, emailIsh } from '../utils/utils';
 import { saveData } from './data/data-profile-airtable';

@@ -1,5 +1,5 @@
 import { slackErr } from '../utils/errors';
-import { IObjectAny } from '../types';
+import { IObjectAny } from '../utils/types';
 import blocksModalProfile from './blocks-modal-profile';
 import { getUserData } from './data/data-profile-slack';
 

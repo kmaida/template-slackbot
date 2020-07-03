@@ -1,5 +1,5 @@
 import btnOpenModalProfile from '../modal-profile/btn-open-modal-profile';
-import { IObjectAny } from '../types';
+import { IObjectAny } from '../utils/types';
 import { IAdminDocument } from './admin/admin.interface';
 import blocksHomeAdmin from './admin/blocks-home-admin';
 import { getAdminSettings } from './admin/data/data-admin';

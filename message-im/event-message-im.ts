@@ -1,6 +1,6 @@
 import { slackErr } from '../utils/errors';
 import { ignoreMention } from '../utils/utils';
-import { IObjectAny } from '../types';
+import { IObjectAny } from '../utils/types';
 
 /*------------------
        BOT DM
