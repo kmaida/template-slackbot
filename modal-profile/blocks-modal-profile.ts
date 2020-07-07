@@ -1,11 +1,12 @@
 import { IProfileInitial } from './profile.interface';
 import { falseyToEmptyStr } from '../utils/utils';
+import { IObjectAny } from '../utils/types';
 
 /*------------------
 BLOCKS: MODAL PROFILE FORM
 ------------------*/
 
-const blocksModalProfile = (prefill: IProfileInitial = { name: '', email: '' }) => {
+const blocksModalProfile = (prefill: IProfileInitial = { name: '', email: '' }): IObjectAny[] => {
   return [
     {
       "type": "input",

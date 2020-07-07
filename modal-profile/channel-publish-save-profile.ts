@@ -8,7 +8,7 @@ import { IProfile } from './profile.interface';
 CHANNEL PUBLISH SAVE PROFILE
 ------------------*/
 
-const channelPublishSave = async (app: IObjectAny, atData: IProfile): Promise<any> => {
+const channelPublishSave = async (app: IObjectAny, atData: IProfile): Promise<void> => {
   const settings: IAdminDocument = await getAdminSettings();
   const channel: string = settings.channel;
   try {

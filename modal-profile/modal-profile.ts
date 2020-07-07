@@ -1,7 +1,8 @@
 import { slackErr } from '../utils/errors';
 import { IObjectAny } from '../utils/types';
 import blocksModalProfile from './blocks-modal-profile';
-import { getUserData } from './data/data-profile-slack';
+import { getUserInfo } from './data/data-profile-slack';
+import { ISlackUserInfo } from './profile.interface';
 
 /*------------------
  MODAL DIALOG FORM
@@ -11,9 +12,9 @@ import { getUserData } from './data/data-profile-slack';
 ------------------*/
 
 const modalProfile = (app: IObjectAny): void => {
-  const openDialog = async ({ ack, body, context }) => {
+  const openDialog = async ({ ack, body, context }): Promise<void> => {
     await ack();
-    const userID = body.user.id;
+    const userID: string = body.user.id;
     /**
      * PASSING DATA FROM INTERACTION TO VIEW SUBMISSION:
      * Hidden metadata can be sent in the modal view as private_metadata to modal-view-submit.ts.
@@ -25,14 +26,15 @@ const modalProfile = (app: IObjectAny): void => {
     // console.log(body.actions);
     // If button value metadata is available, set it as metadata (e.g., useful for getting home view data, for example)
     const btnData = body.actions ? body.actions[0].value : {};
-    const userData = await getUserData(userID, app);
-    const metadata = JSON.stringify({
+    // Get user profile data from Slack API
+    const userData: ISlackUserInfo = await getUserInfo(userID, app);
+    // Set and stringify button value and Slack user data
+    // This becomes the view's private_metadata, which is then available in the view submission
+    const metadata: string = JSON.stringify({
       btnData,
       userData
     });
     try {
-      // Get user profile data from Slack API
-      const userData = await getUserData(userID, app);
       const openView = await app.client.views.open({
         token: context.botToken,
         trigger_id: body.trigger_id,
@@ -58,8 +60,9 @@ const modalProfile = (app: IObjectAny): void => {
   };
 
   /**
-   * Interactions that trigger the modal
+   * User interactions that trigger the modal
    */
+
   // Slash command: /profile
   app.command('/profile', openDialog);
   // Global shortcut to add Airtable data

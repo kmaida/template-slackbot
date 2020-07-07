@@ -29,12 +29,12 @@ interface IProfileInitial {
 };
 
 /**
- * @interface ISlackUserData User profile data
+ * @interface ISlackUserInfo User profile data
  */
-interface ISlackUserData {
+interface ISlackUserInfo {
   name: string;
   email: string;
   image: string;
 };
 
-export { IProfile, IProfileInitial, ISlackUserData };
+export { IProfile, IProfileInitial, ISlackUserInfo };

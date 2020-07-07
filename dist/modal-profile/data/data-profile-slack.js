@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUserData = void 0;
+exports.getUserInfo = void 0;
 /*------------------
  SLACK PROFILE DATA
 ------------------*/
@@ -17,19 +17,20 @@ exports.getUserData = void 0;
  * Get user data from Slack API (user profile)
  * @param {string} userID user's Slack ID
  * @param {IObjectAny} app Slack App
- * @returns {Promise<ISlackUserData}
+ * @returns {Promise<ISlackUserInfo>}
  */
-const getUserData = (userID, app) => __awaiter(void 0, void 0, void 0, function* () {
+const getUserInfo = (userID, app) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const _userInfo = yield app.client.users.info({
+        const _slackUserInfo = yield app.client.users.info({
             token: process.env.SLACK_BOT_TOKEN,
             user: userID
         });
-        // console.log(_userInfo);
+        // console.log(_slackUserInfo);
+        // Pull out only desired info from Slack user profile
         const userData = {
-            name: _userInfo.user.profile.real_name_normalized,
-            email: _userInfo.user.profile.email,
-            image: _userInfo.user.profile.image_512
+            name: _slackUserInfo.user.profile.real_name_normalized,
+            email: _slackUserInfo.user.profile.email,
+            image: _slackUserInfo.user.profile.image_512
         };
         return userData;
     }
@@ -37,5 +38,5 @@ const getUserData = (userID, app) => __awaiter(void 0, void 0, void 0, function*
         console.error(err);
     }
 });
-exports.getUserData = getUserData;
+exports.getUserInfo = getUserInfo;
 //# sourceMappingURL=data-profile-slack.js.map

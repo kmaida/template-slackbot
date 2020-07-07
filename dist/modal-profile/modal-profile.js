@@ -36,14 +36,15 @@ const modalProfile = (app) => {
         // console.log(body.actions);
         // If button value metadata is available, set it as metadata (e.g., useful for getting home view data, for example)
         const btnData = body.actions ? body.actions[0].value : {};
-        const userData = yield data_profile_slack_1.getUserData(userID, app);
+        // Get user profile data from Slack API
+        const userData = yield data_profile_slack_1.getUserInfo(userID, app);
+        // Set and stringify button value and Slack user data
+        // This becomes the view's private_metadata, which is then available in the view submission
         const metadata = JSON.stringify({
             btnData,
             userData
         });
         try {
-            // Get user profile data from Slack API
-            const userData = yield data_profile_slack_1.getUserData(userID, app);
             const openView = yield app.client.views.open({
                 token: context.botToken,
                 trigger_id: body.trigger_id,
@@ -68,7 +69,7 @@ const modalProfile = (app) => {
         }
     });
     /**
-     * Interactions that trigger the modal
+     * User interactions that trigger the modal
      */
     // Slash command: /profile
     app.command('/profile', openDialog);

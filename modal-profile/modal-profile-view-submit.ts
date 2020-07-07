@@ -27,7 +27,7 @@ const submitModal = (app: IObjectAny): void => {
     };
     // Validate form fields and handle errors
     // https://api.slack.com/surfaces/modals/using#displaying_errors#displaying_errors
-    const ackParams: any = {
+    const ackParams: IObjectAny = {
       response_action: 'errors',
       errors: {}
     };
@@ -44,7 +44,7 @@ const submitModal = (app: IObjectAny): void => {
     await ack();
     // Save data to Airtable
     try {
-      const saveToAirtable = await saveData(app, data);
+      const saveToAirtable: IProfile = await saveData(app, data);
     }
     catch (err) {
       slackErr(app, userID, err);

@@ -6,7 +6,7 @@ import { IProfile } from './profile.interface';
   DM CONFIRM SAVE
 ------------------*/
 
-const dmConfirmSave = async (app: IObjectAny, atData: IProfile): Promise<any> => {
+const dmConfirmSave = async (app: IObjectAny, atData: IProfile): Promise<void> => {
   const userID: string = atData.slackID;
   try {
     const sendMsg = await app.client.chat.postMessage({

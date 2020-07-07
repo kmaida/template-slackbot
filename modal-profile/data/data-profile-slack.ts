@@ -1,5 +1,5 @@
 import { IObjectAny } from '../../utils/types';
-import { ISlackUserData } from './../profile.interface';
+import { ISlackUserInfo } from './../profile.interface';
 
 /*------------------
  SLACK PROFILE DATA
@@ -9,19 +9,20 @@ import { ISlackUserData } from './../profile.interface';
  * Get user data from Slack API (user profile)
  * @param {string} userID user's Slack ID
  * @param {IObjectAny} app Slack App
- * @returns {Promise<ISlackUserData}
+ * @returns {Promise<ISlackUserInfo>}
  */
-const getUserData = async (userID: string, app: IObjectAny): Promise<ISlackUserData> => {
+const getUserInfo = async (userID: string, app: IObjectAny): Promise<ISlackUserInfo> => {
   try {
-    const _userInfo = await app.client.users.info({
+    const _slackUserInfo: IObjectAny = await app.client.users.info({
       token: process.env.SLACK_BOT_TOKEN,
       user: userID
     });
-    // console.log(_userInfo);
-    const userData: ISlackUserData = {
-      name: _userInfo.user.profile.real_name_normalized,
-      email: _userInfo.user.profile.email,
-      image: _userInfo.user.profile.image_512
+    // console.log(_slackUserInfo);
+    // Pull out only desired info from Slack user profile
+    const userData: ISlackUserInfo = {
+      name: _slackUserInfo.user.profile.real_name_normalized,
+      email: _slackUserInfo.user.profile.email,
+      image: _slackUserInfo.user.profile.image_512
     };
     return userData;
   }
@@ -30,4 +31,4 @@ const getUserData = async (userID: string, app: IObjectAny): Promise<ISlackUserD
   }
 }
 
-export { getUserData };
+export { getUserInfo };
