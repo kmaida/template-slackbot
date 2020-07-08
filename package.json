@@ -4,7 +4,7 @@
   "description": "Slackbot app template in TypeScript using Bolt framework",
   "main": "dist/index.js",
   "scripts": {
-    "start": "tsc && node dist/index.js"
+    "start": "rm -rf dist/* && tsc && node dist/index.js"
   },
   "dependencies": {
     "@slack/bolt": "^2.1.1",
