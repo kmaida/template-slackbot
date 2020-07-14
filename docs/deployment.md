@@ -1,6 +1,6 @@
 # Deployment
 
-Your Slack app must be deployed to a web server. You should **not** deploy the app to an [ephemeral disk](https://devcenter.heroku.com/articles/active-storage-on-heroku#ephemeral-disk).
+Your Slack app must be deployed to a web server. You **can** deploy the app to an [ephemeral disk](https://devcenter.heroku.com/articles/active-storage-on-heroku#ephemeral-disk), but doing so comes with some inherent risks (e.g., you will not be able to store anything in app memory that cannot be retrieved on initialization).
 
 ## Hosting Recommendations
 
