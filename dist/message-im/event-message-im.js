@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.botDM = void 0;
 const errors_1 = require("../utils/errors");
 const utils_1 = require("../utils/utils");
 /*------------------
@@ -28,5 +29,5 @@ const botDM = (app) => {
         }
     }));
 };
-exports.default = botDM;
+exports.botDM = botDM;
 //# sourceMappingURL=event-message-im.js.map

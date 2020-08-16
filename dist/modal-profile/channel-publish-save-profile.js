@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.channelPublishSave = void 0;
 const errors_1 = require("../utils/errors");
 const data_admin_1 = require("../app-home/admin/data/data-admin");
 /*------------------
@@ -29,5 +30,5 @@ const channelPublishSave = (app, atData) => __awaiter(void 0, void 0, void 0, fu
         errors_1.slackErr(app, channel, err);
     }
 });
-exports.default = channelPublishSave;
+exports.channelPublishSave = channelPublishSave;
 //# sourceMappingURL=channel-publish-save-profile.js.map

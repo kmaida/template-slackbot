@@ -26,4 +26,4 @@ const actionSelectAdmins = (app: IObjectAny, metadata: any): void => {
   });
 };
 
-export default actionSelectAdmins;
+export { actionSelectAdmins };

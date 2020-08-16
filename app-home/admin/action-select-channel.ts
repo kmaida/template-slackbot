@@ -26,4 +26,4 @@ const actionSelectChannel = (app: IObjectAny, metadata: any): void => {
   });
 };
 
-export default actionSelectChannel;
+export { actionSelectChannel };

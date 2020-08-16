@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.btnOpenModalProfile = void 0;
 /*------------------
 BUTTON: OPEN PROFILE MODAL
    with metadata
@@ -19,5 +20,5 @@ const btnOpenModalProfile = (metadata) => {
         "style": "primary"
     };
 };
-exports.default = btnOpenModalProfile;
+exports.btnOpenModalProfile = btnOpenModalProfile;
 //# sourceMappingURL=btn-open-modal-profile.js.map

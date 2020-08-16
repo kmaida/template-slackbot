@@ -8,12 +8,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const btn_open_modal_profile_1 = __importDefault(require("../modal-profile/btn-open-modal-profile"));
-const blocks_home_admin_1 = __importDefault(require("./admin/blocks-home-admin"));
+exports.blocksHome = void 0;
+const btn_open_modal_profile_1 = require("../modal-profile/btn-open-modal-profile");
+const blocks_home_admin_1 = require("./admin/blocks-home-admin");
 const data_admin_1 = require("./admin/data/data-admin");
 /*------------------
  BLOCKS: HOME VIEW
@@ -46,7 +44,7 @@ const blocksHome = (userID, metadata) => __awaiter(void 0, void 0, void 0, funct
         {
             "type": "actions",
             "elements": [
-                btn_open_modal_profile_1.default(metadata)
+                btn_open_modal_profile_1.btnOpenModalProfile(metadata)
             ]
         }
     ];
@@ -57,7 +55,7 @@ const blocksHome = (userID, metadata) => __awaiter(void 0, void 0, void 0, funct
      */
     const composeHomeBlocks = () => {
         if (admins.indexOf(userID) > -1) {
-            const admin = blocks_home_admin_1.default(reportingChannel, admins);
+            const admin = blocks_home_admin_1.blocksHomeAdmin(reportingChannel, admins);
             return [...allUserBlocks, ...admin];
         }
         else {
@@ -69,5 +67,5 @@ const blocksHome = (userID, metadata) => __awaiter(void 0, void 0, void 0, funct
      */
     return composeHomeBlocks();
 });
-exports.default = blocksHome;
+exports.blocksHome = blocksHome;
 //# sourceMappingURL=blocks-home.js.map

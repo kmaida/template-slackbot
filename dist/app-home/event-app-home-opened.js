@@ -8,14 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.appHomeOpened = void 0;
 const errors_1 = require("../utils/errors");
-const action_select_channel_1 = __importDefault(require("./admin/action-select-channel"));
-const action_select_admins_1 = __importDefault(require("./admin/action-select-admins"));
-const blocks_home_1 = __importDefault(require("./blocks-home"));
+const action_select_channel_1 = require("./admin/action-select-channel");
+const action_select_admins_1 = require("./admin/action-select-admins");
+const blocks_home_1 = require("./blocks-home");
 const data_admin_1 = require("./admin/data/data-admin");
 /*------------------
   APP HOME OPENED
@@ -44,7 +42,7 @@ const appHomeOpened = (app) => {
                 user_id: userID,
                 view: {
                     "type": "home",
-                    "blocks": yield blocks_home_1.default(userID, metadata)
+                    "blocks": yield blocks_home_1.blocksHome(userID, metadata)
                 }
             });
             // Set this user's home view ID in database
@@ -57,8 +55,8 @@ const appHomeOpened = (app) => {
     /**
      * Set up action listeners for Home View
      */
-    action_select_channel_1.default(app, metadata);
-    action_select_admins_1.default(app, metadata);
+    action_select_channel_1.actionSelectChannel(app, metadata);
+    action_select_admins_1.actionSelectAdmins(app, metadata);
 };
-exports.default = appHomeOpened;
+exports.appHomeOpened = appHomeOpened;
 //# sourceMappingURL=event-app-home-opened.js.map

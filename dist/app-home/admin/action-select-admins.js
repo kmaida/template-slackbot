@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.actionSelectAdmins = void 0;
 const data_admin_1 = require("./data/data-admin");
 const update_view_home_1 = require("../update-view-home");
 const errors_1 = require("../../utils/errors");
@@ -32,5 +33,5 @@ const actionSelectAdmins = (app, metadata) => {
         }
     }));
 };
-exports.default = actionSelectAdmins;
+exports.actionSelectAdmins = actionSelectAdmins;
 //# sourceMappingURL=action-select-admins.js.map

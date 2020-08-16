@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.blocksModalProfile = void 0;
 const utils_1 = require("../utils/utils");
 /*------------------
 BLOCKS: MODAL PROFILE FORM
@@ -74,5 +75,5 @@ const blocksModalProfile = (prefill = { name: '', email: '' }) => {
         }
     ];
 };
-exports.default = blocksModalProfile;
+exports.blocksModalProfile = blocksModalProfile;
 //# sourceMappingURL=blocks-modal-profile.js.map

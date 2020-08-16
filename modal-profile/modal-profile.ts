@@ -1,6 +1,6 @@
 import { slackErr } from '../utils/errors';
 import { IObjectAny } from '../utils/types';
-import blocksModalProfile from './blocks-modal-profile';
+import { blocksModalProfile } from './blocks-modal-profile';
 import { getUserInfo } from './data/data-profile-slack';
 import { ISlackUserInfo } from './profile.interface';
 
@@ -71,4 +71,4 @@ const modalProfile = (app: IObjectAny): void => {
   app.action('btn_open_modal_profile', openDialog);
 };
 
-export default modalProfile;
+export { modalProfile };

@@ -27,22 +27,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv = __importStar(require("dotenv"));
 dotenv.config();
 const bolt_1 = require("@slack/bolt");
 // MongoDB
-const setup_mongodb_1 = __importDefault(require("./data-init/setup-mongodb"));
+const setup_mongodb_1 = require("./data-init/setup-mongodb");
 const data_admin_1 = require("./app-home/admin/data/data-admin");
 // App functionality
-const modal_profile_1 = __importDefault(require("./modal-profile/modal-profile"));
-const modal_profile_view_submit_1 = __importDefault(require("./modal-profile/modal-profile-view-submit"));
-const event_app_home_opened_1 = __importDefault(require("./app-home/event-app-home-opened"));
-const event_app_mention_1 = __importDefault(require("./app-mention/event-app-mention"));
-const event_message_im_1 = __importDefault(require("./message-im/event-message-im"));
+const modal_profile_1 = require("./modal-profile/modal-profile");
+const modal_profile_view_submit_1 = require("./modal-profile/modal-profile-view-submit");
+const event_app_home_opened_1 = require("./app-home/event-app-home-opened");
+const event_app_mention_1 = require("./app-mention/event-app-mention");
+const event_message_im_1 = require("./message-im/event-message-im");
 /*------------------
   CREATE BOLT APP
 ------------------*/
@@ -55,26 +52,26 @@ const port = process.env.PORT || 3000;
     ON APP INIT
 ------------------*/
 // Set up MongoDB store
-setup_mongodb_1.default();
+setup_mongodb_1.mdbSetup();
 // Set up admin settings from environment variables
 data_admin_1.initAdminSettings();
 /*------------------
   SET UP MODAL IX
 ------------------*/
-modal_profile_1.default(app);
-modal_profile_view_submit_1.default(app);
+modal_profile_1.modalProfile(app);
+modal_profile_view_submit_1.submitModalProfile(app);
 /*------------------
   APP HOME OPENED
 ------------------*/
-event_app_home_opened_1.default(app);
+event_app_home_opened_1.appHomeOpened(app);
 /*------------------
     APP MENTION
 ------------------*/
-event_app_mention_1.default(app);
+event_app_mention_1.appMention(app);
 /*------------------
        BOT DM
 ------------------*/
-event_message_im_1.default(app);
+event_message_im_1.botDM(app);
 /*------------------
      START APP
 ------------------*/

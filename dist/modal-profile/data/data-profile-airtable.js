@@ -8,9 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.saveData = void 0;
 const base = require('airtable').base(process.env.AIRTABLE_BASE_ID);
@@ -18,8 +15,8 @@ const table = process.env.AIRTABLE_TABLE;
 const tableID = process.env.AIRTABLE_TABLE_ID;
 const viewID = process.env.AIRTABLE_TABLE_VIEW_ID;
 const errors_1 = require("../../utils/errors");
-const dm_confirm_save_profile_1 = __importDefault(require("../dm-confirm-save-profile"));
-const channel_publish_save_profile_1 = __importDefault(require("../channel-publish-save-profile"));
+const dm_confirm_save_profile_1 = require("../dm-confirm-save-profile");
+const channel_publish_save_profile_1 = require("../channel-publish-save-profile");
 /*------------------
   AIRTABLE: TABLE
 ------------------*/
@@ -59,9 +56,9 @@ const saveData = (app, data) => __awaiter(void 0, void 0, void 0, function* () {
         };
         console.log('AIRTABLE: Saved new record', savedObj);
         // Send Slack DM to submitter confirming successful save
-        dm_confirm_save_profile_1.default(app, savedObj);
+        dm_confirm_save_profile_1.dmConfirmSave(app, savedObj);
         // Send Slack channel message
-        channel_publish_save_profile_1.default(app, savedObj);
+        channel_publish_save_profile_1.channelPublishSave(app, savedObj);
         // @NOTE: If you want to update home view: need to have passed user's app home view ID
         return savedObj;
     });

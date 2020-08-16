@@ -24,4 +24,4 @@ const channelPublishSave = async (app: IObjectAny, atData: IProfile): Promise<vo
   }
 };
 
-export default channelPublishSave;
+export { channelPublishSave };

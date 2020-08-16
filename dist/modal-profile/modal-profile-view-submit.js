@@ -9,13 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.submitModalProfile = void 0;
 const utils_1 = require("../utils/utils");
 const data_profile_airtable_1 = require("./data/data-profile-airtable");
 const errors_1 = require("../utils/errors");
 /*------------------
   MODAL VIEW SUBMIT
 ------------------*/
-const submitModal = (app) => {
+const submitModalProfile = (app) => {
     // Modal view submitted
     app.view('add_profile', ({ ack, body, view }) => __awaiter(void 0, void 0, void 0, function* () {
         const userID = body.user.id;
@@ -58,5 +59,5 @@ const submitModal = (app) => {
         }
     }));
 };
-exports.default = submitModal;
+exports.submitModalProfile = submitModalProfile;
 //# sourceMappingURL=modal-profile-view-submit.js.map

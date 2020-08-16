@@ -21,4 +21,4 @@ const btnOpenModalProfile = (metadata?: any): IObjectAny => {
   };
 }
 
-export default btnOpenModalProfile;
+export { btnOpenModalProfile };

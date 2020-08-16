@@ -106,4 +106,4 @@ const blocksHomeAdmin = (initialChannel: string, initialAdmins: string[]): IObje
   ];
 };
 
-export default blocksHomeAdmin;
+export { blocksHomeAdmin };

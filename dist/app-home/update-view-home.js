@@ -8,12 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateAllHomes = exports.updateHomeView = void 0;
-const blocks_home_1 = __importDefault(require("./blocks-home"));
+const blocks_home_1 = require("./blocks-home");
 const data_admin_1 = require("./admin/data/data-admin");
 const errors_1 = require("./../utils/errors");
 /*------------------
@@ -35,7 +32,7 @@ const updateHomeView = (app, userID, viewID, metadata) => __awaiter(void 0, void
             view_id: viewID,
             view: {
                 "type": "home",
-                "blocks": yield blocks_home_1.default(userID, metadata)
+                "blocks": yield blocks_home_1.blocksHome(userID, metadata)
             }
         });
         console.log('TRIGGER HOME VIEW UPDATE: app home view updated for userID', userID);

@@ -8,7 +8,7 @@ import { slackErr } from '../utils/errors';
   MODAL VIEW SUBMIT
 ------------------*/
 
-const submitModal = (app: IObjectAny): void => {
+const submitModalProfile = (app: IObjectAny): void => {
   // Modal view submitted
   app.view('add_profile', async ({ ack, body, view }) => {
     const userID: string = body.user.id;
@@ -52,4 +52,4 @@ const submitModal = (app: IObjectAny): void => {
   });
 };
 
-export default submitModal;
+export { submitModalProfile };

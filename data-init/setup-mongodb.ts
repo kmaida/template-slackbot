@@ -22,4 +22,4 @@ const mdbSetup = (): void => {
   });
 };
 
-export default mdbSetup;
+export { mdbSetup };

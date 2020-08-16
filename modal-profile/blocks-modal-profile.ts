@@ -77,4 +77,4 @@ const blocksModalProfile = (prefill: IProfileInitial = { name: '', email: '' }):
   ];
 }
 
-export default blocksModalProfile;
+export { blocksModalProfile };

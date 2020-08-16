@@ -1,5 +1,5 @@
 import { IObjectAny } from '../utils/types';
-import blocksHome from './blocks-home';
+import { blocksHome } from './blocks-home';
 import { getHomeViews } from './admin/data/data-admin';
 import { slackErr } from './../utils/errors';
 

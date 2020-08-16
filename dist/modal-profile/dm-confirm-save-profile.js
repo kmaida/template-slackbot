@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.dmConfirmSave = void 0;
 const errors_1 = require("../utils/errors");
 /*------------------
   DM CONFIRM SAVE
@@ -27,5 +28,5 @@ const dmConfirmSave = (app, atData) => __awaiter(void 0, void 0, void 0, functio
         errors_1.slackErr(app, userID, err);
     }
 });
-exports.default = dmConfirmSave;
+exports.dmConfirmSave = dmConfirmSave;
 //# sourceMappingURL=dm-confirm-save-profile.js.map

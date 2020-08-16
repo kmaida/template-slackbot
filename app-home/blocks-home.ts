@@ -1,7 +1,7 @@
-import btnOpenModalProfile from '../modal-profile/btn-open-modal-profile';
+import { btnOpenModalProfile } from '../modal-profile/btn-open-modal-profile';
 import { IObjectAny } from '../utils/types';
 import { IAdminDocument } from './admin/admin.interface';
-import blocksHomeAdmin from './admin/blocks-home-admin';
+import { blocksHomeAdmin } from './admin/blocks-home-admin';
 import { getAdminSettings } from './admin/data/data-admin';
 
 /*------------------
@@ -59,4 +59,4 @@ const blocksHome = async (userID: string, metadata: any): Promise<IObjectAny[]> 
   return composeHomeBlocks();
 }
 
-export default blocksHome;
+export { blocksHome };

@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.mdbSetup = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 /*------------------
  SET UP MONGODB API
@@ -24,5 +25,5 @@ const mdbSetup = () => {
         console.info('Connected to MongoDB:', process.env.MONGO_URI);
     });
 };
-exports.default = mdbSetup;
+exports.mdbSetup = mdbSetup;
 //# sourceMappingURL=setup-mongodb.js.map

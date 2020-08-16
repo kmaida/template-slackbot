@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.actionSelectChannel = void 0;
 const errors_1 = require("../../utils/errors");
 const data_admin_1 = require("./data/data-admin");
 const update_view_home_1 = require("../update-view-home");
@@ -32,5 +33,5 @@ const actionSelectChannel = (app, metadata) => {
         }
     }));
 };
-exports.default = actionSelectChannel;
+exports.actionSelectChannel = actionSelectChannel;
 //# sourceMappingURL=action-select-channel.js.map

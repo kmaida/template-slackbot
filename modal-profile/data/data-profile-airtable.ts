@@ -5,8 +5,8 @@ const viewID = process.env.AIRTABLE_TABLE_VIEW_ID;
 import { IObjectAny } from '../../utils/types';
 import { IProfile } from '../profile.interface';
 import { storeErr } from '../../utils/errors';
-import dmConfirmSave from '../dm-confirm-save-profile';
-import channelPublishSave from '../channel-publish-save-profile';
+import { dmConfirmSave } from '../dm-confirm-save-profile';
+import { channelPublishSave } from '../channel-publish-save-profile';
 
 /*------------------
   AIRTABLE: TABLE

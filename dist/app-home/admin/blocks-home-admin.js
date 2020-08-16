@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.blocksHomeAdmin = void 0;
 /*------------------
 BLOCKS: APP HOME ADMIN
 ------------------*/
@@ -79,5 +80,5 @@ const blocksHomeAdmin = (initialChannel, initialAdmins) => {
         },
     ];
 };
-exports.default = blocksHomeAdmin;
+exports.blocksHomeAdmin = blocksHomeAdmin;
 //# sourceMappingURL=blocks-home-admin.js.map

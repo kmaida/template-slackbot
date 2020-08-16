@@ -21,4 +21,4 @@ const appMention = (app: IObjectAny): void => {
   });
 };
 
-export default appMention;
+export { appMention };

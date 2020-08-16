@@ -8,12 +8,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.modalProfile = void 0;
 const errors_1 = require("../utils/errors");
-const blocks_modal_profile_1 = __importDefault(require("./blocks-modal-profile"));
+const blocks_modal_profile_1 = require("./blocks-modal-profile");
 const data_profile_slack_1 = require("./data/data-profile-slack");
 /*------------------
  MODAL DIALOG FORM
@@ -56,7 +54,7 @@ const modalProfile = (app) => {
                         type: 'plain_text',
                         text: 'Add Profile'
                     },
-                    blocks: blocks_modal_profile_1.default(userData),
+                    blocks: blocks_modal_profile_1.blocksModalProfile(userData),
                     submit: {
                         type: 'plain_text',
                         text: 'Save Profile'
@@ -78,5 +76,5 @@ const modalProfile = (app) => {
     // Button from App Home
     app.action('btn_open_modal_profile', openDialog);
 };
-exports.default = modalProfile;
+exports.modalProfile = modalProfile;
 //# sourceMappingURL=modal-profile.js.map

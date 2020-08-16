@@ -21,4 +21,4 @@ const botDM = (app: IObjectAny): void => {
   });
 };
 
-export default botDM;
+export { botDM };

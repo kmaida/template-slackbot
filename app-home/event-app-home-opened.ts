@@ -1,8 +1,8 @@
 import { slackErr } from '../utils/errors';
 import { IObjectAny } from '../utils/types';
-import actionSelectChannel from './admin/action-select-channel';
-import actionSelectAdmins from './admin/action-select-admins';
-import blocksHome from './blocks-home';
+import { actionSelectChannel } from './admin/action-select-channel';
+import { actionSelectAdmins } from './admin/action-select-admins';
+import { blocksHome } from './blocks-home';
 import { saveHomeView } from './admin/data/data-admin';
 
 /*------------------
@@ -53,4 +53,4 @@ const appHomeOpened = (app: IObjectAny): void => {
   actionSelectAdmins(app, metadata);
 }
 
-export default appHomeOpened;
+export { appHomeOpened };
