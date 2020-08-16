@@ -7,14 +7,14 @@
     "start": "rm -rf dist/* && tsc && node dist/index.js"
   },
   "dependencies": {
-    "@slack/bolt": "^2.1.1",
-    "airtable": "^0.8.1",
+    "@slack/bolt": "^2.2.3",
+    "airtable": "^0.9.0",
     "dotenv": "^8.2.0",
-    "mongoose": "^5.9.19",
-    "tslint": "^6.1.2",
-    "typescript": "^3.9.5",
+    "mongoose": "^5.10.0",
+    "tslint": "^6.1.3",
+    "typescript": "^3.9.7",
     "@types/airtable": "^0.8.0",
-    "@types/mongoose": "^5.7.27"
+    "@types/mongoose": "^5.7.36"
   },
   "engines": {
     "node": "12.x"
